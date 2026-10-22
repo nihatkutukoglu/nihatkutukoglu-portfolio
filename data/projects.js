@@ -335,7 +335,7 @@ window.PROJECTS = [
     title: "TekMenü QR",
     category: "Web · SaaS",
     summary: "İşletmeler için dijital QR menü uygulaması.",
-    tech: ["TypeScript", "Next.js"],
+    tech: ["AI destekli geliştirme", "Vercel"],
     github: "https://github.com/nihatkutukoglu/tekmenu-qr",
     demo: "https://tekmenu-qr.vercel.app",
     categories: ["software", "web"]
@@ -347,7 +347,7 @@ window.PROJECTS = [
     title: "TekNova",
     category: "Web · Dijital Çözümler",
     summary: "KOBİ ve esnafa yönelik web ve dijital tanıtım çözümleri markasının kurumsal sitesi.",
-    tech: ["TypeScript", "Next.js"],
+    tech: ["AI destekli geliştirme", "Vercel"],
     github: "https://github.com/nihatkutukoglu/TekNova",
     demo: "https://teknova-roan.vercel.app",
     categories: ["software", "web"]
@@ -359,7 +359,7 @@ window.PROJECTS = [
     title: "Özol İş Makineleri",
     category: "Web · Kurumsal Site",
     summary: "İş makineleri firması için kurumsal tanıtım sitesi.",
-    tech: ["TypeScript", "Next.js"],
+    tech: ["AI destekli geliştirme", "Vercel"],
     github: "https://github.com/nihatkutukoglu/ozol-is-makineleri",
     demo: "https://ozol-is-makineleri.vercel.app",
     categories: ["software", "web"]

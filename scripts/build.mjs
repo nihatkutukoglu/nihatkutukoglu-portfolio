@@ -111,7 +111,7 @@ const page = (p, i) => {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css?v=2">
+<link rel="stylesheet" href="/css/styles.css?v=3">
 <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
 </head>
 <body>
@@ -169,9 +169,9 @@ ${header}
 
 ${footer}
 
-<script src="/data/projects.js?v=2" defer></script>
-<script src="/data/site.js?v=2" defer></script>
-<script src="/js/main.js?v=2" defer></script>
+<script src="/data/projects.js?v=3" defer></script>
+<script src="/data/site.js?v=3" defer></script>
+<script src="/js/main.js?v=3" defer></script>
 </body>
 </html>
 `;
