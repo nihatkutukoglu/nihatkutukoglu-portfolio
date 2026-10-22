@@ -1,27 +1,16 @@
-# Nihat Kütükoğlu — Portfolio
+# Nihat Kütükoğlu — Portfolio V2
 
-Kişisel portföy sitesi. Vanilla HTML/CSS/JS, build adımı ve bağımlılık yok.
+Kişisel portföy sitesi. Vanilla HTML/CSS/JS; framework ve runtime bağımlılığı yok.
 
-**Live:** https://nihatkutukoglu.com.tr
+**Live:** https://www.nihatkutukoglu.com.tr
 
-## About
+## Özellikler
 
-Veri bilimi, makine öğrenmesi, karar destek sistemleri ve yazılım geliştirme projelerini
-tek sayfada toplayan statik site.
-
-## Featured Projects
-
-| Proje | Alan | Repo |
-|---|---|---|
-| Agartha Intelligence Suite | Data Science · NLP · Decision Intelligence | [repo](https://github.com/nihatkutukoglu/agartha-intelligence-suite) |
-| Türkiye İç Göç Atlası | Data Science · ML · Network Analysis | [repo](https://github.com/nihatkutukoglu/turkiye-ic-goc-atlasi) |
-| Safranbolu Turizm Analitiği | Data Analytics · Geospatial | [repo](https://github.com/nihatkutukoglu/safranbolu-turizm-analitigi) |
-| Gaziantep Kentsel Sorunlar | Urban Analytics · ML | [repo](https://github.com/nihatkutukoglu/gaziantep-veri-bilimi-projesi) |
-| European Presidents Dataset V4 | Research · Dataset Engineering | [repo](https://github.com/nihatkutukoglu/european-presidents-dataset-v4) |
-
-## Tech Stack
-
-HTML5, CSS (custom properties, grid), vanilla JavaScript, Google Fonts.
+- Selected Work: öne çıkan 5 proje için alternating editorial layout
+- Explore Projects: kategori + durum filtreleri ve arama (Data · AI · Research / Software · Client Work grupları)
+- Statik case study sayfaları: `/projects/<slug>` (benzersiz title, description, canonical, OG, JSON-LD)
+- Komut paleti: `Ctrl/⌘ + K`
+- Koyu / açık tema, `prefers-reduced-motion` desteği
 
 ## Local Run
 
@@ -31,22 +20,37 @@ python3 -m http.server 8080
 
 Ardından http://localhost:8080
 
+## İçerik güncelleme
+
+Tüm proje içerikleri `data/projects.js` içinde; metrikler, notlar ve komut paleti `data/site.js` içinde.
+Proje ekledikten veya case study içeriğini değiştirdikten sonra sayfaları yeniden üretin:
+
+```bash
+node scripts/build.mjs
+```
+
+Script `projects/<slug>/index.html` sayfalarını ve `sitemap.xml`'i üretir. Header ve footer
+`index.html` içindeki `<!-- @header -->` / `<!-- @footer -->` bloklarından kopyalanır.
+Üretilen dosyalar repoya commit edilir; hosting tarafında build adımı gerekmez.
+
+CSS/JS değiştiğinde `index.html` ve `scripts/build.mjs` içindeki `?v=` değerini artırın (önbellek kırma).
+
 ## Structure
 
 ```
 index.html
 css/styles.css
-js/main.js            # tema, navigasyon, render, filtre, modal
-data/projects.js      # tüm proje içerikleri
-assets/images/        # profil, proje ve belge görselleri (webp)
-assets/og/            # Open Graph kapak görseli (1200x630)
+js/main.js              # tema, navigasyon, metrikler, render, filtre, komut paleti
+data/projects.js        # tüm proje içerikleri (tek kaynak)
+data/site.js            # metrikler, notlar, komut paleti
+scripts/build.mjs       # case study sayfaları + sitemap üretimi
+projects/<slug>/        # üretilmiş case study sayfaları
+assets/images/          # profil, proje ve belge görselleri (webp)
+assets/og/              # Open Graph kapak görseli (1200x630)
 nihat-kutukoglu-cv.pdf
-favicon.svg · robots.txt · sitemap.xml
+favicon.svg · robots.txt · sitemap.xml · vercel.json
 ```
-
-Yeni proje eklemek için `data/projects.js` içindeki diziye bir nesne eklemek yeterlidir
-(`group`: `featured` | `labs` | `web`).
 
 ## Deployment
 
-Statik hosting; repo kökü doğrudan yayınlanır.
+Statik hosting (Vercel); repo kökü doğrudan yayınlanır. `vercel.json` URL'leri sondaki `/` olmadan sunar.
