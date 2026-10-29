@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="tr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karar Ağaçları Ders Notları | Nihat Kütükoğlu</title>
+<meta name="description" content="Karar ağaçları (Decision Trees) algoritmasının yapısı ve kullanım alanları.">
+<link rel="canonical" href="https://www.nihatkutukoglu.com.tr/notes/karar-agaclari-ders-notlari">
+<meta property="og:title" content="Karar Ağaçları Ders Notları">
+<meta property="og:description" content="Karar ağaçları (Decision Trees) algoritmasının yapısı ve kullanım alanları.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.nihatkutukoglu.com.tr/notes/karar-agaclari-ders-notlari">
+<meta property="og:image" content="https://www.nihatkutukoglu.com.tr/assets/og/portfolio-cover.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css?v=5">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <nav class="nav" aria-label="Ana menü">
+      <a class="brand" href="/#hero" aria-label="Nihat Kütükoğlu — ana sayfa"><span class="brand__mark" aria-hidden="true">NK</span><span class="brand__name">Nihat Kütükoğlu</span></a>
+
+      <div class="nav__links">
+        <a href="/#hero" data-nav="home">Home</a>
+        <a href="/#projeler" data-nav="projects">Projects</a>
+        <a href="/#deneyim" data-nav="experience">Experience</a>
+        <a href="/#hakkimda" data-nav="about">About</a>
+        <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="kbd-btn nav__desktop" type="button" data-palette-open aria-label="Komut paletini aç (Ctrl+K)"><span>Ara</span><kbd>⌘K</kbd></button>
+        <a class="icon-btn nav__desktop" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener" aria-label="GitHub profili">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+        <a class="btn btn--primary btn--sm nav__desktop" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Temayı değiştir">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMobile" aria-label="Menüyü aç">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <div class="nav__mobile" id="navMobile" data-open="false">
+    <a href="/#hero" data-nav="home">Home</a>
+    <a href="/#projeler" data-nav="projects">Projects</a>
+    <a href="/#deneyim" data-nav="experience">Experience</a>
+    <a href="/#hakkimda" data-nav="about">About</a>
+    <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+    <a href="/#iletisim">Contact</a>
+    <div class="nav__mobile-cta">
+      <a class="btn btn--ghost" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn--primary" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+    </div>
+  </div>
+</header>
+<main id="main" class="section">
+  <div class="wrap note-reader">
+    <nav class="note__actions" aria-label="Not işlemleri">
+      <a class="btn btn--ghost btn--sm" href="/#notlar">← Tüm notlar</a>
+      <a class="btn btn--primary btn--sm" href="/assets/notes/Karar_Agaclari_Ders_Notlari.md" download>Notu indir (.md)</a>
+    </nav>
+    <article class="note-prose"><h1>Karar Ağaçları (Decision Trees): Kapsamlı Ders Notları</h1>
+<p>Bu doküman, Makine Öğrenmesi dünyasının en anlaşılır ve yorumlanabilir algoritmalarından biri olan <strong>Karar Ağaçları</strong>&#39;nı (Decision Trees) derinlemesine ele alır. Örnek uygulama olarak <strong>Car Evaluation (Araba Değerlendirme)</strong> veri seti kullanılmıştır.</p>
+<hr>
+<h2>1. Karar Ağacı Nedir?</h2>
+<p><strong>Karar Ağacı</strong>, veriyi sınıflandırmak için evet/hayır soruları soran, <strong>akış şemasına (flowchart)</strong> benzeyen bir modeldir.</p>
+<ul>
+<li><strong>İnsan gibi düşünür:</strong> &quot;Maaşı yüksek mi?&quot;, &quot;Evli mi?&quot;, &quot;Kredisi var mı?&quot; gibi sorularla eleme yapar.</li>
+<li><strong>Kök Düğüm (Root):</strong> İlk sorunun sorulduğu en tepe nokta.</li>
+<li><strong>Yaprak (Leaf):</strong> Kararın verildiği en alt noktalar.</li>
+</ul>
+<hr>
+<h2>2. Proje Uygulama Adımları (Car Evaluation Örneği)</h2>
+<p><code>car.py</code> dosyamızda izlediğimiz workflow (iş akışı) şu şekildedir:</p>
+<h3>Adım 1: Veriyi Anlama (EDA)</h3>
+<p>Önce verinin fotoğrafını çektik.</p>
+<pre><code class="language-python"># Veriyi okuma ve sütun isimleri verme
+df = pd.read_csv(&quot;13-car_evaluation.csv&quot;)
+new_col_names = [&quot;buying&quot;, &quot;maintenance&quot;, &quot;doors&quot;, &quot;persons&quot;, &quot;lug_boot&quot;, &quot;safety&quot;, &quot;class&quot;]
+df.columns = new_col_names
+
+# İnceleme
+print(df.info())      # Boş veri var mı? (Bizde yoktu)
+print(df.describe())  # İstatistikler
+</code></pre>
+<h3>Adım 2: Veri Ön İşleme (Preprocessing)</h3>
+<p><strong>Karar Ağaçlarının Altın Kuralı:</strong> Makine sadece sayılardan anlar. &quot;vhigh&quot; (çok yüksek) sözcüğünü makine bilemez.</p>
+<h4>Yöntem: Mapping (Elle Çevirme)</h4>
+<p>Pandas <code>.map()</code> fonksiyonu ile kontrolü elimize aldık.
+<strong>Neden LabelEncoder değil de .map kullandık?</strong>
+Çünkü verimizde bir <strong>sıralama (hiyerarşi)</strong> vardı.</p>
+<ul>
+<li><code>vhigh</code> (4) &gt; <code>high</code> (3) &gt; <code>med</code> (2) &gt; <code>low</code> (1).</li>
+<li>LabelEncoder (Otomatik çevirici) bunları alfabetik sıraya göre 0, 1, 2 yapabilirdi (<code>high</code> harf sırasına göre <code>med</code>&#39;den önce gelebilirdi, bu da yanlış olurdu).</li>
+</ul>
+<pre><code class="language-python"># Özel dönüşüm örneği: &#39;5more&#39; ifadesini matematiksel 5 yaptık.
+df[&quot;doors&quot;] = df[&quot;doors&quot;].replace(&quot;5more&quot;, 5).astype(int)
+
+# String kategorileri sayıya çevirme
+df[&quot;buying&quot;] = df[&quot;buying&quot;].map({&quot;vhigh&quot;: 4, &quot;high&quot;: 3, &quot;med&quot;: 2, &quot;low&quot;: 1})
+</code></pre>
+<h3>Adım 3: Eğitim ve Test Ayrımı (Split)</h3>
+<p>Modeli eğitirken kullandığımız soruları sınavda sormamak için veriyi böldük.</p>
+<pre><code class="language-python"># X: Sorular, y: Cevaplar
+X = df.drop([&quot;class&quot;], axis=1)
+y = df[&quot;class&quot;]
+
+# %70 Ders çalışma (Train), %30 Sınav (Test)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+</code></pre>
+<h3>Adım 4: Model Kurma ve İlk Deneme</h3>
+<p>İlk denemede modele &quot;Çok derine inme, basit düşün&quot; (<code>max_depth=3</code>) dedik.</p>
+<pre><code class="language-python"># criterion=&quot;gini&quot;: Bölünme yöntemi
+# max_depth=3: Sadece 3 soru sorabilirsin (Ezberlemeyi engellemek için)
+tree_model = DecisionTreeClassifier(criterion=&quot;gini&quot;, max_depth=3)
+tree_model.fit(X_train, y_train)
+</code></pre>
+<p><strong>Sonuç:</strong> %80 Doğruluk.</p>
+<ul>
+<li><strong>Yorum:</strong> Model, kötü arabaları bildi ama &quot;İyi&quot; arabaları ayırt edemedi çünkü <code>max_depth=3</code> yetersiz kaldı. Model &quot;Underfitting&quot; (yetersiz öğrenme) yaşadı.</li>
+</ul>
+<h3>Adım 5: Hiperparametre Optimizasyonu (Grid Search)</h3>
+<p>Modelin ayarlarıyla (Düğme) tek tek oynamak yerine, bilgisayara &quot;Tüm kombinasyonları dene&quot; dedik.</p>
+<pre><code class="language-python">param = {
+    &quot;criterion&quot;: [&quot;gini&quot;, &quot;entropy&quot;],
+    &quot;max_depth&quot;: [1, 2, 3, 5, 10, 15, None], # Farklı derinlikler
+    &quot;splitter&quot;: [&quot;best&quot;, &quot;random&quot;]
+}
+
+# 5 Katlı çapraz doğrulama ile en iyisini bul
+grid = GridSearchCV(DecisionTreeClassifier(), param_grid=param, cv=5)
+grid.fit(X_train, y_train)
+</code></pre>
+<p><strong>Kazanan Ayarlar:</strong> <code>max_depth=15</code>, <code>criterion=&#39;gini&#39;</code>
+<strong>Yeni Skor:</strong> <strong>%96.5</strong> (Mükemmel Gelişim!)</p>
+<hr>
+<h2>3. Karar Ağaçları: Artılar ve Eksiler</h2>
+<h3>Neden/Ne Zaman Kullanılır?</h3>
+<ol>
+<li><strong>Açıklanabilirlik:</strong> &quot;Neden red verdin?&quot; sorusuna ağaç grafiğini gösterip &quot;Buradan dolayı&quot; diyebilirsiniz. (Banka kredileri, Tıp).</li>
+<li><strong>Ön İşleme Azdır:</strong> Veriyi normalize etmenize (0-1 arasına sıkıştırmaya) gerek yoktur (Biz alışkanlık olarak <code>StandardScaler</code> kullandık ama Karar Ağacı buna <strong>zorunlu değildir</strong>).</li>
+<li><strong>Hız:</strong> Tahmin yapması çok hızlıdır.</li>
+</ol>
+<h3>Dezavantajları</h3>
+<ol>
+<li><strong>Overfitting (Ezberleme):</strong> Sınır koymazsanız (<code>max_depth=None</code>), veriyi noktası noktasına ezberler. Yeni veri gelince çuvallar.</li>
+<li><strong>Kararsızlık:</strong> Verideki küçücük bir değişiklik ağacı tamamen değiştirebilir. (Bunu çözmek için <strong>Random Forest</strong> kullanılır).</li>
+</ol>
+<hr>
+<h2>4. Önemli Parametreler (Sözlük)</h2>
+<ul>
+<li><strong>criterion (Kriter):</strong><ul>
+<li><code>gini</code>: Gini Impurity. Saflığı ölçer (Cart algoritması). Varsayılandır.</li>
+<li><code>entropy</code>: Bilgi Kazancı (Information Gain). Logaritmik hesap yapar.</li>
+</ul>
+</li>
+<li><strong>max_depth (Maksimum Derinlik):</strong> Ağacın kaç kat aşağı ineceği.<ul>
+<li>Düşük olursa -&gt; Underfitting (Öğrenemez).</li>
+<li>Çok yüksek olursa -&gt; Overfitting (Ezberler).</li>
+</ul>
+</li>
+<li><strong>min_samples_split:</strong> Bir dalın bölünmesi için o dalda en az kaç örnek olmalı? (Örn: 50 derseniz, 30 kişinin kaldığı grubu daha fazla bölmez).</li>
+</ul>
+<hr>
+<h2>5. Özet (Reçete)</h2>
+<ol>
+<li>Veriyi <strong>.map()</strong> ile sayısal hale getir (Mümkünse sırayı gözeterek).</li>
+<li>Basit bir ağaç (<code>max_depth=3</code>) ile başla ve görselleştir (<code>plot_tree</code>).</li>
+<li>Sonuç yetersizse <strong>GridSearchCV</strong> ile <code>max_depth</code> ve <code>criterion</code> ayarlarını optimize et.</li>
+<li>Çok kararsız veya ezberleyen bir yapı varsa <strong>Random Forest</strong> algoritmasına geçiş yap.</li>
+</ol>
+</article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__brand">
+      <span class="brand__mark" aria-hidden="true">NK</span>
+      <div><strong>Nihat Kütükoğlu</strong>Data Science · AI · Software</div>
+    </div>
+    <nav class="footer__links" aria-label="Sosyal bağlantılar">
+      <a href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/nihatkutukoglu" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:kutukoglunihat1@gmail.com">Email</a>
+    </nav>
+    <p>© <span data-year>2026</span> Nihat Kütükoğlu</p>
+  </div>
+</footer>
+
+<dialog class="palette" id="palette" aria-label="Komut paleti">
+  <div class="palette__search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input type="text" id="paletteInput" placeholder="Sayfa, proje veya bağlantı ara..." autocomplete="off"
+           role="combobox" aria-expanded="true" aria-controls="paletteList" aria-autocomplete="list">
+    <kbd>Esc</kbd>
+  </div>
+  <div class="palette__list" id="paletteList" role="listbox" aria-label="Sonuçlar"></div>
+  <div class="palette__foot" aria-hidden="true"><span><kbd>↑</kbd> <kbd>↓</kbd> gezin</span><span><kbd>↵</kbd> aç</span></div>
+</dialog>
+<script src="/data/projects.js?v=5" defer></script>
+<script src="/data/site.js?v=5" defer></script>
+<script src="/js/main.js?v=5" defer></script>
+</body>
+</html>

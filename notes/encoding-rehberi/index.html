@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="tr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Encoding Rehberi | Nihat Kütükoğlu</title>
+<meta name="description" content="Kategorik verilerin sayısal verilere dönüştürülmesine yönelik teknikler (One-Hot, Label vb).">
+<link rel="canonical" href="https://www.nihatkutukoglu.com.tr/notes/encoding-rehberi">
+<meta property="og:title" content="Encoding Rehberi">
+<meta property="og:description" content="Kategorik verilerin sayısal verilere dönüştürülmesine yönelik teknikler (One-Hot, Label vb).">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.nihatkutukoglu.com.tr/notes/encoding-rehberi">
+<meta property="og:image" content="https://www.nihatkutukoglu.com.tr/assets/og/portfolio-cover.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css?v=5">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <nav class="nav" aria-label="Ana menü">
+      <a class="brand" href="/#hero" aria-label="Nihat Kütükoğlu — ana sayfa"><span class="brand__mark" aria-hidden="true">NK</span><span class="brand__name">Nihat Kütükoğlu</span></a>
+
+      <div class="nav__links">
+        <a href="/#hero" data-nav="home">Home</a>
+        <a href="/#projeler" data-nav="projects">Projects</a>
+        <a href="/#deneyim" data-nav="experience">Experience</a>
+        <a href="/#hakkimda" data-nav="about">About</a>
+        <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="kbd-btn nav__desktop" type="button" data-palette-open aria-label="Komut paletini aç (Ctrl+K)"><span>Ara</span><kbd>⌘K</kbd></button>
+        <a class="icon-btn nav__desktop" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener" aria-label="GitHub profili">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+        <a class="btn btn--primary btn--sm nav__desktop" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Temayı değiştir">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMobile" aria-label="Menüyü aç">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <div class="nav__mobile" id="navMobile" data-open="false">
+    <a href="/#hero" data-nav="home">Home</a>
+    <a href="/#projeler" data-nav="projects">Projects</a>
+    <a href="/#deneyim" data-nav="experience">Experience</a>
+    <a href="/#hakkimda" data-nav="about">About</a>
+    <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+    <a href="/#iletisim">Contact</a>
+    <div class="nav__mobile-cta">
+      <a class="btn btn--ghost" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn--primary" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+    </div>
+  </div>
+</header>
+<main id="main" class="section">
+  <div class="wrap note-reader">
+    <nav class="note__actions" aria-label="Not işlemleri">
+      <a class="btn btn--ghost btn--sm" href="/#notlar">← Tüm notlar</a>
+      <a class="btn btn--primary btn--sm" href="/assets/notes/Encoding_Rehberi.md" download>Notu indir (.md)</a>
+    </nav>
+    <article class="note-prose"><h1>🔤 ENCODING REHBERİ: KATEGORİK VERİYİ SAYIYA ÇEVİRME</h1>
+<blockquote>
+<p><strong>Makine öğrenmesi modelleri sadece SAYI anlar.</strong>
+&quot;erkek&quot;, &quot;kadın&quot;, &quot;İstanbul&quot; gibi metinlerle çalışamaz.
+→ Bu yüzden kategorik veriyi sayıya çevirmemiz gerekir. Buna <strong>encoding</strong> denir.</p>
+</blockquote>
+<hr>
+<h2>📌 TEMEL SORU: &quot;female=1, male=0 verdim — model bunu BÜYÜKLÜK olarak algılar mı?&quot;</h2>
+<h3>Cevap: 2 kategori varsa → HAYIR, sorun yok.</h3>
+<pre><code class="language-python">df[&quot;cinsiyet&quot;] = df[&quot;cinsiyet&quot;].map({&quot;male&quot;: 0, &quot;female&quot;: 1})
+</code></pre>
+<p>Bu durumda sütunda sadece <strong>0 ve 1</strong> var. Model bunu şöyle görür:</p>
+<pre><code>cinsiyet = 0  →  katsayı etkisiz (0 × β = 0)
+cinsiyet = 1  →  katsayı aktif   (1 × β = β)
+</code></pre>
+<p>Yani model <strong>&quot;1 büyüktür, 0 küçüktür&quot;</strong> diye düşünmüyor.
+Şöyle düşünüyor: <strong>&quot;Bu kişi female mi (1), değil mi (0)?&quot;</strong> — Bir açma-kapama düğmesi gibi.</p>
+<blockquote>
+<p>💡 İster <code>male=0, female=1</code> yap, ister <code>male=1, female=0</code> yap — modelin performansı <strong>aynı</strong> kalır.
+Sadece katsayının işareti (+ veya -) değişir, sonuç değişmez.</p>
+</blockquote>
+<hr>
+<h3>Peki 3+ kategori olunca?</h3>
+<pre><code class="language-python"># TEHLİKELİ! ⚠️
+df[&quot;sehir&quot;] = df[&quot;sehir&quot;].map({&quot;Ankara&quot;: 0, &quot;Bandırma&quot;: 1, &quot;İstanbul&quot;: 2})
+</code></pre>
+<p>Şimdi model bunu görüyor:</p>
+<pre><code>Ankara = 0,  Bandırma = 1,  İstanbul = 2
+</code></pre>
+<p>Model düşünür: <strong>&quot;İstanbul (2) Ankara&#39;dan (0) iki kat daha büyük!&quot;</strong></p>
+<p>Ama şehirler arasında büyüklük ilişkisi <strong>yok</strong>. Bu <strong>sahte sıralama</strong> modeli yanıltır.</p>
+<p><strong>Çözüm:</strong> 3+ sırasız kategori için → <code>get_dummies()</code> kullan (One-Hot Encoding)</p>
+<hr>
+<h2>🗂️ TÜM ENCODING YÖNTEMLERİ</h2>
+<hr>
+<h2>1️⃣ <code>.map()</code> — Manuel Sözlük</h2>
+<p><strong>Sen</strong> her değerin karşılığını elle yazıyorsun.</p>
+<pre><code class="language-python">df[&quot;cinsiyet&quot;] = df[&quot;cinsiyet&quot;].map({&quot;erkek&quot;: 1, &quot;kadın&quot;: 0})
+df[&quot;sigara&quot;]   = df[&quot;sigara&quot;].map({&quot;evet&quot;: 1, &quot;hayır&quot;: 0})
+df[&quot;beden&quot;]    = df[&quot;beden&quot;].map({&quot;S&quot;: 0, &quot;M&quot;: 1, &quot;L&quot;: 2, &quot;XL&quot;: 3})
+</code></pre>
+<pre><code>Önce:     erkek   kadın   erkek   kadın
+Sonra:      1       0       1       0
+</code></pre>
+<h3>Avantajlar ve Dezavantajlar</h3>
+<table>
+<thead>
+<tr>
+<th>✅ Avantaj</th>
+<th>❌ Dezavantaj</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tam kontrol — hangi sayıyı vereceğini sen seçersin</td>
+<td>Çok kategori varsa tek tek yazmak zahmetli</td>
+</tr>
+<tr>
+<td>Sıralama gerekiyorsa doğru sırayı sen verirsin</td>
+<td>Veride yeni kategori gelirse NaN olur</td>
+</tr>
+<tr>
+<td>Basit ve okunabilir</td>
+<td>Sadece tek sütuna uygulanır</td>
+</tr>
+</tbody></table>
+<h3>Ne Zaman Kullanılır?</h3>
+<ul>
+<li>✅ 2 kategori: erkek/kadın, evet/hayır, var/yok</li>
+<li>✅ Doğal sıralama var: küçük(0) &lt; orta(1) &lt; büyük(2)</li>
+<li>❌ 10+ sırasız kategori (şehir, marka) → get_dummies kullan</li>
+</ul>
+<h3>Train/Test Split: <strong>ÖNCE</strong> yap</h3>
+<pre><code class="language-python"># 1. Önce encoding
+df[&quot;cinsiyet&quot;] = df[&quot;cinsiyet&quot;].map({&quot;erkek&quot;: 1, &quot;kadın&quot;: 0})
+
+# 2. Sonra split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+</code></pre>
+<p><strong>Neden önce?</strong> Çünkü <code>.map()</code> veriden bir şey öğrenmiyor, sabit bir sözlük uyguluyor.
+Önce de sonra da yapsan aynı sonuç çıkar. Ama önce yapmak daha düzenli.</p>
+<hr>
+<h2>2️⃣ <code>LabelEncoder</code> — Otomatik Numaralama</h2>
+<p>Sen sözlük yazmıyorsun. Sklearn <strong>alfabetik sıraya göre</strong> otomatik numara veriyor.</p>
+<pre><code class="language-python">from sklearn.preprocessing import LabelEncoder
+
+le = LabelEncoder()
+df[&quot;sehir&quot;] = le.fit_transform(df[&quot;sehir&quot;])
+</code></pre>
+<pre><code>Önce:     Ankara   İstanbul   Bandırma   Ankara
+Sonra:      0         2          1         0
+           (A)       (İ)        (B)    ← alfabetik sıra
+</code></pre>
+<h3>Hangi sayı hangi kategori?</h3>
+<pre><code class="language-python">print(le.classes_)
+# [&#39;Ankara&#39;, &#39;Bandırma&#39;, &#39;İstanbul&#39;]
+#     0          1           2
+</code></pre>
+<h3>Avantajlar ve Dezavantajlar</h3>
+<table>
+<thead>
+<tr>
+<th>✅ Avantaj</th>
+<th>❌ Dezavantaj</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tek satır, hızlı</td>
+<td>Alfabetik sıra → sahte büyüklük ilişkisi yaratır</td>
+</tr>
+<tr>
+<td>Çok kategorili sütunlarda pratik</td>
+<td>Model &quot;İstanbul(2) &gt; Ankara(0)&quot; sanabilir</td>
+</tr>
+<tr>
+<td>Sayı vermek yeter, sıra önemli değilse OK</td>
+<td>X sütunlarında kullanmak riskli</td>
+</tr>
+</tbody></table>
+<h3>⚠️ Sahte Sıralama Problemi</h3>
+<pre><code>LabelEncoder verdi:  Ankara=0,  Bandırma=1,  İstanbul=2
+
+Model düşünür:
+  İstanbul - Ankara = 2 - 0 = 2
+  Bandırma - Ankara = 1 - 0 = 1
+
+  &quot;İstanbul, Ankara&#39;dan 2 kat daha büyük!&quot;  ← YANLIŞ!
+</code></pre>
+<p>Şehirler arasında sayısal büyüklük ilişkisi yok. Model bunu bilmiyor.</p>
+<h3>Ne Zaman Kullanılır?</h3>
+<ul>
+<li>✅ <strong>Hedef değişken (y)</strong> için güvenli:<pre><code class="language-python">le = LabelEncoder()
+y = le.fit_transform(df[&quot;sonuc&quot;])  # &quot;başarılı&quot;→0, &quot;başarısız&quot;→1
+</code></pre>
+</li>
+<li>✅ <strong>Tree-based modeller</strong> (Random Forest, XGBoost) sıralamadan etkilenmez → kullanılabilir</li>
+<li>❌ <strong>Linear Regression, Logistic Regression, SVM, KNN</strong> → sahte sıralama sorun yaratır</li>
+</ul>
+<h3>Train/Test Split: <strong>ÖNCE</strong> yap</h3>
+<pre><code class="language-python">le = LabelEncoder()
+df[&quot;kategori&quot;] = le.fit_transform(df[&quot;kategori&quot;])
+# Sonra split
+</code></pre>
+<hr>
+<h2>3️⃣ <code>OrdinalEncoder</code> — Sıralı Kategoriler İçin</h2>
+<p>LabelEncoder&#39;a benzer ama <strong>sırayı sen belirliyorsun</strong>.</p>
+<pre><code class="language-python">from sklearn.preprocessing import OrdinalEncoder
+
+oe = OrdinalEncoder(categories=[[&quot;ilkokul&quot;, &quot;lise&quot;, &quot;üniversite&quot;, &quot;yüksek lisans&quot;]])
+df[[&quot;egitim&quot;]] = oe.fit_transform(df[[&quot;egitim&quot;]])
+</code></pre>
+<pre><code>Önce:        lise   üniversite   ilkokul   yüksek lisans
+Sonra:         1        2          0            3
+
+Sıralama:  ilkokul(0) &lt; lise(1) &lt; üniversite(2) &lt; yüksek lisans(3)
+           Bu sıralama GERÇEK — eğitim seviyesi gerçekten artıyor.
+</code></pre>
+<h3>LabelEncoder vs OrdinalEncoder Farkı</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>LabelEncoder</th>
+<th>OrdinalEncoder</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sıra</td>
+<td>Alfabetik (otomatik)</td>
+<td>Sen belirlersin</td>
+</tr>
+<tr>
+<td>Sütun sayısı</td>
+<td>Tek sütun</td>
+<td>Birden fazla sütuna aynı anda</td>
+</tr>
+<tr>
+<td>Kontrol</td>
+<td>Yok</td>
+<td>Tam kontrol</td>
+</tr>
+<tr>
+<td>Input</td>
+<td>1D array (Series)</td>
+<td>2D array (DataFrame)</td>
+</tr>
+</tbody></table>
+<h3>Ne Zaman Kullanılır?</h3>
+<ul>
+<li>✅ Doğal sıralama OLAN kategoriler:<ul>
+<li>Eğitim seviyesi: ilkokul &lt; lise &lt; üniversite</li>
+<li>Beden ölçüsü: S &lt; M &lt; L &lt; XL</li>
+<li>Müşteri memnuniyeti: kötü &lt; orta &lt; iyi &lt; çok iyi</li>
+<li>Gelir grubu: düşük &lt; orta &lt; yüksek</li>
+</ul>
+</li>
+<li>❌ Sıralama OLMAYAN kategoriler (şehir, renk, marka) → get_dummies kullan</li>
+</ul>
+<h3>Train/Test Split: <strong>ÖNCE</strong> yap</h3>
+<pre><code class="language-python">oe = OrdinalEncoder(categories=[[&quot;S&quot;, &quot;M&quot;, &quot;L&quot;, &quot;XL&quot;]])
+df[[&quot;beden&quot;]] = oe.fit_transform(df[[&quot;beden&quot;]])
+# Sonra split
+</code></pre>
+<hr>
+<h2>4️⃣ <code>get_dummies()</code> — One-Hot Encoding (Pandas)</h2>
+<p>Her kategoriyi <strong>ayrı bir sütun</strong> yapar. O kategoriye ait satır = 1, değil = 0.</p>
+<pre><code class="language-python">df = pd.get_dummies(df, columns=[&quot;sehir&quot;], drop_first=True)
+</code></pre>
+<pre><code>Önce:                     Sonra:
+  sehir                     sehir_Bandırma    sehir_İstanbul
+  Ankara                         0                  0         ← her ikisi 0 = Ankara
+  İstanbul                       0                  1
+  Bandırma                       1                  0
+  Ankara                         0                  0
+  İstanbul                       0                  1
+</code></pre>
+<h3><code>drop_first=True</code> ne yapıyor ve NEDEN gerekli?</h3>
+<p>3 şehir varsa normalde 3 sütun oluşur:</p>
+<pre><code>sehir_Ankara   sehir_Bandırma   sehir_İstanbul
+    1               0                0
+    0               0                1
+    0               1                0
+</code></pre>
+<p>Ama düşün: Eğer Bandırma=0 ve İstanbul=0 ise → zaten Ankara! 3. sütun <strong>fazlalık bilgi</strong> (redundant). Buna <strong>multicollinearity</strong> denir ve modeli yanıltır.</p>
+<p><code>drop_first=True</code> birini siler (referans kategori yapar):</p>
+<pre><code>sehir_Bandırma   sehir_İstanbul
+     0                0            ← Bu kişi Ankara (referans)
+     0                1            ← Bu kişi İstanbul
+     1                0            ← Bu kişi Bandırma
+</code></pre>
+<blockquote>
+<p><strong>Kural:</strong> <code>drop_first=True</code> her zaman kullan. N kategori → N-1 sütun yeterli.</p>
+</blockquote>
+<h3>Avantajlar ve Dezavantajlar</h3>
+<table>
+<thead>
+<tr>
+<th>✅ Avantaj</th>
+<th>❌ Dezavantaj</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sahte sıralama sorunu YOK</td>
+<td>Çok kategori varsa sütun sayısı patlar</td>
+</tr>
+<tr>
+<td>Her model ile güvenle kullanılır</td>
+<td>50 şehir = 49 yeni sütun</td>
+</tr>
+<tr>
+<td>En güvenli encoding yöntemi</td>
+<td>Bellek kullanımı artar</td>
+</tr>
+</tbody></table>
+<h3>Ne Zaman Kullanılır?</h3>
+<ul>
+<li>✅ Sıralama OLMAYAN 3+ kategori: şehir, bölge, renk, marka, meslek</li>
+<li>✅ Her tür model ile güvenli (Linear, Logistic, KNN, SVM, Tree...)</li>
+<li>❌ Çok yüksek kardinalite (100+ farklı değer) → Target Encoding düşün</li>
+</ul>
+<h3>Train/Test Split: <strong>ÖNCE</strong> yap ⚠️ ÇOK ÖNEMLİ</h3>
+<pre><code class="language-python"># ✅ DOĞRU — Split ÖNCE
+df = pd.get_dummies(df, columns=[&quot;bolge&quot;], drop_first=True)
+X = df.drop(&quot;hedef&quot;, axis=1)
+y = df[&quot;hedef&quot;]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+</code></pre>
+<pre><code class="language-python"># ❌ YANLIŞ — Split SONRA
+X_train, X_test = train_test_split(...)
+X_train = pd.get_dummies(X_train, columns=[&quot;bolge&quot;])  # Train&#39;de 3 bölge var
+X_test  = pd.get_dummies(X_test, columns=[&quot;bolge&quot;])   # Test&#39;te 2 bölge var!
+# SORUN: Sütun sayıları farklı → model çöker!
+</code></pre>
+<p><strong>Neden ÖNCE?</strong></p>
+<blockquote>
+<p>Train setinde &quot;Karadeniz&quot; bölgesi var ama test setinde yok.
+Split sonrası yapsan: Train&#39;de <code>bolge_Karadeniz</code> sütunu oluşur, Test&#39;te oluşmaz.
+Model 10 sütun bekliyor ama test&#39;te 9 sütun var → <strong>Shape Mismatch hatası!</strong></p>
+</blockquote>
+<hr>
+<h2>5️⃣ <code>OneHotEncoder</code> — One-Hot Encoding (sklearn)</h2>
+<p><code>get_dummies()</code> ile aynı işi yapar ama <strong>sklearn Pipeline&#39;larına</strong> entegre edilebilir.</p>
+<pre><code class="language-python">from sklearn.preprocessing import OneHotEncoder
+
+ohe = OneHotEncoder(drop=&quot;first&quot;, sparse_output=False)
+encoded = ohe.fit_transform(df[[&quot;sehir&quot;]])
+</code></pre>
+<h3>get_dummies vs OneHotEncoder</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>get_dummies()</code></th>
+<th><code>OneHotEncoder</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Kütüphane</td>
+<td>Pandas</td>
+<td>sklearn</td>
+</tr>
+<tr>
+<td>Kullanım</td>
+<td>Daha kolay, tek satır</td>
+<td>Pipeline&#39;a entegre</td>
+</tr>
+<tr>
+<td>Yeni kategori</td>
+<td>Hata vermez (NaN üretir)</td>
+<td>Hata verir (handle_unknown ile çözülür)</td>
+</tr>
+<tr>
+<td>Ne zaman?</td>
+<td>Hızlı proje, notebook</td>
+<td>Production, Pipeline</td>
+</tr>
+</tbody></table>
+<pre><code class="language-python"># Pipeline ile kullanım
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+
+preprocessor = ColumnTransformer([
+    (&#39;cat&#39;, OneHotEncoder(drop=&#39;first&#39;, handle_unknown=&#39;ignore&#39;), [&#39;sehir&#39;, &#39;bolge&#39;]),
+    (&#39;num&#39;, StandardScaler(), [&#39;yas&#39;, &#39;maas&#39;])
+])
+
+pipe = Pipeline([
+    (&#39;prep&#39;, preprocessor),
+    (&#39;model&#39;, Ridge())
+])
+
+pipe.fit(X_train, y_train)  # Encoding + Scaling + Model hepsi bir arada
+</code></pre>
+<blockquote>
+<p><code>handle_unknown=&#39;ignore&#39;</code> → Test&#39;te yeni kategori çıkarsa hata vermez, o sütunları 0 yapar.</p>
+</blockquote>
+<hr>
+<h2>⏰ TRAIN/TEST SPLIT ZAMANLAMA TABLOSU</h2>
+<pre><code>Veriden bir şey ÖĞRENİYOR mu?
+
+  HAYIR → Split ÖNCE yap
+  EVET  → Split SONRA yap
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>İşlem</th>
+<th>Veriden Öğreniyor mu?</th>
+<th>Ne Zaman?</th>
+<th>Neden?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>.map()</code></td>
+<td>❌ Hayır (sabit sözlük)</td>
+<td><strong>ÖNCE</strong></td>
+<td>Her zaman aynı sonuç</td>
+</tr>
+<tr>
+<td><code>LabelEncoder</code></td>
+<td>❌ Hayır (alfabetik sıra)</td>
+<td><strong>ÖNCE</strong></td>
+<td>Sıra veriden bağımsız</td>
+</tr>
+<tr>
+<td><code>OrdinalEncoder</code></td>
+<td>❌ Hayır (sen sıralıyorsun)</td>
+<td><strong>ÖNCE</strong></td>
+<td>Sabit eşleme</td>
+</tr>
+<tr>
+<td><code>get_dummies()</code></td>
+<td>❌ Hayır (sütun oluşturma)</td>
+<td><strong>ÖNCE</strong> ⚠️</td>
+<td>Sütun uyuşmazlığı riski</td>
+</tr>
+<tr>
+<td><code>OneHotEncoder</code></td>
+<td>❌ Hayır</td>
+<td><strong>ÖNCE</strong> (veya Pipeline)</td>
+<td>Pipeline&#39;da otomatik</td>
+</tr>
+<tr>
+<td><code>StandardScaler</code></td>
+<td>✅ EVET (mean, std)</td>
+<td><strong>SONRA</strong> ⚠️</td>
+<td>Data leakage riski</td>
+</tr>
+<tr>
+<td><code>MinMaxScaler</code></td>
+<td>✅ EVET (min, max)</td>
+<td><strong>SONRA</strong> ⚠️</td>
+<td>Data leakage riski</td>
+</tr>
+<tr>
+<td><code>RobustScaler</code></td>
+<td>✅ EVET (median, IQR)</td>
+<td><strong>SONRA</strong> ⚠️</td>
+<td>Data leakage riski</td>
+</tr>
+</tbody></table>
+<h3>Data Leakage Nedir?</h3>
+<pre><code class="language-python"># ❌ YANLIŞ — Test bilgisi Train&#39;e sızıyor
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)          # Tüm veriyi birden ölçekledi
+X_train, X_test = train_test_split(X_scaled) # Test bilgisi mean/std&#39;ye sızmış!
+
+# ✅ DOĞRU — Sadece Train&#39;den öğren
+X_train, X_test = train_test_split(X)
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)   # Train&#39;den öğren + uygula
+X_test  = scaler.transform(X_test)        # Train&#39;den öğrenileni test&#39;e uygula
+</code></pre>
+<blockquote>
+<p><strong>Sezgi:</strong> Sınav öncesi sınav sorularını görmek = Data Leakage.
+Scaler&#39;ı tüm veriye uygularsan, test verisi hakkında bilgi train&#39;e sızar.</p>
+</blockquote>
+<hr>
+<h2>🧭 KARAR AĞACI: HANGİ ENCODİNG?</h2>
+<pre><code>  Kategorik sütun geldi
+         │
+         ▼
+  Kaç farklı değer var?
+         │
+    ┌────┴────────┐
+  2 tane         3+ tane
+    │               │
+    ▼               ▼
+  .map()      Aralarında DOĞAL
+  {A:0, B:1}  SIRALAMA var mı?
+                 │          │
+                Evet       Hayır
+                 │          │
+                 ▼          │
+           .map() veya     │
+           OrdinalEncoder  │
+                           ▼
+                   Kaç farklı değer?
+                     │           │
+                   &lt; 15        15+
+                     │           │
+                     ▼           ▼
+              get_dummies()   Target Encoding
+              (One-Hot)       veya başka yöntem
+</code></pre>
+<hr>
+<h2>📊 BÜYÜK KARŞILAŞTIRMA TABLOSU</h2>
+<table>
+<thead>
+<tr>
+<th>Yöntem</th>
+<th>Sütun bir mi çok mu?</th>
+<th>Sıralama</th>
+<th>En iyi model tipi</th>
+<th>Örnek</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>.map()</code></td>
+<td>Aynı kalır (1)</td>
+<td>Sen kontrol</td>
+<td>Hepsi</td>
+<td>erkek→1, kadın→0</td>
+</tr>
+<tr>
+<td><code>LabelEncoder</code></td>
+<td>Aynı kalır (1)</td>
+<td>Alfabetik (otomatik)</td>
+<td>Tree modeller / hedef y</td>
+<td>Ankara→0, İstanbul→2</td>
+</tr>
+<tr>
+<td><code>OrdinalEncoder</code></td>
+<td>Aynı kalır (1)</td>
+<td>Sen belirlersin</td>
+<td>Hepsi</td>
+<td>S→0, M→1, L→2</td>
+</tr>
+<tr>
+<td><code>get_dummies</code></td>
+<td>Artar (N-1)</td>
+<td>Yok</td>
+<td>Hepsi ✅</td>
+<td>sehir → 3 ayrı sütun</td>
+</tr>
+<tr>
+<td><code>OneHotEncoder</code></td>
+<td>Artar (N-1)</td>
+<td>Yok</td>
+<td>Hepsi ✅ (Pipeline)</td>
+<td>aynı iş, sklearn yolu</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>🎯 ALTIN KURALLAR</h2>
+<pre><code>1. İki kategori (evet/hayır, erkek/kadın)
+   → .map() kullan, 0 ve 1 ver. Büyüklük sorunu YOK.
+
+2. Doğal sıralama olan kategori (S &lt; M &lt; L &lt; XL)
+   → .map() veya OrdinalEncoder kullan. Sıralama GERÇEK.
+
+3. Sıralama olmayan 3+ kategori (şehir, renk, marka)
+   → get_dummies(drop_first=True) kullan. En GÜVENLİ yol.
+
+4. Hedef değişken (y) kategorikse
+   → LabelEncoder kullan.
+
+5. Encoding işlemi → Train/Test split ÖNCE yap.
+   Scaling işlemi  → Train/Test split SONRA yap.
+
+6. drop_first=True HER ZAMAN yaz.
+   N kategori → N-1 sütun yeter.
+</code></pre>
+<hr>
+<h2>⚡ HIZLI ŞABLON — Her Projede Kopyala-Yapıştır</h2>
+<pre><code class="language-python">import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+
+# ─── VERİYİ YÜKLE ───
+df = pd.read_csv(&quot;verin.csv&quot;)
+
+# ─── 1. ENCODİNG (Split ÖNCE) ───
+
+# 2 kategorili sütunlar → .map()
+df[&quot;cinsiyet&quot;] = df[&quot;cinsiyet&quot;].map({&quot;male&quot;: 0, &quot;female&quot;: 1})
+df[&quot;sigara&quot;]   = df[&quot;sigara&quot;].map({&quot;yes&quot;: 1, &quot;no&quot;: 0})
+
+# Sıralı kategoriler → .map()
+df[&quot;beden&quot;]    = df[&quot;beden&quot;].map({&quot;S&quot;: 0, &quot;M&quot;: 1, &quot;L&quot;: 2, &quot;XL&quot;: 3})
+
+# Sırasız 3+ kaategoriler → get_dummies
+df = pd.get_dummies(df, columns=[&quot;sehir&quot;, &quot;bolge&quot;], drop_first=True)
+
+# Hedef değişken kategorikse → LabelEncoder
+# le = LabelEncoder()
+# df[&quot;hedef&quot;] = le.fit_transform(df[&quot;hedef&quot;])
+
+# ─── 2. X ve y AYIR ───
+X = df.drop(&quot;hedef&quot;, axis=1)
+y = df[&quot;hedef&quot;]
+
+# ─── 3. TRAIN/TEST SPLIT ───
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# ─── 4. SCALİNG (Split SONRA) ───
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)   # Train&#39;den öğren + uygula
+X_test  = scaler.transform(X_test)        # Train&#39;in öğrendiğini test&#39;e uygula
+
+# ─── 5. MODEL ───
+from sklearn.linear_model import RidgeCV
+model = RidgeCV(cv=5)
+model.fit(X_train, y_train)
+print(f&quot;Test R2: {model.score(X_test, y_test):.3f}&quot;)
+</code></pre>
+<hr>
+<h2>❓ SIK SORULAN SORULAR</h2>
+<h3>&quot;female=1, male=0 verdim. Model female&#39;ı daha büyük algılar mı?&quot;</h3>
+<blockquote>
+<p><strong>2 kategoride → Hayır.</strong> 0/1 bir on/off düğmesi gibi çalışır. Hangisine 1 verdiğin fark etmez, sonuç aynı.</p>
+</blockquote>
+<h3>&quot;Neden get_dummies split ÖNCE yapılmalı?&quot;</h3>
+<blockquote>
+<p>Test setinde train&#39;de olmayan kategori olabilir (veya tersi). Ayrı ayrı yapsan sütun sayıları uyuşmaz → model çöker.</p>
+</blockquote>
+<h3>&quot;LabelEncoder ile .map() arasındaki fark ne?&quot;</h3>
+<blockquote>
+<p><code>.map()</code>: Sen sözlük yazarsın, tam kontrol. <code>LabelEncoder</code>: Alfabetik otomatik numara verir, kontrol yok.</p>
+</blockquote>
+<h3>&quot;Neden drop_first=True?&quot;</h3>
+<blockquote>
+<p>N sütunun N-1 tanesi bilgiyi zaten taşır. Sonuncusu fazlalıktır ve multicollinearity yaratır.</p>
+</blockquote>
+<h3>&quot;Tree modellerde (Random Forest, XGBoost) encoding gerekli mi?&quot;</h3>
+<blockquote>
+<p>Evet, sklearn&#39;de gerekli (sayı istiyor). Ama tree modeller sahte sıralamadan ETKİLENMEZ. Bu yüzden LabelEncoder bile kullanılabilir.</p>
+</blockquote>
+<h3>&quot;Çok fazla kategori varsa (100+ şehir) ne yapayım?&quot;</h3>
+<blockquote>
+<p>get_dummies 99 sütun oluşturur — çok fazla. Bu durumda:</p>
+<ul>
+<li><strong>Grupla:</strong> İlk 10 şehri tut, geri kalanını &quot;Diğer&quot; yap</li>
+<li><strong>Target Encoding:</strong> Kategorinin hedef değişken ortalamasıyla değiştir (sklearn&#39;de <code>TargetEncoder</code>)</li>
+<li><strong>Frequency Encoding:</strong> Kategorinin veri setindeki frekansıyla değiştir</li>
+</ul>
+</blockquote>
+</article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__brand">
+      <span class="brand__mark" aria-hidden="true">NK</span>
+      <div><strong>Nihat Kütükoğlu</strong>Data Science · AI · Software</div>
+    </div>
+    <nav class="footer__links" aria-label="Sosyal bağlantılar">
+      <a href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/nihatkutukoglu" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:kutukoglunihat1@gmail.com">Email</a>
+    </nav>
+    <p>© <span data-year>2026</span> Nihat Kütükoğlu</p>
+  </div>
+</footer>
+
+<dialog class="palette" id="palette" aria-label="Komut paleti">
+  <div class="palette__search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input type="text" id="paletteInput" placeholder="Sayfa, proje veya bağlantı ara..." autocomplete="off"
+           role="combobox" aria-expanded="true" aria-controls="paletteList" aria-autocomplete="list">
+    <kbd>Esc</kbd>
+  </div>
+  <div class="palette__list" id="paletteList" role="listbox" aria-label="Sonuçlar"></div>
+  <div class="palette__foot" aria-hidden="true"><span><kbd>↑</kbd> <kbd>↓</kbd> gezin</span><span><kbd>↵</kbd> aç</span></div>
+</dialog>
+<script src="/data/projects.js?v=5" defer></script>
+<script src="/data/site.js?v=5" defer></script>
+<script src="/js/main.js?v=5" defer></script>
+</body>
+</html>

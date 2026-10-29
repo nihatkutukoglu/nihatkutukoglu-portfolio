@@ -1,0 +1,1755 @@
+<!doctype html>
+<html lang="tr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Makine Öğrenimi: Kapsamlı Rehber | Nihat Kütükoğlu</title>
+<meta name="description" content="Makine öğrenimi kavramlarını uçtan uca ele alan geniş kapsamlı bir rehber.">
+<link rel="canonical" href="https://www.nihatkutukoglu.com.tr/notes/makine-ogrenimi-kapsamli-rehber">
+<meta property="og:title" content="Makine Öğrenimi: Kapsamlı Rehber">
+<meta property="og:description" content="Makine öğrenimi kavramlarını uçtan uca ele alan geniş kapsamlı bir rehber.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.nihatkutukoglu.com.tr/notes/makine-ogrenimi-kapsamli-rehber">
+<meta property="og:image" content="https://www.nihatkutukoglu.com.tr/assets/og/portfolio-cover.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css?v=5">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <nav class="nav" aria-label="Ana menü">
+      <a class="brand" href="/#hero" aria-label="Nihat Kütükoğlu — ana sayfa"><span class="brand__mark" aria-hidden="true">NK</span><span class="brand__name">Nihat Kütükoğlu</span></a>
+
+      <div class="nav__links">
+        <a href="/#hero" data-nav="home">Home</a>
+        <a href="/#projeler" data-nav="projects">Projects</a>
+        <a href="/#deneyim" data-nav="experience">Experience</a>
+        <a href="/#hakkimda" data-nav="about">About</a>
+        <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="kbd-btn nav__desktop" type="button" data-palette-open aria-label="Komut paletini aç (Ctrl+K)"><span>Ara</span><kbd>⌘K</kbd></button>
+        <a class="icon-btn nav__desktop" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener" aria-label="GitHub profili">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+        <a class="btn btn--primary btn--sm nav__desktop" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Temayı değiştir">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMobile" aria-label="Menüyü aç">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <div class="nav__mobile" id="navMobile" data-open="false">
+    <a href="/#hero" data-nav="home">Home</a>
+    <a href="/#projeler" data-nav="projects">Projects</a>
+    <a href="/#deneyim" data-nav="experience">Experience</a>
+    <a href="/#hakkimda" data-nav="about">About</a>
+    <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+    <a href="/#iletisim">Contact</a>
+    <div class="nav__mobile-cta">
+      <a class="btn btn--ghost" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn--primary" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+    </div>
+  </div>
+</header>
+<main id="main" class="section">
+  <div class="wrap note-reader">
+    <nav class="note__actions" aria-label="Not işlemleri">
+      <a class="btn btn--ghost btn--sm" href="/#notlar">← Tüm notlar</a>
+      <a class="btn btn--primary btn--sm" href="/assets/notes/Makine_Ogrenimi_Kapsamli_Rehber.md" download>Notu indir (.md)</a>
+    </nav>
+    <article class="note-prose"><h1>📘 MAKİNE ÖĞRENMESİ: SIFIRDAN UZMANLIĞA KAPSAMLI REHBER VE KOD KÜTÜPHANESİ</h1>
+<blockquote>
+<p><strong>&quot;Bir şeyi basitçe anlatamıyorsanız, onu yeterince iyi anlamamışsınız demektir.&quot; - Albert Einstein</strong></p>
+</blockquote>
+<p>Bu rehber, sadece kod parçalarını birleştiren bir dosya değildir. Makine Öğrenmesi (Machine Learning) dünyasına adım atanlar için, her kavramın <strong>teorik mantığını</strong>, <strong>matematiksel sezgisini</strong>, <strong>gerçek hayat karşılığını</strong> ve <strong>uygulama detaylarını</strong> içeren canlı bir kitaptır.</p>
+<hr>
+<h2>📑 İÇİNDEKİLER</h2>
+<ol>
+<li><p><a href="#b%C3%B6l%C3%BCm-0-giri%C5%9F"><strong>GİRİŞ: MAKİNE ÖĞRENMESİNİN TEMELLERİ</strong></a></p>
+<ul>
+<li>Makine Öğrenmesi Nedir? Geleneksel Yazılımdan Farkı Nedir?</li>
+<li>Öğrenme Türleri: Gözetimli (Supervised) vs Gözetimsiz (Unsupervised)</li>
+<li>Altın Kurallar: Overfitting (Aşırı Ezber), Underfitting (Öğrenememe) ve Bias-Variance Dengesi</li>
+<li>Veri Ön İşleme Sanatı: Scaling, Encoding, Splitting Neden Yapılır?</li>
+</ul>
+</li>
+<li><p><a href="#b%C3%B6l%C3%BCm-1-regresyon"><strong>BÖLÜM 1: REGRESYON MODELLERİ (SAYISAL TAHMİN)</strong></a></p>
+<ul>
+<li>1.1. Lineer Regresyon: Dünyayı Düz Çizgilerle Anlamak</li>
+<li>1.2. Çoklu Regresyon: Birden Fazla Etkeni Yönetmek</li>
+<li>1.3. Polinom Regresyon: Eğrisel İlişkiler ve Gerçek Hayat</li>
+<li>1.4. Regülarizasyon (Ridge, Lasso, ElasticNet): Modeli Cezalandırarak Eğitmek</li>
+<li><strong>Proje 1:</strong> Sigorta Maliyet Tahmini (Uçtan Uca Proje)</li>
+</ul>
+</li>
+<li><p><a href="#b%C3%B6l%C3%BCm-2-siniflandirma"><strong>BÖLÜM 2: SINIFLANDIRMA VE LOJİSTİK REGRESYON</strong></a></p>
+<ul>
+<li>Lojistik Regresyonun Mantığı: Sigmoid Fonksiyonu ve Olasılık</li>
+<li>Karmaşıklık Matrisi (Confusion Matrix) Okuma Sanatı</li>
+<li><strong>Proje 2:</strong> Banka Müşteri Analizi ve Pokemon Efsanevi Tespiti</li>
+</ul>
+</li>
+<li><p><a href="#b%C3%B6l%C3%BCm-3-knn"><strong>BÖLÜM 3: K-EN YAKIN KOMŞU (KNN)</strong></a></p>
+<ul>
+<li>Mesafelerin Gücü: Euclidean vs Manhattan</li>
+<li>Doğru &quot;K&quot; Değerini Bulmak</li>
+</ul>
+</li>
+<li><p><a href="#b%C3%B6l%C3%BCm-4-svm"><strong>BÖLÜM 4: DESTEK VEKTÖR MAKİNELERİ (SVM)</strong></a></p>
+<ul>
+<li>En Geniş Caddeyi (Margin) Bulma Teorisi</li>
+<li>Kernel Trick: Veriyi Üst Boyutlara Taşıma</li>
+</ul>
+</li>
+<li><p><a href="#b%C3%B6l%C3%BCm-5-naive-bayes"><strong>BÖLÜM 5: NAIVE BAYES</strong></a></p>
+<ul>
+<li>Olasılık ve Bayes Teoremi</li>
+</ul>
+</li>
+<li><p><a href="#b%C3%B6l%C3%BCm-6-karar-agaclari"><strong>BÖLÜM 6: KARAR AĞAÇLARI (DECISION TREES)</strong></a></p>
+<ul>
+<li>Entropy ve Bilgi Kazancı (Information Gain)</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>&lt;a name=&quot;bölüm-0-giriş&quot;&gt;&lt;/a&gt;</p>
+<h1>🧠 GİRİŞ: MAKİNE ÖĞRENMESİNİN TEMELLERİ</h1>
+<p>Kodlara geçmeden önce, ne yaptığımızı anlamalıyız.</p>
+<h3>1. Makine Öğrenmesi Nedir?</h3>
+<p>Geleneksel yazılımda (örneğin bir hesap makinesi yaparken), bilgisayara kuralları biz veririz: <code>if x &gt; 5: yap</code>.
+Makine öğrenmesinde ise bilgisayara <strong>veriyi (cevapları)</strong> veririz, bilgisayar <strong>kuralları kendi keşfeder</strong>.</p>
+<h3>2. Öğrenme Türleri</h3>
+<ul>
+<li><strong>Gözetimli Öğrenme (Supervised Learning):</strong> &quot;Öğretmenli Öğrenme&quot; gibidir. Modele hem soruları (Girdiler/X) hem de cevap anahtarını (Çıktılar/y) veririz. Model aradaki ilişkiyi çözer.<ul>
+<li><em>Örnek:</em> Evin özelliklerini (X) ve fiyatını (y) verip, yeni bir evin fiyatını tahmin etmesini istemek.</li>
+</ul>
+</li>
+<li><strong>Gözetimsiz Öğrenme (Unsupervised Learning):</strong> Cevap anahtarı yoktur. Veriyi veririz ve &quot;Buradaki gizli grupları bul&quot; deriz.<ul>
+<li><em>Örnek:</em> Müşteri alışveriş verilerini verip &quot;Benzer müşterileri grupla (Segmentasyon)&quot; demek.</li>
+</ul>
+</li>
+</ul>
+<h3>3. Kritik Kavramlar (Sözlük)</h3>
+<ul>
+<li><strong>Feature (Özellik/X):</strong> Tahmin yapmak için kullandığımız veriler (Yaş, Boy, Metrekare vb.).</li>
+<li><strong>Target (Hedef/y):</strong> Tahmin etmeye çalıştığımız şey (Fiyat, Hasta mı?, Spam mi?).</li>
+<li><strong>Train/Test Split:</strong> Veriyi her zaman ikiye böleriz. %70-80&#39;i ile modeli eğitiriz (Ders çalışma), %20-30&#39;u saklarız ve modeli test ederiz (Sınav). Asla sınav sorularını (Test verisini) öğrenciye (Modele) önceden göstermeyiz!</li>
+<li><strong>Overfitting (Aşırı Öğrenme/Ezberleme):</strong> Modelin eğitim verisini çok iyi ezberlemesi ama yeni veri görünce çuvallamasıdır. (Sınav sorularını ezberleyen öğrenci).</li>
+<li><strong>Underfitting (Eksik Öğrenme):</strong> Modelin ne eğitim setini ne de test setini öğrenememesi durumudur. (Ders çalışmayan öğrenci).</li>
+</ul>
+<hr>
+<p>&lt;a name=&quot;bölüm-1-regresyon&quot;&gt;&lt;/a&gt;</p>
+<h1>📈 BÖLÜM 1: REGRESYON MODELLERİ (Sayısal Tahmin)</h1>
+<p>Regresyon, &quot;Ne kadar?&quot;, &quot;Kaç para?&quot;, &quot;Kaç derece?&quot; gibi soruların cevabını arar. Çıktımız (y) her zaman sayısal bir değerdir.</p>
+<h2>1.1. Lineer Regresyon (Linear Regression)</h2>
+<p><strong>Mantık:</strong> Veri noktalarının arasından geçen <strong>en mükemmel düz çizgiyi</strong> çizmektir.
+<strong>Formül:</strong> <code>y = mx + b</code> (Liseden hatırladığımız doğru denklemi)</p>
+<ul>
+<li><p><code>y</code>: Tahmin (Örn: Sınav Notu)</p>
+</li>
+<li><p><code>x</code>: Girdi (Örn: Çalışma Saati)</p>
+</li>
+<li><p><code>m</code> (Katsayı/Coefficient): Eğim. Çalışma saati notu ne kadar artırıyor?</p>
+</li>
+<li><p><code>b</code> (Sabit/Intercept): Başlangıç noktası. Hiç çalışmazsa kaç alır?</p>
+</li>
+</ul>
+<h3>📝 LİNEER REGRESYON REÇETESİ (ADIM ADIM)</h3>
+<ol>
+<li><strong>Kütüphaneleri Yükle:</strong> <code>pandas</code>, <code>sklearn.linear_model</code>, <code>sklearn.model_selection</code>.</li>
+<li><strong>Veriyi Hazırla (X ve y):</strong><ul>
+<li><code>X</code> (Girdi): DataFrame olmalı <code>[[ ]]</code>. (Örn: <code>df[[&quot;Study Hours&quot;]]</code>)</li>
+<li><code>y</code> (Hedef): Tek sütun (Series) olmalı. (Örn: <code>df[&quot;Exam Score&quot;]</code>)</li>
+</ul>
+</li>
+<li><strong>Eğitim-Test Ayrımı:</strong> <code>train_test_split(X, y)</code> ile veriyi böl (Genelde %80 Eğitim, %20 Test).</li>
+<li><strong>Ölçeklendirme (Opsiyonel ama Önerilir):</strong> <code>StandardScaler</code>.<ul>
+<li><strong>Kural:</strong> <code>X_train</code> -&gt; <code>fit_transform</code>, <code>X_test</code> -&gt; <code>transform</code>.</li>
+</ul>
+</li>
+<li><strong>Modeli Kur:</strong> <code>model = LinearRegression()</code></li>
+<li><strong>Eğit (Pişir):</strong> <code>model.fit(X_train, y_train)</code></li>
+<li><strong>Tahmin Et (Servis):</strong> <code>model.predict(X_test)</code></li>
+<li><strong>Değerlendir:</strong> <code>r2_score</code> ve <code>mean_squared_error</code> ile başarını ölç.</li>
+</ol>
+<h3>💻 Uygulama: Çalışma Saati ve Sınav Notu Analizi</h3>
+<p>Bu kodda, çalışma saati arttıkça sınav notunun nasıl değiştiğini modelliyoruz.</p>
+<pre><code class="language-python"># ---------------------------------------------------------------------------------------
+# ADIM 1: Kütüphanelerin Yüklenmesi
+# ---------------------------------------------------------------------------------------
+# Pandas: Veriyi Excel tablosu gibi okumak ve yönetmek için (Veri Biliminin Excel&#39;i).
+# Numpy: Matematiksel işlemler ve diziler için.
+# Matplotlib/Seaborn: Veriyi grafiklere dökmek için.
+# Sklearn (Scikit-learn): Makine öğrenmesi modellerini barındıran ana kütüphane.
+# ---------------------------------------------------------------------------------------
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+import os
+
+# Scikit-learn&#39;den gerekli araçları çağırıyoruz
+from sklearn.model_selection import train_test_split # Veriyi bölmek için
+from sklearn.preprocessing import StandardScaler     # Veriyi ölçeklemek için
+from sklearn.linear_model import LinearRegression    # Modeli kurmak için
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error # Başarıyı ölçmek için
+
+# ---------------------------------------------------------------------------------------
+# ADIM 2: Verinin Yüklenmesi
+# ---------------------------------------------------------------------------------------
+# Dinamik dosya yolu bulma: Kodun çalıştığı klasörü otomatik bulur, hata almayı engeller.
+current_dir = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(current_dir, &quot;LineervePolinomRegresyon&quot;, &quot;1-studyhours (1).csv&quot;)
+
+# csv dosyasını oku ve &#39;df&#39; (dataframe) adlı değişkene ata.
+try:
+    df = pd.read_csv(file_path)
+    print(&quot;Veri başarıyla yüklendi!&quot;)
+except FileNotFoundError:
+    print(f&quot;Hata: Dosya bulunamadı -&gt; {file_path}&quot;)
+    # Demo veri oluşturalım (Dosya yoksa kod çalışmaya devam etsin diye)
+    data = {&#39;Study Hours&#39;: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            &#39;Exam Score&#39;: [20, 30, 40, 50, 60, 70, 80, 85, 90, 95]}
+    df = pd.DataFrame(data)
+
+# Veriyi Gözle: Dağılım grafiği (Scatter Plot) çizelim
+# x eksenine saati, y eksenine notu koyuyoruz.
+plt.figure(figsize=(10, 6))
+plt.scatter(df[&quot;Study Hours&quot;], df[&quot;Exam Score&quot;], color=&#39;blue&#39;, label=&#39;Öğrenci Verisi&#39;)
+plt.title(&quot;Çalışma Saati vs Sınav Notu (İlişki Analizi)&quot;)
+plt.xlabel(&quot;Çalışma Saati&quot;)
+plt.ylabel(&quot;Sınav Notu&quot;)
+plt.legend()
+plt.show() # Grafiğe bak: Noktalar yukarı doğru bir şerit halinde mi? (Evetse Lineer Regresyon uygun)
+
+# ---------------------------------------------------------------------------------------
+# ADIM 3: Veri Hazırlığı (Preprocessing)
+# ---------------------------------------------------------------------------------------
+
+# X (Bağımsız Değişken): Girdilerimiz.
+# DİKKAT: Sklearn X&#39;i her zaman 2 boyutlu tablo (DataFrame) olarak ister. O yüzden çift parantez [[ ]] kullanırız.
+X = df[[&quot;Study Hours&quot;]]
+
+# y (Bağımlı Değişken): Hedefimiz.
+# Bu tek bir sütundur (Series), tek parantez yeterlidir.
+y = df[&quot;Exam Score&quot;]
+
+# TRAIN - TEST SPLIT (Eğitim - Test Ayrımı)
+# test_size=0.2: Verinin %20&#39;sini test (sınav) için kenara ayır. %80&#39;i ile ders çalış (eğit).
+# random_state=15: Rastgeleliği sabitle. Her çalıştırdığımızda aynı ayrımı yapsın ki sonuçlar değişmesin.
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=15)
+
+# SCALING (ÖLÇEKLENDİRME)
+# Neden? Bazı özellikler 0-1 arasında, bazıları 0-1000 arasında olabilir.
+# Büyük sayılar modeli domine etmesin diye hepsini benzer aralığa (Standart Sapma) çekeriz.
+scaler = StandardScaler()
+
+# ALTIN KURAL:
+# fit_transform() -&gt; SADECE X_train&#39;e yapılır. (Model veriyi tanır ve dönüştürür).
+# transform()     -&gt; SADECE X_test&#39;e yapılır. (Model test verisinden kopya çekmemeli, sadece öğrendiğini uygulamalı).
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# ---------------------------------------------------------------------------------------
+# ADIM 4: Model Kurulumu ve Eğitim
+# ---------------------------------------------------------------------------------------
+# Modeli bir &quot;öğrenci&quot; gibi düşünün.
+regression = LinearRegression()
+
+# .fit() komutu &quot;Otur ders çalış&quot; komutudur. Verilen soruları (X) ve cevapları (y) analiz eder.
+regression.fit(X_train_scaled, y_train)
+
+print(&quot;\n--- Modelin Öğrendikleri ---&quot;)
+print(f&quot;Eğim (Coefficient): {regression.coef_[0]:.2f}&quot;)
+# Yorum: &quot;Bir birim (standartlaştırılmış) çalışma artışı, notu ne kadar artırıyor?&quot;
+print(f&quot;Başlangıç Noktası (Intercept): {regression.intercept_:.2f}&quot;)
+# Yorum: &quot;Tüm değerler ortalama olduğunda beklenen not kaç?&quot;
+
+# ---------------------------------------------------------------------------------------
+# ADIM 5: Tahmin ve Test (Prediction &amp; Evaluation)
+# ---------------------------------------------------------------------------------------
+# Artık model eğitimini bitirdi. Onu sınav yapma zamanı.
+# .predict() komutu ile test sorularını (X_test) veriyoruz, cevapları tahmin etmesini istiyoruz.
+y_pred = regression.predict(X_test_scaled)
+
+# Sonuçları Değerlendirme Metrikleri
+r2 = r2_score(y_test, y_pred)
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+rmse = np.sqrt(mse)
+
+print(&quot;\n--- Model Karnesi ---&quot;)
+print(f&quot;R2 Score (Başarı Puanı): %{r2*100:.2f}&quot;)
+# R2 Nedir?: 0 ile 1 arasındadır. 1&#39;e ne kadar yakınsa, model veriyi o kadar iyi açıklamıştır.
+# %90 üzeri mükemmeldir. %50 altı kötüdür.
+
+print(f&quot;MAE (Ortalama Hata): {mae:.2f}&quot;)
+# MAE Nedir?: Modelin tahminleri gerçek değerden ortalama kaç puan şaşıyor? (Örn: 4 puan aşağı veya yukarı)
+
+print(f&quot;RMSE (Karesel Hata): {rmse:.2f}&quot;)
+# RMSE Nedir?: Büyük hataları daha sert cezalandıran hata ölçütü.
+
+# ---------------------------------------------------------------------------------------
+# ADIM 6: Görselleştirme (Gerçek vs Model Doğrusu)
+# ---------------------------------------------------------------------------------------
+plt.figure(figsize=(10, 6))
+# Gerçek veriler (Mavi noktalar)
+plt.scatter(X_train_scaled, y_train, color=&#39;blue&#39;, label=&#39;Gerçek Veriler&#39;)
+# Modelin tahmini (Kırmızı çizgi)
+plt.plot(X_train_scaled, regression.predict(X_train_scaled), color=&#39;red&#39;, linewidth=3, label=&#39;Makine Öğrenimi Modeli&#39;)
+plt.title(&quot;Model Başarısı: Gerçek Veriler ve Regresyon Doğrusu&quot;)
+plt.xlabel(&quot;Çalışma Saati (Standartlaştırılmış)&quot;)
+plt.ylabel(&quot;Sınav Notu&quot;)
+plt.legend()
+plt.show()
+
+# ÖZEL TAHMİN YAPALIM
+# Yeni bir öğrenci 10 saat çalışırsa kaç alır?
+new_hours = [[10]] # Çift parantez dataframe formatı için
+# Dikkat: Modeli scale edilmiş veriyle eğittik, yeni veriyi de scale etmeliyiz!
+new_hours_scaled = scaler.transform(pd.DataFrame(new_hours, columns=[&quot;Study Hours&quot;]))
+prediction = regression.predict(new_hours_scaled)
+print(f&quot;\n10 Saat çalışan öğrenci için tahmin edilen not: {prediction[0]:.2f}&quot;)
+</code></pre>
+<hr>
+<h2>1.2. Çoklu Doğrusal Regresyon (Multiple Linear Regression)</h2>
+<p><strong>Mantık:</strong> Hayatta bir sonucu etkileyen genelde tek bir sebep yoktur. Sınav notunu sadece çalışma saati belirlemez; uyku süresi, derse katılım, sosyal medya kullanımı da belirler.
+<strong>Formül:</strong> <code>y = m1*x1 + m2*x2 + m3*x3 + ... + b</code></p>
+<p>Bu bölümde, birden fazla değişkenin (X1, X2, X3...) hedef üzerindeki etkisini ölçeceğiz.</p>
+<h3>📝 ÇOKLU REGRESYON REÇETESİ</h3>
+<ol>
+<li><strong>Veriyi Hazırla:</strong> <code>X</code> artık tek sütun değil. <code>df[[&quot;Study&quot;, &quot;Sleep&quot;, &quot;Social&quot;]]</code>.</li>
+<li><strong>EDA (Keşifçi Analiz):</strong> <code>df.corr()</code> ile hangi değişkenlerin hedefle ilişkili olduğuna bak. Gereksizleri at.</li>
+<li><strong>Dummy Variable:</strong> Eğer &quot;Cinsiyet&quot; gibi yazı içeren sütunlar varsa sayıya çevir (<code>pd.get_dummies</code>).</li>
+<li><strong>Split &amp; Scale:</strong> Böl ve Ölçekle.</li>
+<li><strong>Model Eğitimi:</strong> <code>LinearRegression</code> (Mantık aynı).</li>
+<li><strong>Katsayı Yorumlama:</strong> <code>model.coef_</code> ile hangi özelliğin ne kadar etkili olduğunu gör.</li>
+</ol>
+<h3>💻 Uygulama: Sınav Notu İçin Çoklu Analiz</h3>
+<p><strong>Dosya:</strong> <code>LineervePolinomRegresyon/multiple_lineer_regression.py</code></p>
+<pre><code class="language-python">import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score, mean_absolute_error
+import os
+
+# 1. VERİ YÜKLEME
+# -----------------------------------------------
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Hata almamak için dosya yolunu kontrol ediyoruz
+file_path = os.path.join(current_dir, &quot;LineervePolinomRegresyon&quot;, &quot;2-multiplegradesdataset.csv&quot;)
+
+try:
+    df = pd.read_csv(file_path)
+except:
+    # Demo veri
+    df = pd.DataFrame({
+        &#39;Study Hours&#39;: np.random.randint(1, 10, 100),
+        &#39;Sleep Hours&#39;: np.random.randint(4, 10, 100),
+        &#39;Social Media Hours&#39;: np.random.randint(0, 5, 100),
+        &#39;Attendance Rate&#39;: np.random.randint(50, 100, 100),
+        &#39;Exam Score&#39;: np.random.randint(40, 100, 100)
+    })
+
+# 2. İLİŞKİLERİ GÖRME (EDA)
+# -----------------------------------------------
+# Hangi özellik notla pozitif (dost), hangisi negatif (düşman) ilişkili?
+print(df.corr()[&quot;Exam Score&quot;].sort_values(ascending=False))
+# Beklenti: Study Hours ve Attendance Rate pozitif çıkmalı, Social Media negatif çıkmalı.
+
+# 3. VERİ HAZIRLIĞI
+# -----------------------------------------------
+# Girdiler (Birden fazla sütun seçiyoruz)
+X = df[[&quot;Study Hours&quot;, &quot;Sleep Hours&quot;, &quot;Social Media Hours&quot;, &quot;Attendance Rate&quot;]]
+y = df[&quot;Exam Score&quot;]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# 4. MODEL EĞİTİMİ
+# -----------------------------------------------
+multi_model = LinearRegression()
+multi_model.fit(X_train_scaled, y_train)
+
+# Katsayıları İnceleme (En önemli kısım burası!)
+feature_names = [&quot;Study&quot;, &quot;Sleep&quot;, &quot;Social Media&quot;, &quot;Attendance&quot;]
+coefficients = multi_model.coef_
+
+print(&quot;\n--- Hangi Faktör Ne Kadar Etkili? ---&quot;)
+for name, score in zip(feature_names, coefficients):
+    print(f&quot;{name}: {score:.2f}&quot;)
+
+# YORUM: Eğer &#39;Social Media&#39; katsayısı -5 ise, bu şu demek:
+# &quot;Sosyal medyada geçirdiğin her 1 birim artış, notunu 5 puan düşürüyor.&quot;
+# Eğer &#39;Study&#39; katsayısı +10 ise: &quot;Her 1 birim çalışma, notu 10 puan artırıyor.&quot;
+
+# 5. TAHMİN
+# -----------------------------------------------
+y_pred = multi_model.predict(X_test_scaled)
+print(f&quot;\nModel Başarısı (R2): %{r2_score(y_test, y_pred)*100:.2f}&quot;)
+
+# Gerçek vs Tahmin Grafiği
+plt.figure(figsize=(8, 6))
+plt.scatter(y_test, y_pred)
+plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], &#39;r--&#39;, lw=2) # İdeal çizgi
+plt.xlabel(&quot;Gerçek Notlar&quot;)
+plt.ylabel(&quot;Tahmin Edilen Notlar&quot;)
+plt.title(&quot;Gerçek vs Tahmin (Çizgi üzerindeki noktalar tam isabettir)&quot;)
+plt.show()
+</code></pre>
+<hr>
+<h2>1.3. Polinom Regresyon (Polynomial Regression)</h2>
+<p><strong>Mantık:</strong> Lineer regresyon her şeyi &quot;düz çizgi&quot; sanır. Ama hayat her zaman düz değildir.</p>
+<ul>
+<li><p>Örneğin: Bir ilaç dozu azken etki etmez, orta dozda iyileştirir, çok yüksek dozda zehirler. Bu ilişki düz çizgi değil, bir eğridir (Parabol).</p>
+</li>
+<li><p>Veriyi &quot;bükebilmek&quot; için <code>x</code> değerinin karesini (<code>x^2</code>), küpünü (<code>x^3</code>) alıp modele ekleriz.</p>
+</li>
+</ul>
+<h3>📝 POLİNOM REGRESYON REÇETESİ</h3>
+<ol>
+<li><strong>Hazırlık:</strong> Standart <code>X</code> ve <code>y</code> ayrımını yap.</li>
+<li><strong>Polinom Dönüşümü (KRİTİK):</strong><ul>
+<li><code>poly = PolynomialFeatures(degree=2)</code> (Genelde 2 veya 3 yeterlidir).</li>
+<li><code>X_poly = poly.fit_transform(X)</code> -&gt; Artık elimizde <code>X</code> ve <code>X^2</code> var.</li>
+</ul>
+</li>
+<li><strong>Model Kur:</strong> <code>LinearRegression()</code> (Hala lineer model kullanıyoruz ama verimiz büküldü!).</li>
+<li><strong>Eğit:</strong> <code>model.fit(X_poly, y)</code></li>
+<li><strong>Tahmin:</strong> Yeni veri gelince ÖNCE <code>poly.transform(yeni_veri)</code> yap, SONRA <code>model.predict()</code>.</li>
+</ol>
+<h3>💻 Uygulama: Müşteri Memnuniyeti ve Prim İlişkisi</h3>
+<p><strong>Dosya:</strong> <code>LineervePolinomRegresyon/polinomregresyon.py</code></p>
+<pre><code class="language-python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures, StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import r2_score
+import os
+
+# Veri Yükleme
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Hata önleyici kontrol
+try:
+    df = pd.read_csv(os.path.join(current_dir, &quot;LineervePolinomRegresyon&quot;, &quot;3-customersatisfaction.csv&quot;))
+except:
+    # Demo veri: Karesel bir ilişki yaratalım (y = x^2 gibi)
+    x_demo = np.linspace(1, 10, 100).reshape(-1, 1)
+    y_demo = x_demo**2 + np.random.normal(0, 5, (100, 1))
+    df = pd.DataFrame(np.hstack([x_demo, y_demo]), columns=[&quot;Customer Satisfaction&quot;, &quot;Incentive&quot;])
+
+X = df[[&quot;Customer Satisfaction&quot;]]
+y = df[[&quot;Incentive&quot;]]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# StandardScaler
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# --- DENEY 1: LİNEER MODEL (DÜZ ÇİZGİ) ---
+lin_model = LinearRegression()
+lin_model.fit(X_train_scaled, y_train)
+lin_pred = lin_model.predict(X_test_scaled)
+print(f&quot;Lineer Model Başarısı (R2): {r2_score(y_test, lin_pred):.2f}&quot;)
+# Sonuç düşük çıkacaktır çünkü veri kavisli, model düz.
+
+# --- DENEY 2: POLİNOM MODEL (KAVİSLİ) ---
+# PolynomialFeatures: Verinin karesini alıp yeni özellik olarak ekler.
+# degree=2: x&#39;in karesine kadar git (x, x^2).
+poly = PolynomialFeatures(degree=2, include_bias=False)
+
+X_train_poly = poly.fit_transform(X_train_scaled) # X ve X^2 oluşturuldu
+X_test_poly = poly.transform(X_test_scaled)
+
+poly_model = LinearRegression()
+poly_model.fit(X_train_poly, y_train) # Artık x^2 bilgisini de kullanarak öğreniyor
+poly_pred = poly_model.predict(X_test_poly)
+
+print(f&quot;Polinom Model (Degree=2) Başarısı (R2): {r2_score(y_test, poly_pred):.2f}&quot;)
+# Sonuç çok daha yüksek çıkacaktır!
+
+# GÖRSEL KARŞILAŞTIRMA
+plt.scatter(X, y, color=&#39;gray&#39;, label=&#39;Gerçek Veri&#39;)
+# Lineer Model (Kırmızı Düz Çizgi)
+plt.plot(X, lin_model.predict(scaler.transform(X)), color=&#39;red&#39;, label=&#39;Lineer Model (Yetersiz)&#39;)
+# Polinom Model (Mavi Eğri)
+# Eğriyi düzgün çizmek için X&#39;i sıralamamız lazım
+X_range = np.linspace(X.min(), X.max(), 100).reshape(-1, 1)
+X_range_scaled = scaler.transform(X_range)
+X_range_poly = poly.transform(X_range_scaled)
+plt.plot(X_range, poly_model.predict(X_range_poly), color=&#39;blue&#39;, label=&#39;Polinom Model (Başarılı)&#39;)
+plt.legend()
+plt.title(&quot;Lineer vs Polinom Regresyon Mücadelesi&quot;)
+plt.show()
+</code></pre>
+<h3>📏 Regresyon Karnesi: Hangi Hataya Bakmalı?</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Metrik</th>
+<th align="left">Açıklama</th>
+<th align="left">Ne Zaman Kullanılır?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>MAE (Ortalama Hata)</strong></td>
+<td align="left">Hataların direkt ortalamasıdır. (Örn: 5 TL hata).</td>
+<td align="left">Hataların direkt yorumlanabilir olması gerekirse.</td>
+</tr>
+<tr>
+<td align="left"><strong>MSE (Kare Hata)</strong></td>
+<td align="left">Hataların karesi. Büyük hataları çok büyütür.</td>
+<td align="left">Büyük hataları cezalandırmak istiyorsan kritiktir.</td>
+</tr>
+<tr>
+<td align="left"><strong>RMSE (Kök Kare Hata)</strong></td>
+<td align="left">MSE&#39;nin karekökü. Hem cezalandırıcı hem de birimi anlaşılır.</td>
+<td align="left">En yaygın regresyon metriğidir (Kaggle).</td>
+</tr>
+<tr>
+<td align="left"><strong>R2 Score</strong></td>
+<td align="left">Modelin başarısı (0 ile 1 arası).</td>
+<td align="left">Modelin genel başarısını (notunu) görmek için.</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>1.4. Regülarizasyon (Ridge, Lasso, ElasticNet)</h2>
+<p><strong>Problem:</strong> Bazen model dersi o kadar çok çalışır ki, ders kitabındaki virgül hatalarını bile ezberler (<strong>Overfitting</strong>). Modelin aşırı özgüvenli olmasını engellemek için ona &quot;ceza&quot; veririz.</p>
+<h3>🎭 Overfitting (Ezber) vs Underfitting (Yetersiz)</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Durum</th>
+<th align="left">Belirti</th>
+<th align="left">Neden Olur?</th>
+<th align="left">Çözüm</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Underfitting (Yüksek Bias)</strong></td>
+<td align="left">Eğitim skoru düşük, Test skoru düşük.</td>
+<td align="left">Model çok basit (Örn: Eğriye düz çizgi çekmek).</td>
+<td align="left">Modeli karmaşıklaştır (Polinom derece arttır).</td>
+</tr>
+<tr>
+<td align="left"><strong>Overfitting (Yüksek Variance)</strong></td>
+<td align="left">Eğitim skoru ÇOK YÜKSEK (%99), Test skoru DÜŞÜK (%60).</td>
+<td align="left">Model veriyi ezberlemiş. Gürültüyü bile öğrenmiş.</td>
+<td align="left">Veriyi arttır, Regülarizasyon yap (Lasso/Ridge).</td>
+</tr>
+<tr>
+<td align="left"><strong>Optimum (Denge)</strong></td>
+<td align="left">Eğitim skoru Yüksek, Test skoru Yüksek.</td>
+<td align="left">Model genellemeyi öğrenmiş.</td>
+<td align="left">Tebrikler! 🎉</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Ridge (L2):</strong> &quot;Katsayıları (ağırlıkları) sıfıra yaklaştır ama tamamen silme.&quot; (Tüm özellikler kalsın ama etkisi azalsın).</li>
+<li><strong>Lasso (L1):</strong> &quot;Gereksiz özelliklerin katsayısını direkt 0 yap ve sil.&quot; (Özellik seçimi yapar).</li>
+<li><strong>ElasticNet:</strong> İkisinin karışımıdır.</li>
+</ul>
+<p>Bu konu ileri seviyedir ve özellikle çok fazla çöp sütun (feature) olan verilerde hayat kurtarır.</p>
+<h3>💻 Uygulama: Regülarizasyon ile Model İyileştirme</h3>
+<p>Bu örnekte, <strong>aşırı karmaşıklaştırılmış (Overfitting)</strong> bir modele Ridge ve Lasso uygulayarak nasıl &quot;uslandırdığımızı&quot; göreceğiz. 20 satırlık veriye 10. dereceden polinom uydurmaya çalışarak modeli bilerek ezberlemeye zorlayacağız, sonra regülarizasyon ile düzelteceğiz.</p>
+<p><strong>Dosya:</strong> <code>LineervePolinomRegresyon/ridge-lasso-elasticnet.py</code></p>
+<pre><code class="language-python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, PolynomialFeatures
+from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
+from sklearn.metrics import r2_score
+
+# 1. VERİ OLUŞTURMA (Sentetik/Uydurma Veri)
+# ---------------------------------------------------------
+# Az veri (20 satır), Çok Gürültü ve Karışık İlişki
+np.random.seed(42)
+X = 2 * np.random.rand(20, 1)
+y = 0.5 * X**2 + X + 2 + np.random.randn(20, 1) # Gerçek ilişki: y = 0.5x^2 + x + 2 (ve biraz gürültü)
+
+# Overfitting Yaratmak İçin: Polinom Derecesini Abartalım (Degree=10!)
+# 20 veri noktasına 10. derece polinom uydurmaya çalışırsak model ezberler (Overfit).
+# Model gereksiz yere x^3, x^4 ... x^10 gibi özelliklere anlam yüklemeye çalışacak.
+# (Gereksiz karmaşıklık)
+poly = PolynomialFeatures(degree=10, include_bias=False)
+X_poly = poly.fit_transform(X)
+
+# Train/Test Split
+X_train, X_test, y_train, y_test = train_test_split(X_poly, y, test_size=0.3, random_state=42)
+
+# StandardScaler (Regülarizasyon için ŞART!)
+# Çünkü Ridge/Lasso katsayı büyüklüklerine ceza keser. Sayılar büyükse ceza adaletsiz olur.
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# 2. MODELLERİN YARIŞI
+# ---------------------------------------------------------
+
+print(&quot;\n--- Model Karşılaştırması ---&quot;)
+
+# A) Linear Regression (Regülarizasyon Yok)
+lin_reg = LinearRegression()
+lin_reg.fit(X_train_scaled, y_train)
+train_score = lin_reg.score(X_train_scaled, y_train)
+test_score = lin_reg.score(X_test_scaled, y_test)
+print(f&quot;Linear Reg. -&gt; Train: %{train_score*100:.2f} | Test: %{test_score*100:.2f}&quot;)
+print(&quot;   -&gt; Yorum: Train çok yüksek, Test düşükse -&gt; Overfitting (Ezber) var demektir.&quot;)
+
+# B) Ridge (L2 - Katsayıları Baskılar)
+# alpha: Ceza katsayısı. Ne kadar büyükse o kadar çok ceza (baskı).
+ridge_reg = Ridge(alpha=1.0)
+ridge_reg.fit(X_train_scaled, y_train)
+print(f&quot;Ridge Reg.  -&gt; Train: %{ridge_reg.score(X_train_scaled, y_train)*100:.2f} | Test: %{ridge_reg.score(X_test_scaled, y_test)*100:.2f}&quot;)
+
+# C) Lasso (L1 - Gereksizleri Sıfırlar)
+# alpha=0.1: Biraz esneklik tanıyalım.
+lasso_reg = Lasso(alpha=0.1)
+lasso_reg.fit(X_train_scaled, y_train)
+print(f&quot;Lasso Reg.  -&gt; Train: %{lasso_reg.score(X_train_scaled, y_train)*100:.2f} | Test: %{lasso_reg.score(X_test_scaled, y_test)*100:.2f}&quot;)
+
+# Lasso kaç özelliği iptal etmiş?
+# Sıfırlanan katsayıları sayıyoruz.
+# Katsayı 0 olduysa, o özellik modelden &quot;atılmış&quot; demektir.
+sifir_sayisi = np.sum(lasso_reg.coef_ == 0)
+print(f&quot;   -&gt; Lasso {X_train_scaled.shape[1]} özellikten {sifir_sayisi} tanesini tamamen sildi (0 yaptı).&quot;)
+
+# D) ElasticNet (Karışık)
+# l1_ratio=0.5: %50 Lasso, %50 Ridge karışımı.
+elastic_reg = ElasticNet(alpha=0.1, l1_ratio=0.5)
+elastic_reg.fit(X_train_scaled, y_train)
+print(f&quot;ElasticNet  -&gt; Train: %{elastic_reg.score(X_train_scaled, y_train)*100:.2f} | Test: %{elastic_reg.score(X_test_scaled, y_test)*100:.2f}&quot;)
+
+# 3. Görselleştirme (Katsayıların Durumu)
+# Hangi model katsayıları nasıl değiştirmiş?
+plt.figure(figsize=(10, 5))
+plt.plot(lin_reg.coef_.flatten(), label=&#39;Linear (Kontrolsüz - Uçuşta)&#39;, marker=&#39;o&#39;, alpha=0.5)
+plt.plot(ridge_reg.coef_.flatten(), label=&#39;Ridge (Baskı Altında - Küçültülmüş)&#39;, marker=&#39;s&#39;)
+plt.plot(lasso_reg.coef_.flatten(), label=&#39;Lasso (Seçici - Sıfırlanmış)&#39;, marker=&#39;x&#39;, linewidth=2)
+plt.axhline(0, color=&#39;black&#39;, linestyle=&#39;--&#39;)
+plt.legend()
+plt.title(&quot;Regülarizasyon Modellerinin Katsayılara Etkisi&quot;)
+plt.xlabel(&quot;Özellik Derecesi (x, x^2, x^3 ... x^10)&quot;)
+plt.ylabel(&quot;Katsayı Büyüklüğü (Ağırlık)&quot;)
+plt.show()
+</code></pre>
+<hr>
+<p>&lt;a name=&quot;bölüm-2-siniflandirma&quot;&gt;&lt;/a&gt;</p>
+<h1>🎯 BÖLÜM 2: SINIFLANDIRMA VE LOJİSTİK REGRESYON</h1>
+<p>Regresyon &quot;Kaç?&quot; sorusunu sorardı. Sınıflandırma ise <strong>&quot;Hangi Grup?&quot;</strong> sorusunu sorar.
+Çıktımız (y) sayısal değil, kategoriktir (Evet/Hayır, Kedi/Köpek, A/B/C).</p>
+<h2>2.1. Lojistik Regresyon (Logistic Regression)</h2>
+<p><strong>İsim Karmaşası:</strong> Adında &quot;Regresyon&quot; geçer ama aslında bir <strong>Sınıflandırma</strong> algoritmasıdır. Neden? Çünkü temelde bir olasılık (sayı) üretir, sonra o sayıya göre sınıf seçer.</p>
+<h3>🧠 Nasıl Çalışır? (Sigmoid Fonksiyonu)</h3>
+<p>Lineer regresyon sonsuza giden bir doğru çizer (<code>y = mx + b</code>). Ancak olasılık 0 ile 1 arasında olmalıdır.
+Lojistik regresyon, bu doğruyu bükerek <strong>&quot;S&quot;</strong> şekline (Sigmoid eğrisi) getirir.</p>
+<ul>
+<li><p>Sonuç &gt; 0.5 ise -&gt; <strong>Sınıf 1 (Evet)</strong></p>
+</li>
+<li><p>Sonuç &lt; 0.5 ise -&gt; <strong>Sınıf 0 (Hayır)</strong></p>
+</li>
+<li><p>0.5: Karar Sınırı (Decision Boundary).</p>
+</li>
+</ul>
+<h3>📝 LOJİSTİK REGRESYON REÇETESİ</h3>
+<ol>
+<li><strong>Dengesiz Veri Kontrolü:</strong> <code>df[&quot;hedef&quot;].value_counts()</code> ile bak. Eğer biri %95, diğeri %5 ise -&gt; <code>class_weight=&#39;balanced&#39;</code> kullan.</li>
+<li><strong>Split:</strong> Veriyi böl.</li>
+<li><strong>Scale (ÇOK ÖNEMLİ):</strong> Lojistik Regresyon sayıların büyüklüğüne duyarlıdır. <code>StandardScaler</code> kullan.</li>
+<li><strong>Model:</strong> <code>LogisticRegression()</code>.</li>
+<li><strong>Değerlendirme:</strong> Sadece &quot;Accuracy&quot; yetmez! <code>confusion_matrix</code> ve <code>classification_report</code> ile F1-Score&#39;a bak.</li>
+</ol>
+<h3>📊 Model Performansını Okumak: Karmaşıklık Matrisi (Confusion Matrix)</h3>
+<p>Sınıflandırmada sadece &quot;Doğruluk&quot; (Accuracy) yetmez. Hatanın türü hayati önem taşır.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Gerçek \ Tahmin</th>
+<th align="left"><strong>Tahmin: NEGATİF (0)</strong></th>
+<th align="left"><strong>Tahmin: POZİTİF (1)</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Gerçek: NEGATİF (0)</strong></td>
+<td align="left"><strong>TN (True Negative)</strong> &lt;br&gt; ✅ <em>Doğru Bildik</em> &lt;br&gt; (Hasta değil dedik, değilmiş)</td>
+<td align="left"><strong>FP (False Positive)</strong> &lt;br&gt; 🚨 <em>Tip 1 Hata (Yanlış Alarm)</em> &lt;br&gt; (Hasta dedik, turp gibi çıktı)</td>
+</tr>
+<tr>
+<td align="left"><strong>Gerçek: POZİTİF (1)</strong></td>
+<td align="left"><strong>FN (False Negative)</strong> &lt;br&gt; 💀 <em>Tip 2 Hata (Kaçan Fırsat)</em> &lt;br&gt; (Hasta değil dedik, adam öldü!)</td>
+<td align="left"><strong>TP (True Positive)</strong> &lt;br&gt; ✅ <em>Doğru Bildik</em> &lt;br&gt; (Hasta dedik, hasta çıktı)</td>
+</tr>
+</tbody></table>
+<h4>📐 Hangi Metriği Ne Zaman Kullanmalı?</h4>
+<table>
+<thead>
+<tr>
+<th align="left">Metrik</th>
+<th align="center">Formül</th>
+<th align="left">Ne Zaman Kullanılır?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Accuracy (Doğruluk)</strong></td>
+<td align="center"><code>(TP+TN) / Tüm Veri</code></td>
+<td align="left">Sınıflar dengeliyse (50-50).</td>
+</tr>
+<tr>
+<td align="left"><strong>Precision (Keskinlik)</strong></td>
+<td align="center"><code>TP / (TP + FP)</code></td>
+<td align="left"><strong>Yanlış Alarm (FP)</strong> maliyetliyse. (Örn: Spam filtresi - Önemli maili spam sanmamalı).</td>
+</tr>
+<tr>
+<td align="left"><strong>Recall (Duyarlılık)</strong></td>
+<td align="center"><code>TP / (TP + FN)</code></td>
+<td align="left"><strong>Gözden Kaçırma (FN)</strong> maliyetliyse. (Örn: Kanser teşhisi - Hastayı kaçırmamalıyız!).</td>
+</tr>
+<tr>
+<td align="left"><strong>F1-Score</strong></td>
+<td align="center"><code>2 * (P*R) / (P+R)</code></td>
+<td align="left">Dengesiz verilerde veya hem Precision hem Recall önemliyse.</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>💻 Proje 1: Banka Müşteri Analizi (Vadeli Hesap Açacak mı?)</h3>
+<p><strong>Dosya:</strong> <code>SınıflandırmayaGirisLojistikRegresyon/lojistik-regresyon.py</code></p>
+<p>Müşterinin yaşı, mesleği, eğitim durumu gibi bilgilerine bakarak vadeli hesap açıp açmayacağını (1 veya 0) tahmin ediyoruz.</p>
+<pre><code class="language-python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import os
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# 1. VERİ YÜKLEME VE ANALİZ
+# -----------------------------------------------
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# 6-bank_customers.csv dosyasını bulmaya çalış, yoksa demo oluştur.
+try:
+    df = pd.read_csv(os.path.join(current_dir, &quot;SınıflandırmayaGirisLojistikRegresyon&quot;, &quot;6-bank_customers.csv&quot;))
+    print(&quot;Müşteri verisi yüklendi.&quot;)
+except:
+    # Demo veri
+    print(&quot;Demo veri kullanılıyor.&quot;)
+    df = pd.DataFrame({
+        &#39;age&#39;: np.random.randint(18, 90, 200),
+        &#39;balance&#39;: np.random.randint(-1000, 50000, 200),
+        &#39;duration&#39;: np.random.randint(0, 1000, 200), # Saniye cinsinden görüşme süresi
+        &#39;campaign&#39;: np.random.randint(1, 10, 200),   # Kampanya sayısı
+        &#39;subscribed&#39;: np.random.randint(0, 2, 200)   # Hedef: 0 veya 1
+    })
+
+# Hedef Dağılımına Bak (Dengesiz Veri Kontrolü)
+print(df[&quot;subscribed&quot;].value_counts())
+# Eğer %95 Hayır, %5 Evet ise model sürekli &quot;Hayır&quot; diyerek %95 başarı alabilir. Bu yalancı bir başarıdır!
+
+# 2. VERİ HAZIRLIĞI
+# -----------------------------------------------
+X = df.drop(&quot;subscribed&quot;, axis=1) # Girdiler
+y = df[&quot;subscribed&quot;]              # Çıktı
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=15)
+
+# SCALING: Lojistik regresyon mesafeye duyarlıdır, mutlaka ölçekleyin!
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# 3. MODEL EĞİTİMİ
+# -----------------------------------------------
+# LogisticRegression() varsayılan olarak 0.5 eşiğini kullanır.
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# 4. DEĞERLENDİRME (KRİTİK BÖLÜM)
+# -----------------------------------------------
+# Model tahmin yaparken aslında olasılık üretir.
+# predict() fonksiyonu bu olasılık %50&#39;den büyükse 1, küçükse 0 döndürür.
+y_pred = model.predict(X_test)
+
+print(f&quot;Doğruluk (Accuracy): %{accuracy_score(y_test, y_pred)*100:.2f}&quot;)
+
+print(&quot;\nKarmaşıklık Matrisi (Confusion Matrix):&quot;)
+cm = confusion_matrix(y_test, y_pred)
+sns.heatmap(cm, annot=True, fmt=&#39;d&#39;, cmap=&#39;Blues&#39;)
+plt.xlabel(&quot;Tahmin&quot;)
+plt.ylabel(&quot;Gerçek&quot;)
+plt.title(&quot;Model Nerede Yanılıyor?&quot;)
+plt.show()
+
+print(&quot;\nDetaylı Rapor:&quot;)
+print(classification_report(y_test, y_pred))
+# Burada Precision ve Recall değerlerine odaklanın.
+# Hangi sınıfı tahmin etmekte zorlanıyor? (Genelde azınlık sınıfı - 1)
+</code></pre>
+<h3>💻 Proje 2: Çok Sınıflı Sınıflandırma (Siber Saldırı Tespiti)</h3>
+<h3>💻 Proje 2: Çok Sınıflı Sınıflandırma (Siber Saldırı Tespiti)</h3>
+<p><strong>Dosya:</strong> <code>SınıflandırmayaGirisLojistikRegresyon/logisticregresiyon_Multiclass.py</code></p>
+<p>Lojistik Regresyon doğası gereği <strong>İkili (Binary)</strong> sınıflandırıcıdır (0 veya 1). Ancak gerçek hayatta, örneğin siber saldırı türlerinde (Normal, DoS, Probe, U2R) gibi birçok sınıf olabilir. Bunu çözmek için stratejiler geliştirilmiştir.</p>
+<h4>Çözüm Stratejileri:</h4>
+<ol>
+<li><strong>One-vs-Rest (OvR - Biri Diğerlerine Karşı):</strong> &quot;Ben Tek Siz Hepiniz&quot;. Her sınıf için bir model eğitilir (Örn: DoS mu? Değil mi?). En yüksek olasılığı veren kazanır. En yaygın ve hızlı yöntemdir.</li>
+<li><strong>One-vs-One (OvO - Bire Bir):</strong> &quot;Lig Usulü&quot;. Her sınıf diğeriyle tek tek maç yapar. (DoS vs Normal, DoS vs Probe...). En çok maçı kazanan sınıf seçilir. Hassastır ama yavaştır.</li>
+<li><strong>Multinomial (Softmax):</strong> Tek seferde tüm sınıflar için olasılık dağılımı hesaplar.</li>
+</ol>
+<pre><code class="language-python">import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.multiclass import OneVsOneClassifier, OneVsRestClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix
+
+# 1. VERİ HAZIRLIĞI (Basitleştirilmiş)
+# ---------------------------------------------------------
+# 3 Farklı sınıfımız olsun: 0 (Normal), 1 (DoS Saldırısı), 2 (Probe Saldırısı)
+# df = pd.read_csv(&quot;7-cyber_attack_data.csv&quot;)
+# X = df.drop(&quot;attack_type&quot;, axis=1)
+# y = df[&quot;attack_type&quot;]
+
+# Demo maksatlı rastgele veri:
+import numpy as np
+X = np.random.randn(100, 5) # 5 özellik
+y = np.random.randint(0, 3, 100) # 0, 1, 2 sınıfları
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# YÖNTEM 1: NATIVE (Doğal) MULTINOMIAL
+# ---------------------------------------------------------
+# Lojistik Regresyon&#39;a &quot;bu çok sınıflı bir problem&quot; diyoruz.
+# solver=&#39;lbfgs&#39; bu işi matematiksel olarak çözebilen motordur.
+model_multi = LogisticRegression(multi_class=&#39;multinomial&#39;, solver=&#39;lbfgs&#39;)
+model_multi.fit(X_train, y_train)
+print(f&quot;Multinomial Başarısı: {model_multi.score(X_test, y_test):.2f}&quot;)
+
+# YÖNTEM 2: One-Vs-Rest (OvR) -&gt; En Yaygın
+# ---------------------------------------------------------
+# Arka planda 3 tane model eğitir:
+# 1. Model: 0 mı, değil mi?
+# 2. Model: 1 mi, değil mi?
+# 3. Model: 2 mi, değil mi?
+ovr_model = OneVsRestClassifier(LogisticRegression())
+ovr_model.fit(X_train, y_train)
+print(f&quot;One-Vs-Rest Başarısı: {ovr_model.score(X_test, y_test):.2f}&quot;)
+
+# YÖNTEM 3: One-Vs-One (OvO) -&gt; Hassas
+# ---------------------------------------------------------
+# Arka planda (3*2)/2 = 3 tane &quot;maç&quot; (model) yapar:
+# 1. Model: 0 vs 1
+# 2. Model: 0 vs 2
+# 3. Model: 1 vs 2
+ovo_model = OneVsOneClassifier(LogisticRegression())
+ovo_model.fit(X_train, y_train)
+print(f&quot;One-Vs-One Başarısı: {ovo_model.score(X_test, y_test):.2f}&quot;)
+
+# Hangi sınıfları karıştırdık?
+y_pred = ovr_model.predict(X_test)
+print(&quot;\nKarmaşıklık Matrisi (Hata Nerede?):&quot;)
+print(confusion_matrix(y_test, y_pred))
+</code></pre>
+<hr>
+<h3>💻 Proje 3: İleri Seviye ve Dengesiz Veri (Fraud Detection)</h3>
+<h3>💻 Proje 3: İleri Seviye ve Dengesiz Veri (Fraud Detection)</h3>
+<p><strong>Dosya:</strong> <code>SınıflandırmayaGirisLojistikRegresyon/logisticregressionAdvanced.py</code></p>
+<p>Gerçek hayatta &quot;Dolandırıcılık (Fraud)&quot;, &quot;Kanser Teşhisi&quot; veya &quot;Fabrika Hatası&quot; gibi olaylar nadir görülür (%1 veya daha az).
+Eğer verinizde %99 &quot;Normal&quot;, %1 &quot;Fraud&quot; varsa, modeliniz <strong>&quot;Herkes Normaldir&quot;</strong> diyerek %99 Doğruluk (Accuracy) yakalayabilir. Ama bu model <strong>çöptür</strong> çünkü tek bir dolandırıcıyı bile yakalayamaz.</p>
+<h4>Nasıl Çözeriz?</h4>
+<ol>
+<li><strong>Metric Seçimi:</strong> Asla <code>accuracy</code> kullanma! <code>F1-Score</code>, <code>Precision</code>, <code>Recall</code> veya <code>AUC</code> kullan.</li>
+<li><strong>Stratified Split:</strong> Veriyi bölerken test setine hiç fraud düşmemesini engellemek için <code>stratify=y</code> kullan.</li>
+<li><strong>Class Weight:</strong> Modele &quot;Azınlık sınıfında hata yaparsan seni 100 kat daha fazla cezalandırırım&quot; de (<code>class_weight=&#39;balanced&#39;</code>).</li>
+<li><strong>Threshold (Eşik) Ayarı:</strong> Standart %50 (0.5) yerine, %20 (0.2) şüpheyi bile &quot;Fraud&quot; kabul et.</li>
+</ol>
+<pre><code class="language-python">import pandas as pd
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report, confusion_matrix, f1_score, roc_auc_score
+from sklearn.preprocessing import StandardScaler
+
+# 1. VERİ HAZIRLIĞI &amp; STRATIFIED SPLIT
+# ---------------------------------------------------------
+# df = pd.read_csv(&quot;8-fraud_detection.csv&quot;)
+# X = df.drop(&quot;is_fraud&quot;, axis=1)
+# y = df[&quot;is_fraud&quot;]
+
+# Demo Dengesiz Veri: 1000 satır, sadece 20 tanesi (1) Fraud.
+import numpy as np
+X = np.random.randn(1000, 10)
+y = np.array([0] * 980 + [1] * 20) # %98 Normal, %2 Fraud
+
+# KRİTİK ADIM: stratify=y
+# Bu parametre, Train ve Test setlerindeki Fraud oranının EŞİT olmasını sağlar.
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# 2. MODEL VE CLASS WEIGHT
+# ---------------------------------------------------------
+# &#39;balanced&#39;: Formülü otomatik hesaplar -&gt; (Toplam / 2 * Sınıf Sayısı)
+# Az olan sınıfa (Fraud) devasa bir ağırlık (ceza puanı) verir.
+model = LogisticRegression(class_weight=&#39;balanced&#39;, solver=&#39;liblinear&#39;)
+
+# 3. İNCE AYAR (HYPERPARAMETER TUNING)
+# ---------------------------------------------------------
+# Sadece ağırlık yetmez, ceza (C) ve yöntem (penalty) de denenmeli.
+params = {
+    &#39;C&#39;: [0.01, 0.1, 1, 10],
+    &#39;penalty&#39;: [&#39;l1&#39;, &#39;l2&#39;], # L1 gereksiz özellikleri siler
+    &#39;class_weight&#39;: [&#39;balanced&#39;, {0:1, 1:10}, {0:1, 1:100}] # Farklı ağırlıklar dene
+}
+
+# DİKKAT: scoring=&#39;f1&#39;. Çünkü accuracy yalan söyler!
+grid = GridSearchCV(model, params, cv=5, scoring=&#39;f1&#39;, n_jobs=-1)
+print(&quot;En iyi model aranıyor...&quot;)
+grid.fit(X_train_scaled, y_train)
+
+print(f&quot;En İyi F1 Skoru: {grid.best_score_:.2f}&quot;)
+print(f&quot;En İyi Ayarlar: {grid.best_params_}&quot;)
+
+# 4. DEĞERLENDİRME VE EŞİK (THRESHOLD) AYARI
+# ---------------------------------------------------------
+best_model = grid.best_estimator_
+y_pred_proba = best_model.predict_proba(X_test_scaled)[:, 1] # Olasılıkları al (örn: %35 fraud ihtimali)
+
+# AUC Skoru (Modelin genel ayırma yeteneği)
+print(f&quot;AUC Skoru: {roc_auc_score(y_test, y_pred_proba):.2f}&quot;)
+
+# EŞİK DEĞİŞTİRME:
+# Varsayılan olarak &gt; 0.5 ise 1 deriz.
+# Ama banka diyor ki: &quot;Risk alma! %30 şüphe bile olsa alarm ver.&quot;
+y_pred_new_threshold = (y_pred_proba &gt; 0.3).astype(int)
+
+print(&quot;\n--- Varsayılan (0.5) vs Yeni Eşik (0.3) ---&quot;)
+print(&quot;Rapor (0.3 Eşikli):&quot;)
+print(classification_report(y_test, y_pred_new_threshold))
+
+# Yorum: Eşiği düşürmek Recall&#39;u (Yakalama) artırır ama False Alarm&#39;ı da artırır.
+# Bu bir ticari karardır.
+</code></pre>
+<hr>
+<p>&lt;a name=&quot;bölüm-3-knn&quot;&gt;&lt;/a&gt;</p>
+<h1>📍 BÖLÜM 3: K-EN YAKIN KOMŞU ALGORİTMASI (KNN)</h1>
+<p><strong>Atasözü:</strong> &quot;Bana arkadaşını söyle, sana kim olduğunu söyleyeyim.&quot;</p>
+<p>KNN (K-Nearest Neighbors), şimdiye kadarki en basit ama etkili algoritmalardan biridir. Bir matematiksel model <strong>kurmaz</strong> (eğitim sırasında bir şey öğrenmez, tembeldir). Sadece tüm veriyi hafızasında tutar ve yeni biri geldiğinde &quot;Sen kime benziyorsun?&quot; diye sorar.</p>
+<h2>3.1. Nasıl Çalışır?</h2>
+<p>Yeni bir veri noktası geldiğinde:</p>
+<ol>
+<li>Ona en yakın <strong>K</strong> adet komşuyu bulur. (Mesafe hesaplar).</li>
+<li><strong>Sınıflandırma (Classification):</strong> Komşuların çoğu hangi takımdaysa onu seçer. (5 komşunun 3&#39;ü B sınıfındaysa, ben de B&#39;yim).</li>
+<li><strong>Regresyon (Regression):</strong> Komşuların ortalamasını alır. (Ev fiyatı tahmininde, en yakın 3 evin ortalaması).</li>
+</ol>
+<h3>Mesafeyi Nasıl Ölçeriz?</h3>
+<ul>
+<li><strong>Euclidean (Öklid):</strong> Kuş uçuşu mesafe (Hipotenüs). En yaygınıdır.</li>
+<li><strong>Manhattan:</strong> Şehir blokları gibi, sadece dik gidilebilir (Taksi mesafesi).</li>
+</ul>
+<h3>&quot;K&quot; Sayısının Önemi (Hayati Nokta)</h3>
+<ul>
+<li><strong>K = 1:</strong> En yakındaki tek bir komşuya inanır. Çok hassastır, gürültüden etkilenir (<strong>Overfitting</strong>).</li>
+<li><strong>K = 100:</strong> Çok geniş bir kalabalığın ortalamasını alır. Detaylar kaybolur (<strong>Underfitting</strong>).</li>
+<li><strong>En iyi K:</strong> Genelde tek sayı seçilir (oy eşitliği olmasın diye) ve <code>karekök(N)</code> formülüyle başlanabilir.</li>
+</ul>
+<h3>💻 Proje 1: Ev Enerji Tüketimi Tahmini (KNN Regresyon)</h3>
+<p><strong>Dosya:</strong> <code>KNN Algoritması/ev-enerji-data.py</code></p>
+<p>Metrekare ve kişi sayısına göre enerji faturası tahmini.</p>
+<pre><code class="language-python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsRegressor # Regresyon!
+from sklearn.metrics import mean_squared_error
+
+# Veri Yükleme (Demo)
+# Normalde: df = pd.read_csv(&quot;12-house_energy_regression.csv&quot;)
+X_train = np.random.rand(100, 2) * 100 # m2 ve kişi sayısı
+y_train = X_train[:, 0] * 2 + X_train[:, 1] * 50 + np.random.normal(0, 10, 100) # Fatura
+X_test = np.random.rand(20, 2) * 100
+y_test = X_test[:, 0] * 2 + X_test[:, 1] * 50 + np.random.normal(0, 10, 20)
+
+# KRİTİK ADIM: SCALING
+# KNN mesafeye baktığı için, sayıları büyük olan özellik (Metrekare: 120), küçük olanı (Kişi Sayısı: 4) ezer geçer.
+# Bu yüzden HEPSİNİ aynı ölçeğe getirmeliyiz.
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# Model Eğitimi (Aslında sadece veriyi kaydediyor)
+knn = KNeighborsRegressor(n_neighbors=5) # En yakın 5 komşuya bak
+knn.fit(X_train_scaled, y_train)
+
+# Tahmin
+print(f&quot;R2 Score: {knn.score(X_test_scaled, y_test):.2f}&quot;)
+</code></pre>
+<h3>💻 Proje 2: Sağlık Riski Analizi (KNN Sınıflandırma ve Elbow Metodu)</h3>
+<p><strong>Dosya:</strong> <code>KNN Algoritması/saglikrisk.py</code></p>
+<p>KNN algoritmasında en büyük soru şudur: <strong>&quot;K kaç olmalı?&quot;</strong></p>
+<ul>
+<li>K çok küçükse (1): Model gürültüye takılır (Overfitting).</li>
+<li>K çok büyükse (50): Model fazla geneller, grupları ayıramaz (Underfitting).</li>
+</ul>
+<p>Bunu bulmak için <strong>&quot;Elbow Method&quot; (Dirsek Metodu)</strong> kullanırız. K değerini 1&#39;den 40&#39;a kadar deneriz ve hatanın nerede kırıldığına (dirsek yaptığına) bakarız.</p>
+<pre><code class="language-python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+# 1. VERİ HAZIRLIĞI (Sentetik)
+# ---------------------------------------------------------
+# İki grup insan olsun: Sağlıklı (0) ve Riskli (1)
+# Yaş ve Kolesterol değerlerine göre sınıflandıralım.
+np.random.seed(42)
+clust1 = np.random.normal(25, 5, (100, 2)) # Genç ve düşük kolesterol
+clust2 = np.random.normal(55, 10, (100, 2)) # Yaşlı ve yüksek kolesterol
+X = np.concatenate([clust1, clust2])
+y = np.concatenate([np.zeros(100), np.ones(100)]) # 0 ve 1 etiketleri
+
+# Train/Test Split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# StandardScaler (KNN için ŞARTTIR)
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# 2. ELBOW METHOD (En İyi K&#39;yı Bulma)
+# ---------------------------------------------------------
+hata_oranlari = []
+
+for k in range(1, 40):
+    knn = KNeighborsClassifier(n_neighbors=k)
+    knn.fit(X_train_scaled, y_train)
+    pred_i = knn.predict(X_test_scaled)
+    # Hata oranı = Yanlış tahminlerin ortalaması
+    hata_oranlari.append(np.mean(pred_i != y_test))
+
+# 3. GRAFİK (Dirsek Nerede?)
+plt.figure(figsize=(10, 6))
+plt.plot(range(1, 40), hata_oranlari, color=&#39;blue&#39;, linestyle=&#39;dashed&#39;, marker=&#39;o&#39;, markerfacecolor=&#39;red&#39;, markersize=10)
+plt.title(&#39;Hata Oranı vs K Değeri&#39;)
+plt.xlabel(&#39;K Değeri&#39;)
+plt.ylabel(&#39;Hata Oranı&#39;)
+print(&quot;Grafiğe bakarak hatanın en düşük olduğu K değerini seçin (Genelde 3, 5 veya 7).&quot;)
+plt.show()
+
+# 4. FİNAL MODEL (Örn: K=5 için)
+final_knn = KNeighborsClassifier(n_neighbors=5)
+final_knn.fit(X_train_scaled, y_train)
+print(f&quot;Final Model Başarısı: %{accuracy_score(y_test, final_knn.predict(X_test_scaled))*100:.2f}&quot;)
+</code></pre>
+<hr>
+<p>&lt;a name=&quot;bölüm-4-svm&quot;&gt;&lt;/a&gt;</p>
+<h1>⚔️ BÖLÜM 4: DESTEK VEKTÖR MAKİNELERİ (SVM)</h1>
+<p>SVM (Support Vector Machine), veri bilimi dünyasının &quot;Şövalyesi&quot;dir.
+Amacı: İki sınıfı birbirinden ayıran çizgiyi çizmek değil, <strong>en geniş güvenlik şeridini (Margin)</strong> çizmektir.</p>
+<h2>4.1. Mantığı Nedir?</h2>
+<p>İki ülkeyi ayıran bir sınır çizeceksiniz. Sınırı nereye çekersiniz?</p>
+<ul>
+<li>Sınıra en yakın evlere (Destek Vektörleri - Support Vectors) bakarsınız.</li>
+<li>Bu evlerden mümkün olduğunca uzak, tam ortadan geçen, en güvenli hattı çizersiniz.</li>
+<li>Bu güvenli bölgeye &quot;Margin&quot; denir. Margin ne kadar genişse, model o kadar sağlamdır.</li>
+</ul>
+<h2>4.2. Veri Doğrusal Ayrılmıyorsa? (Kernel Trick)</h2>
+<p>Diyelim ki kırmızılar ortada, maviler etrafta (Halka şeklinde). Düz bir çizgiyle ayıramazsınız.</p>
+<p><strong>Kernel Trick:</strong> Masadaki kağıdı (2D) elinize alıp bükerseniz (3D), ortadaki noktalar yukarı kalkar ve aralarından düz bir kağıt geçirebilirsiniz. SVM bunu matematiksel olarak yapar! (<code>kernel=&#39;rbf&#39;</code>)</p>
+<h3>📝 SVM REÇETESİ</h3>
+<ol>
+<li><strong>Scaling ŞART:</strong> SVM mesafe hesabına dayanır. <code>StandardScaler</code> yapmazsanız yanlış sonuç verir.</li>
+<li><strong>Kernel Seçimi:</strong><ul>
+<li>Doğrusal veri -&gt; <code>linear</code></li>
+<li>Kavisli veri -&gt; <code>poly</code></li>
+<li>Karışık/Genel -&gt; <code>rbf</code> (Varsayılan ve genelde en iyisi)</li>
+</ul>
+</li>
+<li><strong>Hata Toleransı (C):</strong> <code>C=1</code> ile başla. Overfitting olursa küçült.</li>
+</ol>
+<h3>💻 Proje 1: Spam E-Posta Yakalama (SVM Sınıflandırma)</h3>
+<p><strong>Dosya:</strong> <code>support-vector-machine/svmClassifier.py</code></p>
+<p>SVM, verileri ayırmak için &quot;Hyperplane&quot; adı verilen en ideal sınırı çizer. Bu örnekte, kelime sıklıklarına göre bir e-postanın <strong>Spam (1)</strong> mi yoksa <strong>Normal (0)</strong> mi olduğunu bulacağız.</p>
+<pre><code class="language-python">import pandas as pd
+import numpy as np
+from sklearn.svm import SVC
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import make_classification
+
+# 1. VERİ HAZIRLIĞI (Sentetik Veri)
+# ---------------------------------------------------------
+# make_classification: Deney yapmak için uydurma veri üretir.
+# n_features=20: Her e-postada 20 farklı kelime/özellik var gibi düşünün.
+X, y = make_classification(n_samples=1000, n_features=20, n_classes=2, random_state=42)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# StandardScaler (SVM için KRİTİKTİR)
+# SVM &quot;mesafe&quot; hesabı yaptığı için, ölçeklenmemiş veri hatalı sonuç verir.
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# 2. MODEL KURULUMU VE EĞİTİM
+# ---------------------------------------------------------
+# kernel=&#39;rbf&#39;: (Radial Basis Function). Veri doğrusal değilse (iç içe geçmişse) bu kernel harikadır.
+# C=1.0: Hata Toleransı.
+#   - C Büyükse (100): &quot;Asla hata yapma!&quot; (Margin daralır, Overfitting riski).
+#   - C Küçükse (0.1): &quot;Biraz hata olabilir, yolu geniş tut.&quot; (Daha genel model).
+# gamma=&#39;scale&#39;: Her bir veri noktasının etki alanı.
+svm_model = SVC(kernel=&#39;rbf&#39;, C=1.0, gamma=&#39;scale&#39;)
+
+print(&quot;Model eğitiliyor...&quot;)
+svm_model.fit(X_train_scaled, y_train)
+
+# 3. TAHMİN VE DEĞERLENDİRME
+# ---------------------------------------------------------
+y_pred = svm_model.predict(X_test_scaled)
+print(f&quot;Spam Tespit Başarısı (Accuracy): %{accuracy_score(y_test, y_pred)*100:.2f}&quot;)
+
+print(&quot;\n--- Detaylı Rapor ---&quot;)
+print(classification_report(y_test, y_pred))
+</code></pre>
+<h3>💻 Proje 2: Elmas Fiyat Tahmini (SVR - Regresyon Modu)</h3>
+<p><strong>Dosya:</strong> <code>support-vector-machine/diamond.py</code></p>
+<p>SVM sadece sınıflandırma değil, regresyon da yapar (Support Vector Regression = SVR). Mantık aynıdır: Veri noktalarını içine alan en dar tüneli (tüpü) çizmeye çalışır.</p>
+<pre><code class="language-python">from sklearn.svm import SVR
+# kernel=&#39;poly&#39;: Polinom (kavisli) ilişki kur.
+svr = SVR(kernel=&#39;poly&#39;, degree=2, C=100)
+# svr.fit(X_train_scaled, y_train)
+</code></pre>
+<p><strong>Not:</strong> SVM büyük verilerde YAVAŞTIR. Milyonlarca satır varsa kullanırken dikkatli olun.</p>
+<hr>
+<p>&lt;a name=&quot;bölüm-5-naive-bayes&quot;&gt;&lt;/a&gt;</p>
+<h1>🎲 BÖLÜM 5: NAIVE BAYES</h1>
+<p><strong>Atasözü:</strong> &quot;Ördek gibi yürüyorsa ve ördek gibi vaklıyorsa, o bir ördektir.&quot;</p>
+<p>Olasılık temellidir (Bayes Teoremi).
+<strong>Neden &quot;Naive&quot; (Saf)?</strong>: Çünkü verideki tüm özelliklerin birbirinden bağımsız olduğunu varsayar.</p>
+<ul>
+<li>Örn: &quot;Hava bulutlu&quot; ve &quot;Yağmur yağıyor&quot; olaylarını birbirinden bağımsız sanır. Halbuki ilişkilidir.</li>
+<li>Bu &quot;saf&quot; varsayıma rağmen, özellikle <strong>Metin Sınıflandırma</strong> (Spam filtresi, Duygu analizi) konusunda inanılmaz hızlı ve başarılıdır.</li>
+</ul>
+<h2>5.1. Matematiksel Temel (Bayes Teoremi)</h2>
+<p><code>P(A|B) = P(B|A) * P(A) / P(B)</code></p>
+<ul>
+<li><code>P(Kanser|Pozitif Test)</code>: Test pozitif çıktığında kişinin gerçekten kanser olma olasılığı.</li>
+</ul>
+<h2>5.2. Türleri</h2>
+<ul>
+<li><p><strong>GaussianNB:</strong> Veriler sayısal ve normal dağılıyorsa (Boy, Kilo).</p>
+</li>
+<li><p><strong>MultinomialNB:</strong> Veriler adet ise (Kelime sayısı).</p>
+</li>
+<li><p><strong>BernoulliNB:</strong> Veriler var/yok ise (0/1).</p>
+</li>
+</ul>
+<h3>📝 NAIVE BAYES REÇETESİ</h3>
+<ol>
+<li><strong>Soru:</strong> Verin ne tür?<ul>
+<li>Sayısal (Boy, Kilo) -&gt; <code>GaussianNB</code> kullan.</li>
+<li>Sayaç (Kelime sayısı) -&gt; <code>MultinomialNB</code> kullan.</li>
+<li>Evet/Hayır (Var/Yok) -&gt; <code>BernoulliNB</code> kullan.</li>
+</ul>
+</li>
+<li><strong>Hız:</strong> Bu model çok hızlıdır, devasa verilerde ilk bunu dene.</li>
+</ol>
+<h3>💻 Proje: İris Çiçeği Türü Bulma</h3>
+<p><strong>Dosya:</strong> <code>NaiveBayes/irish.py</code> (Dosya adı &#39;irish&#39; yazılmış, doğrusu &#39;iris&#39;tir).</p>
+<pre><code class="language-python">from sklearn.naive_bayes import GaussianNB
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# Veri
+iris = load_iris()
+X, y = iris.data, iris.target
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Model
+# Verilerimiz (Yaprak uzunluğu cm cinsinden) sürekli sayısal olduğu için Gaussian kullanıyoruz.
+nb = GaussianNB()
+nb.fit(X_train, y_train)
+
+print(f&quot;Başarı Skoru: {accuracy_score(y_test, nb.predict(X_test)):.2f}&quot;)
+</code></pre>
+<hr>
+<p>&lt;a name=&quot;bölüm-6-karar-agaclari&quot;&gt;&lt;/a&gt;</p>
+<h1>🌳 BÖLÜM 6: KARAR AĞAÇLARI (DECISION TREES)</h1>
+<p><strong>Mantık:</strong> &quot;20 Soru Oyunu&quot;.
+Hedefe ulaşmak için sürekli Evet/Hayır soruları sorar. Veriyi sürekli parçalara böler.</p>
+<ul>
+<li>Soru 1: Hava yağmurlu mu? -&gt; Evet.</li>
+<li>Soru 2: Rüzgar var mı? -&gt; Hayır.</li>
+<li><strong>KARAR:</strong> Şemsiye al.</li>
+</ul>
+<h2>6.1. Nasıl Böler? (Entropy ve Gini)</h2>
+<p>Ağaç, hangi soruyu önce soracağına nasıl karar verir? En çok &quot;Bilgi&quot; veren soruyu seçer.</p>
+<ul>
+<li><strong>Entropy:</strong> Düzensizliktir. (Bir odada 5 kedi 5 köpek varsa entropy yüksektir. 10 kedi varsa entropy 0&#39;dır).</li>
+<li><strong>Amaç:</strong> Her soruda entropy&#39;yi azaltmak, saflığı artırmaktır.</li>
+</ul>
+<h2>6.2. Tehlike: Overfitting</h2>
+<p>Karar ağaçları ezberlemeye çok meyillidir. Her bir veri noktası için özel bir kural uydurabilir.
+<strong>Çözüm:</strong> Budama (Pruning) veya Derinlik Sınırı (max_depth).</p>
+<ul>
+<li><code>max_depth=3</code>: Sadece 3 soru sorabilirsin! (Böylece model genellemeyi öğrenir).</li>
+</ul>
+<h3>📝 KARAR AĞACI REÇETESİ</h3>
+<ol>
+<li><strong>Scaling GEREKMEZ:</strong> Ağaçlar &quot;Şu sayıdan büyük mü?&quot; diye bakar, sayının 5 veya 5000 olması fark etmez.</li>
+<li><strong>Encoding ŞART:</strong> Yazı veremezsiniz (Kadın/Erkek). Sayı olmalı (0/1). <code>LabelEncoder</code> kullan.</li>
+<li><strong>Sınır Koy:</strong> <code>max_depth=3</code> veya <code>5</code> ile başla. Yoksa ağaç veriyi ezberler (Overfit).</li>
+<li><strong>Çiz:</strong> <code>plot_tree</code> ile ağacı görselleştir, ne yaptığını anla.</li>
+</ol>
+<h3>💻 Proje: İris Çiçeği Karar Ağacı (Görselleştirme)</h3>
+<p><strong>Dosya:</strong> <code>KararAgaclari/iris_tree.py</code></p>
+<p>Karar ağaçlarının en güzel yanı &quot;ne düşündüğünü&quot; görebilmektir. Bu örnekte, Iris veri setini kullanarak çiçeğin türünü tahmin eden bir ağaç dikeceğiz ve bu ağacı ekrana çizeceğiz.</p>
+<pre><code class="language-python">import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# 1. VERİ HAZIRLIĞI
+# ---------------------------------------------------------
+iris = load_iris()
+X = iris.data
+y = iris.target
+feature_names = iris.feature_names # [&#39;sepal length&#39;, &#39;sepal width&#39;, ...]
+class_names = iris.target_names    # [&#39;setosa&#39;, &#39;versicolor&#39;, &#39;virginica&#39;]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# 2. MODEL VE SINIRLAMA (PRUNING)
+# ---------------------------------------------------------
+# max_depth=3: Ağacın derinliğini 3 ile sınırla.
+# Neden? Sınırlamazsak her yaprakta tek bir çiçek kalana kadar böler (Overfitting).
+# 3 kat derine inmek, genelleme yapmak için idealdir.
+tree_model = DecisionTreeClassifier(criterion=&#39;gini&#39;, max_depth=3, random_state=42)
+tree_model.fit(X_train, y_train)
+
+# 3. BAŞARI ÖLÇÜMÜ
+# ---------------------------------------------------------
+y_pred = tree_model.predict(X_test)
+print(f&quot;Test Başarısı: %{accuracy_score(y_test, y_pred)*100:.2f}&quot;)
+
+# 4. AĞACI ÇİZME (GÖRSELLEŞTİRME)
+# ---------------------------------------------------------
+plt.figure(figsize=(12, 8))
+# filled=True: Her sınıfı farklı renkle göster
+# rounded=True: Kutuların köşelerini yuvarla
+plot_tree(tree_model,
+          filled=True,
+          feature_names=feature_names,
+          class_names=class_names,
+          rounded=True)
+plt.title(&quot;Karar Ağacının Mantığı&quot;)
+plt.show()
+
+# ÇIKTI YORUMU:
+# En üstteki kutu (Kök), en çok bilgi veren sorudur (Örn: &quot;Petal width &lt;= 0.8 mi?&quot;).
+# Gini: O kutudaki safsızlık (kargaşa) oranıdır. 0 olursa tertemiz (saf) demektir.
+</code></pre>
+<hr>
+<hr>
+<p>&lt;a name=&quot;bölüm-7-ensemble&quot;&gt;&lt;/a&gt;</p>
+<h1>🌲 BÖLÜM 7: TOPLULUK ÖĞRENMESİ (ENSEMBLE LEARNING) VE RANDOM FOREST</h1>
+<p><strong>Atasözü:</strong> &quot;Bir elin nesi var, iki elin sesi var.&quot; veya &quot;Akıl akıldan üstündür.&quot;</p>
+<p>Bugüne kadar tek bir model (Tek bir öğrenci) kullandık. Ensemble yöntemleri ise <strong>bir sınıf dolusu öğrenciyi</strong> aynı sınava sokar ve ortak karara (oy çokluğuna veya ortalamaya) bakar.</p>
+<ul>
+<li>Bir Karar Ağacı hata yapabilir.</li>
+<li>Ama 100 Karar Ağacı bir araya gelirse (Orman olursa), birbirlerinin hatasını kapatırlar. Buna <strong>Random Forest (Rastgele Orman)</strong> denir.</li>
+</ul>
+<h2>7.1. Bagging (Bootstrap Aggregating) Mantığı</h2>
+<p>Rastgele Orman, &quot;Bagging&quot; adı verilen zekice bir yöntem kullanır:</p>
+<ol>
+<li>Veri setinden rastgele parçalar alarak 100 farklı alt veri seti oluşturur.</li>
+<li>Her alt veri setine ayrı bir ağaç diker.</li>
+<li><strong>Sınıflandırma:</strong> 100 ağaçtan 80&#39;i &quot;Hasta&quot;, 20&#39;si &quot;Sağlıklı&quot; dediyse sonuç &quot;Hasta&quot;dır (Oy çokluğu).</li>
+<li><strong>Regresyon:</strong> 100 ağacın tahminlerinin ortalamasını alır.</li>
+</ol>
+<h3>💻 Proje: Yetişkin Gelir Tahmini (Sentetik Veri ile)</h3>
+<p><strong>Dosya:</strong> <code>Ensemble/random_forest_income.py</code></p>
+<p>Bu örnekte, Random Forest (Rastgele Orman) algoritmasının tek bir karar ağacına göre ne kadar güçlü olduğunu göreceğiz.
+Ayrıca kategorik verileri (Meslek, Eğitim) nasıl işleyeceğimizi (Encoding) göstereceğiz.</p>
+<pre><code class="language-python">import pandas as pd
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import LabelEncoder
+
+# 1. VERİ HAZIRLIĞI (Sentetik)
+# ---------------------------------------------------------
+# Senaryo: Yaş, Eğitim Yılı ve Haftalık Çalışma Saatine göre Gelir &gt; 50K mı?
+np.random.seed(42)
+n_samples = 1000
+age = np.random.randint(18, 70, n_samples)
+education_years = np.random.randint(5, 20, n_samples)
+hours_per_week = np.random.normal(40, 10, n_samples)
+
+# Hedef: Gelir (Karmaşık bir kural uyduralım)
+# Kural: Eğitim &gt; 16 VE Yaş &gt; 30 ise Yüksek Gelir (%80 ihtimalle)
+income_prob = (education_years &gt; 16).astype(int) * 0.4 + (age &gt; 30).astype(int) * 0.4
+y = (income_prob + np.random.normal(0, 0.1, n_samples) &gt; 0.5).astype(int)
+
+# DataFrame oluştur
+df = pd.DataFrame({&#39;Age&#39;: age, &#39;Edu&#39;: education_years, &#39;Hours&#39;: hours_per_week})
+
+X_train, X_test, y_train, y_test = train_test_split(df, y, test_size=0.3, random_state=42)
+
+# 2. TEK AĞAÇ vs ORMAN
+# ---------------------------------------------------------
+# Tek Karar Ağacı
+tree = DecisionTreeClassifier(random_state=42)
+tree.fit(X_train, y_train)
+print(f&quot;Tek Karar Ağacı Başarısı: %{accuracy_score(y_test, tree.predict(X_test))*100:.2f}&quot;)
+
+# Random Forest (100 Ağaç)
+# n_estimators=100: 100 tane ağaç dik.
+# n_jobs=-1: Bilgisayarın tüm işlemcilerini kullan (Hızlandır).
+rf = RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1)
+rf.fit(X_train, y_train)
+print(f&quot;Random Forest Başarısı:   %{accuracy_score(y_test, rf.predict(X_test))*100:.2f}&quot;)
+
+# 3. ÖZELLİK ÖNEMİ (Feature Importance)
+# ---------------------------------------------------------
+# Hangi özellik geliri en çok etkiliyor?
+importances = pd.Series(rf.feature_importances_, index=df.columns)
+print(&quot;\n--- Özelliklerin Önemi ---&quot;)
+print(importances.sort_values(ascending=False))
+</code></pre>
+<h2>7.3. Proje: Spor Salonu Kalabalıklığı (DateTime Özellikleri)</h2>
+<p><strong>Senaryo:</strong> Hangi saatte, hangi günde spor salonu ne kadar dolu?
+<strong>Zorluk:</strong> Elimizde sadece &quot;Tarih/Saat&quot; (2023-10-25 18:30:00) var. Makine bunu tarih olarak anlamaz.
+<strong>Çözüm:</strong> Tarihi parçalara ayırmak (Feature Engineering).</p>
+<pre><code class="language-python"># Örnek Tarih İşleme
+# df[&#39;date&#39;] = pd.to_datetime(df[&#39;date&#39;])
+# df[&#39;hour&#39;] = df[&#39;date&#39;].dt.hour        # Saati çek (18)
+# df[&#39;day_of_week&#39;] = df[&#39;date&#39;].dt.dayofweek # Haftanın günü (Pazartesi=0)
+# df[&#39;month&#39;] = df[&#39;date&#39;].dt.month      # Ayı çek (10)
+# Artık model &quot;Akşam 18:00&quot; ve &quot;Hafta sonu&quot; kavramlarını öğrenebilir!
+
+# Model Karşılaştırma:
+# Random Forest vs Linear Regression
+# Zaman serisi verilerinde Random Forest, döngüleri (Hafta sonu kalabalığı) daha iyi yakalar.
+</code></pre>
+<h3>📝 RANDOM FOREST REÇETESİ</h3>
+<ol>
+<li><strong>Hazırlık:</strong> Eksik veri olmamalı. Kategorik veriler sayıya çevrilmeli (Encoding).</li>
+<li><strong>Model Ayarları (Hyperparameters):</strong><ul>
+<li><code>n_estimators</code>: Ağaç sayısı. 100 ile başla, 500&#39;e kadar dene. Ne kadar çok, o kadar iyi (ama yavaşlar).</li>
+<li><code>max_depth</code>: Ağaç derinliği. Genelde Random Forest&#39;ta sınırlamaya (pruning) çok gerek yoktur ama model çok şişerse 10-20 verilebilir.</li>
+</ul>
+</li>
+<li><strong>Özellik Önemi (Feature Importance):</strong> Model eğitildikten sonra <code>model.feature_importances_</code> komutuyla hangi özelliğin (Yaş mı, Eğitim mi?) daha kritik olduğunu çizdirip bakabilirsin. Bu, iş sunumlarında hayat kurtarır!</li>
+</ol>
+<hr>
+<p>&lt;a name=&quot;bölüm-8-boosting&quot;&gt;&lt;/a&gt;</p>
+<h1>🚀 BÖLÜM 8: BOOSTING ALGORİTMALARI (ADABOOST &amp; GRADIENT BOOSTING)</h1>
+<p><strong>Atasözü:</strong> &quot;Hatasız kul olmaz, hatadan ders çıkarmayan model olmaz.&quot;</p>
+<p>Random Forest&#39;ta ağaçlar birbirinden bağımsızdı (Paralel öğrenme).
+Boosting&#39;de ise ağaçlar <strong>sırayla</strong> öğrenir (Seri öğrenme).</p>
+<h3>🥊 Karşılaştırma: Bagging vs Boosting</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Özellik</th>
+<th align="left">Random Forest (Bagging)</th>
+<th align="left">Boosting (XGBoost, AdaBoost)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Öğrenme Tarzı</strong></td>
+<td align="left"><strong>Paralel</strong> (Tüm ağaçlar aynı anda).</td>
+<td align="left"><strong>Seri</strong> (Bir önceki ağacın hatasını düzeltir).</td>
+</tr>
+<tr>
+<td align="left"><strong>Amaç</strong></td>
+<td align="left">Variance&#39;ı (değişkenliği) düşürmek.</td>
+<td align="left">Bias&#39;ı (önyargıyı/hatayı) düşürmek.</td>
+</tr>
+<tr>
+<td align="left"><strong>Hız</strong></td>
+<td align="left">Hızlıdır (Paralel işlem).</td>
+<td align="left">Yavaştır (Sırayla gider) ama daha güçlüdür.</td>
+</tr>
+<tr>
+<td align="left"><strong>Overfitting Riski</strong></td>
+<td align="left">Düşüktür.</td>
+<td align="left">Yüksektir (Dikkatli ayarlanmalı).</td>
+</tr>
+</tbody></table>
+<p><strong>Atasözü:</strong> &quot;Hatasız kul olmaz, hatadan ders çıkarmayan model olmaz.&quot;</p>
+<p>Random Forest&#39;ta ağaçlar birbirinden bağımsızdı (Paralel öğrenme).
+Boosting&#39;de ise ağaçlar <strong>sırayla</strong> öğrenir (Seri öğrenme).</p>
+<ol>
+<li>Birinci öğrenci (Model A) testi çözer.</li>
+<li>İkinci öğrenci (Model B), <strong>sadece Model A&#39;nın yanlış yaptığı sorulara</strong> odaklanır.</li>
+<li>Üçüncü öğrenci (Model C), A ve B&#39;nin çözemediklerine odaklanır.
+Sonuçta bu &quot;uzmanlaşmış&quot; öğrencilerin toplamı mükemmel bir zeka oluşturur.</li>
+</ol>
+<h2>8.1. AdaBoost (Adaptive Boosting)</h2>
+<h3>💻 Proje: Hastalık Teşhisi (AdaBoost)</h3>
+<p>Zayıf öğrenicileri (kısa karar ağaçlarını) birleştirerek güçlü bir model oluşturur. Her adımda &quot;yanlış yapılan&quot; veriye odaklanır.</p>
+<pre><code class="language-python">import numpy as np
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.datasets import make_hastie_10_2
+
+# 1. VERİ HAZIRLIĞI
+# make_hastie_10_2: Sınıflandırma için zor bir yapay veri seti (12.000 veri).
+X, y = make_hastie_10_2(n_samples=2000, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# 2. MODEL
+# base_estimator: Zayıf öğrenici ne olsun? (Genelde derinliği 1 olan ağaç - Stump).
+# n_estimators: Kaç tane zayıf öğrenici olsun?
+ada = AdaBoostClassifier(
+    estimator=DecisionTreeClassifier(max_depth=1), # Sadece 1 soru sorabilen ağaç
+    n_estimators=100,
+    learning_rate=1.0,
+    random_state=42
+)
+
+ada.fit(X_train, y_train)
+
+print(f&quot;AdaBoost Başarısı: %{accuracy_score(y_test, ada.predict(X_test))*100:.2f}&quot;)
+</code></pre>
+<h2>8.2. Gradient Boosting (GBM)</h2>
+<p>AdaBoost ağırlıklarla oynar, Gradient Boosting ise <strong>Hatayı (Residual)</strong> tahmin etmeye çalışır.</p>
+<ul>
+<li>Hedef: 100. Tahmin: 80. Hata: 20.</li>
+<li>İkinci model bu &quot;20&quot;yi tahmin etmeye çalışır.</li>
+<li><strong>Metafor:</strong> Golfçü topa vurur, deliğe yaklaşır ama girmez. İkinci vuruşu deliğe değil, topun kaldığı yerden deliğe olan mesafeye göre yapar. Adım adım hatayı sıfıra indirir.</li>
+</ul>
+<h3>💻 Proje: Gradient Boosting Regresyon (Beton Dayanımı)</h3>
+<p>AdaBoost sınıflandırma yapar, bu örnekte Gradient Boosting ile <strong>Regresyon (Sayısal Tahmin)</strong> yapacağız.</p>
+<pre><code class="language-python">from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.datasets import make_regression
+from sklearn.model_selection import train_test_split
+
+# 1. VERİ (Beton verisi simülasyonu)
+X, y = make_regression(n_samples=1000, n_features=10, noise=0.5, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 2. MODEL
+# learning_rate: Adım büyüklüğü. Küçük olması (0.01) iyidir ama çok ağaç (n_estimators) gerekir.
+gb_model = GradientBoostingRegressor(
+    n_estimators=500,
+    learning_rate=0.05,
+    max_depth=3,
+    random_state=42
+)
+
+gb_model.fit(X_train, y_train)
+y_pred = gb_model.predict(X_test)
+
+print(f&quot;R2 Score (Başarı): %{r2_score(y_test, y_pred)*100:.2f}&quot;)
+print(f&quot;RMSE (Hata): {mean_squared_error(y_test, y_pred, squared=False):.2f}&quot;)
+</code></pre>
+<h3>📝 BOOSTING REÇETESİ</h3>
+<ol>
+<li><strong>Hız/Öğrenme Oranı (<code>learning_rate</code>):</strong> En kritik ayardır.<ul>
+<li>Düşük (0.01): Yavaş yavaş, emin adımlarla öğrenir (Daha çok ağaç gerekir, sonuç genelde daha iyidir).</li>
+<li>Yüksek (0.1): Hızlı öğrenir ama detayı kaçırabilir (Overfitting riski).</li>
+</ul>
+</li>
+<li><strong>Veri Temizliği ŞART:</strong> Boosting gürültüye (hatalı veriye) çok duyarlıdır. Outlier (Aykırı değer) temizliği yapılmalı.</li>
+<li><strong>Sıralama:</strong> Önce Random Forest dene. Yetmezse XGBoost, LightGBM veya CatBoost (Gradient Boosting&#39;in modern versiyonları) dene.</li>
+</ol>
+<hr>
+<h1>🏁 FİNAL: MAKİNE ÖĞRENMESİ YOLCULUĞU</h1>
+<p>Bu rehberde, basit bir doğrudan (Lineer Regresyon) başlayıp, çoklu akıl sistemlerine (Ensemble, Boosting) kadar geldik.</p>
+<p><strong>Hangi Modeli Ne Zaman Kullanayım?</strong></p>
+<ol>
+<li><p><strong>Veriyi Anlamak için:</strong> Karar Ağacı (Görseli var, insan okuyabilir).</p>
+</li>
+<li><p><strong>Basit ve Hızlı Başlangıç:</strong> Lojistik Regresyon / Naive Bayes.</p>
+</li>
+<li><p><strong>Karmaşık İlişkiler ve Sağlamlık:</strong> Random Forest (Varsayılan ayarlarla bile harikadır).</p>
+</li>
+<li><p><strong>Yüksek Başarı ve Yarışmalar:</strong> Gradient Boosting (XGBoost/LightGBM). İnce ayar ister ama en iyi sonucu verir.</p>
+</li>
+</ol>
+<hr>
+<p>&lt;a name=&quot;bölüm-9-xgboost&quot;&gt;&lt;/a&gt;</p>
+<h1>🚀 BÖLÜM 9: XGBOOST (EXTREME GRADIENT BOOSTING)</h1>
+<p><strong>Tanım:</strong> &quot;Kaggle Yarışmalarının Kralı.&quot;</p>
+<p>Gradient Boosting&#39;i hatırlıyorsunuz (Golfçü örneği). XGBoost, bu golfçünün <strong>steroid almış</strong> halidir.</p>
+<ol>
+<li><strong>Hız:</strong> Çok daha hızlı çalışır (Paralel işlem yapar).</li>
+<li><strong>Akıl:</strong> &quot;Budama&quot; işlemini çok akıllıca yapar, gereksiz dalları keser.</li>
+<li><strong>Kayıp Veri:</strong> Eksik verileri (NaN) kendisi yönetebilir.</li>
+</ol>
+<h2>9.1. Proje: XGBoost ile Sınıflandırma (Kaggle Kralı)</h2>
+<p>XGBoost kütüphanesi harici kurulum gerektirir (<code>pip install xgboost</code>).</p>
+<pre><code class="language-python">import xgboost as xgb
+from sklearn.datasets import load_wine
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# 1. VERİ (Wine Dataset - Şarap Kalite Analizi)
+# 3 farklı şarap üreticisi (sınıf) var.
+data = load_wine()
+X, y = data.data, data.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 2. XGBOOST MODELİ
+# use_label_encoder=False: Uyarı almamak için.
+# eval_metric=&#39;mlogloss&#39;: Çoklu sınıflandırma hatasını ölç.
+model = xgb.XGBClassifier(
+    n_estimators=100,
+    learning_rate=0.1,
+    max_depth=4,
+    use_label_encoder=False,
+    eval_metric=&#39;mlogloss&#39;
+)
+
+model.fit(X_train, y_train)
+
+print(f&quot;XGBoost Başarısı: %{accuracy_score(y_test, model.predict(X_test))*100:.2f}&quot;)
+</code></pre>
+<h2>9.2. Proje 2: Ev Fiyatları ve Outlier (Aykırı Değer) Temizliği</h2>
+<p><strong>Kritik Konu: Outlier Nedir?</strong>
+Bir mahallede evler 3-5 Milyon TL iken, arada bir tane 100 Milyon TL&#39;lik &quot;Saray&quot; varsa, bu veriye <strong>Outlier</strong> denir. Bu veri modelin kafasını karıştırır, ortalamayı bozar. Temizlenmelidir.</p>
+<h3>🧹 Outlier Temizliği Reçetesi (Z-Score &amp; IQR)</h3>
+<pre><code class="language-python"># Yöntem 1: Z-Score (Standart Sapma)
+# Ortalamadan 3 standart sapma uzaktakileri at.
+# from scipy import stats
+# z_scores = stats.zscore(df[&#39;price&#39;])
+# df_clean = df[(z_scores &lt; 3)]
+
+# Yöntem 2: IQR (Interquartile Range) - En Yaygını
+# Q1 = df[&#39;price&#39;].quantile(0.25)
+# Q3 = df[&#39;price&#39;].quantile(0.75)
+# IQR = Q3 - Q1
+# Alt_Sinir = Q1 - 1.5 * IQR
+# Ust_Sinir = Q3 + 1.5 * IQR
+# df_clean = df[(df[&#39;price&#39;] &gt; Alt_Sinir) &amp; (df[&#39;price&#39;] &lt; Ust_Sinir)]
+</code></pre>
+<h3>📝 XGBOOST REÇETESİ</h3>
+<ol>
+<li><strong>Overfitting&#39;e Dikkat:</strong> XGBoost çok güçlüdür, veriyi ezberleyebilir.<ul>
+<li>Çözüm: <code>early_stopping_rounds</code>. &quot;Eğer 10 tur boyunca gelişme yoksa eğitimi durdur&quot; deyin.</li>
+</ul>
+</li>
+<li><strong>Veri Tipi:</strong> Sadece sayısal veri kabul eder. Tüm kategorik verileri (Encoding) dönüştürün.</li>
+<li><strong>Hiperparametreler:</strong><ul>
+<li><code>max_depth</code>: Genelde 3-6 arası (Çok derin yapma).</li>
+<li><code>learning_rate</code>: 0.01 ile 0.3 arası.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>&lt;a name=&quot;bölüm-10-lightgbm&quot;&gt;&lt;/a&gt;</p>
+<h1>⚡ BÖLÜM 10: LIGHTGBM (Light Gradient Boosting Machine)</h1>
+<p><strong>Farkı Nedir?</strong></p>
+<ul>
+<li><strong>XGBoost:</strong> Ağacı katman katman büyütür (Level-wise). Dengelidir.</li>
+<li><strong>LightGBM:</strong> Ağacı yaprak tabanlı büyütür (Leaf-wise). En çok hata veren yaprağa odaklanır, orayı derinleştirir.</li>
+<li><strong>Sonuç:</strong> Çok daha HIZLI ve daha az bellek (RAM) harcar. Büyük verilerde (Milyonlarca satır) tercih edilir.</li>
+</ul>
+<h2>10.1. Proje: LightGBM (Hız Canavarı)</h2>
+<p>Büyük veri setlerinde XGBoost&#39;tan daha hızlıdır. <code>pip install lightgbm</code> gerektirir.</p>
+<pre><code class="language-python">import lightgbm as lgb
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# 1. BÜYÜK VERİ SİMÜLASYONU (100.000 Satır)
+X, y = make_classification(n_samples=100000, n_features=20, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 2. LIGHTGBM MODELİ
+# LightGBM özel veri yapısı (Dataset) kullanırsa daha hızlıdır ama doğrudan da verilebilir.
+model = lgb.LGBMClassifier(
+    learning_rate=0.05,
+    n_estimators=200,   # Ağaç sayısı
+    num_leaves=31       # Yaprak sayısı (Derinlik kontrolü yerine bu kullanılır)
+)
+
+print(&quot;LightGBM Eğitiliyor (Hızına dikkat)...&quot;)
+model.fit(X_train, y_train)
+
+print(f&quot;LightGBM Başarısı: %{accuracy_score(y_test, model.predict(X_test))*100:.2f}&quot;)
+</code></pre>
+<h3>📝 LIGHTGBM REÇETESİ</h3>
+<ol>
+<li><strong>Kategorik Veri:</strong> LightGBM, kategorik veriyi (One-Hot yapmadan) doğrudan işleyebilir! Sadece sütun tipini <code>category</code> olarak ayarlayın.</li>
+<li><strong>Küçük Veride Kullanma:</strong> 10.000 satırdan az veride Overfitting yapabilir. Büyük veriler için kullanın.</li>
+<li><strong>Hız:</strong> Eğer model eğitiminiz saatler sürüyorsa, LightGBM&#39;e geçin, dakikalar sürsün.</li>
+</ol>
+<hr>
+<p>&lt;a name=&quot;bölüm-11-transformation&quot;&gt;&lt;/a&gt;</p>
+<h1>🔄 BÖLÜM 11: VERİ DÖNÜŞÜMLERİ (BOX-COX VE YEO-JOHNSON)</h1>
+<p>Modeller (Özellikle Lineer Regresyon, KNN), verinin <strong>Normal Dağılımını</strong> (Çan Eğrisi) sever.
+Ancak gerçek hayat verisi genelde çarpıktır (Skewed).</p>
+<ul>
+<li><strong>Sola Çarpık:</strong> İnsanların çoğu düşük maaş alır, az sayıda kişi ultra zengin olur. Grafik sola yığılır.</li>
+</ul>
+<p>Bu veriyi &quot;ütüler gibi&quot; düzeltip çan eğrisine benzetmemiz gerekir.</p>
+<h2>11.1. Dönüşüm Teknikleri</h2>
+<ol>
+<li><strong>Log Dönüşümü (<code>np.log</code>):</strong> Basit ve etkilidir ama &quot;0&quot; veya negatif sayılarda çalışmaz.</li>
+<li><strong>Box-Cox:</strong> Çok güçlüdür. Sadece <strong>Pozitif (&gt;0)</strong> sayılarda çalışır.</li>
+<li><strong>Yeo-Johnson:</strong> Negatif sayılarla da çalışabilen modern yöntemdir.</li>
+</ol>
+<h2>11.2. Proje: Veri Dönüşümü ve Normalleştirme</h2>
+<p>Verilerimiz her zaman düzgün dağılmaz (&quot;Çan Eğrisi&quot;). Çarpık verileri düzeltmek (Transformasyon) modelin performansını artırır.</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.preprocessing import PowerTransformer
+
+# 1. ÇARPIK VERİ OLUŞTURMA (Log-Normal Dağılım)
+# Gelir verisi gibi: Çoğu kişi az kazanır, az kişi çok kazanır (Sola yığılı).
+np.random.seed(42)
+X = np.random.lognormal(mean=2, sigma=0.5, size=(1000, 1))
+
+# 2. DÖNÜŞÜM (Yeo-Johnson)
+# Yeo-Johnson hem pozitif hem negatif sayılarda çalışır (Box-Cox sadece pozitiftir).
+pt = PowerTransformer(method=&#39;yeo-johnson&#39;)
+X_transformed = pt.fit_transform(X)
+
+# 3. GÖRSEL KARŞILAŞTIRMA
+fig, ax = plt.subplots(1, 2, figsize=(12, 5))
+
+sns.histplot(X, kde=True, ax=ax[0], color=&#39;red&#39;)
+ax[0].set_title(&quot;Orijinal Veri (Çarpık)&quot;)
+
+sns.histplot(X_transformed, kde=True, ax=ax[1], color=&#39;green&#39;)
+ax[1].set_title(&quot;Dönüştürülmüş Veri (Normal Dağılım)&quot;)
+
+plt.show()
+</code></pre>
+<h3>📝 TRANSFORMASYON REÇETESİ</h3>
+<ol>
+<li><strong>Sıra:</strong> Outlier temizliği -&gt; Transformasyon -&gt; Scaling. (Önce çöpü at, sonra şekil ver, sonra ölçekle).</li>
+<li><strong>Sadece Girdiler (X):</strong> Hedef değişkene (y) transformasyon yapmak zorunda değilsiniz ama yaparsanız geri dönüştürmeyi (<code>inverse_transform</code>) unutmayın.</li>
+<li><strong>Kontrol:</strong> <code>df.skew()</code> komutu ile çarpıklığa bakın. 0&#39;a yakınsa dokunmayın.</li>
+</ol>
+<hr>
+<p>&lt;a name=&quot;bölüm-12-final&quot;&gt;&lt;/a&gt;</p>
+<h1>🎓 BÜYÜK FİNAL: SIÇRAMA TAHTASI</h1>
+<p>Tebrikler! Artık sadece kod yazan biri değil, verinin dilinden anlayan bir <strong>Veri Bilimcisisiniz</strong>.</p>
+<h3>🏆 Neler Başardınız?</h3>
+<ol>
+<li><strong>Temeller:</strong> Regresyon, Sınıflandırma, Overfitting, Bias-Variance.</li>
+<li><strong>Algoritmalar:</strong> KNN, SVM, Naive Bayes, Karar Ağaçları.</li>
+<li><strong>İleri Seviye:</strong> Random Forest, AdaBoost, Gradient Boosting.</li>
+<li><strong>Modern Silahlar:</strong> XGBoost, LightGBM.</li>
+<li><strong>Sanat:</strong> Feature Engineering, Outlier Temizliği, Veri Transformasyonu.</li>
+</ol>
+<h3>🗺️ Veri Bilimci Pusulası: Hangi Algoritmayı Seçmeliyim?</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Durum</th>
+<th align="left">Veri Miktarı</th>
+<th align="left">Önerilen Algoritma</th>
+<th align="left">Neden?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Başlangıç / Keşif</strong></td>
+<td align="left">Az (&lt;10k)</td>
+<td align="left"><strong>Decision Tree</strong></td>
+<td align="left">Veriyi anlamak ve görselleştirmek için.</td>
+</tr>
+<tr>
+<td align="left"><strong>Basit Sınıflandırma</strong></td>
+<td align="left">Orta (&lt;100k)</td>
+<td align="left"><strong>Logistic Regression / Naive Bayes</strong></td>
+<td align="left">Hızlı, basit ve olasılık verir.</td>
+</tr>
+<tr>
+<td align="left"><strong>Yüksek Performans</strong></td>
+<td align="left">Çok (&gt;100k)</td>
+<td align="left"><strong>XGBoost / LightGBM</strong></td>
+<td align="left">Kaggle standartıdır. En iyi sonucu verir.</td>
+</tr>
+<tr>
+<td align="left"><strong>Karmaşık &amp; Gürültülü</strong></td>
+<td align="left">Orta-Çok</td>
+<td align="left"><strong>Random Forest</strong></td>
+<td align="left">Ayar yapmadan bile iyi çalışır. Overfit olmaz.</td>
+</tr>
+<tr>
+<td align="left"><strong>Görüntü / Ses</strong></td>
+<td align="left">Çok Fazla</td>
+<td align="left"><strong>Neural Networks (Derin Öğrenme)</strong></td>
+<td align="left">(Bu rehberin kapsamı dışındadır ama bilmelisiniz).</td>
+</tr>
+</tbody></table>
+<h3>🚀 Bundan Sonraki Meydan Okuma (Ödevler)</h3>
+<p>Kendinizi test etmek için şu projeleri yapın:</p>
+<ol>
+<li><strong>Titanic (Kaggle):</strong> %80 üzeri doğruluk skoruna ulaşmaya çalışın. (İpucu: &#39;Cabin&#39; sütununu ve ünvanları iyi kullanın).</li>
+<li><strong>House Prices (Kaggle):</strong> XGBoost ve LightGBM&#39;i karıştırarak (Ensemble) kullanın.</li>
+<li><strong>Kendi Veriniz:</strong> İş yerinizdeki veya ilgi alanınızdaki bir Excel dosyasını alıp makineye öğretin.</li>
+</ol>
+<p>Unutmayın: <strong>&quot;Veri, toprağın altındaki petrol gibidir. Makine öğrenmesi ise rafineridir.&quot;</strong></p>
+<p>Yolunuz açık, modeliniz <code>Overfit</code> olmasın! Başarılar! 🚀</p>
+</article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__brand">
+      <span class="brand__mark" aria-hidden="true">NK</span>
+      <div><strong>Nihat Kütükoğlu</strong>Data Science · AI · Software</div>
+    </div>
+    <nav class="footer__links" aria-label="Sosyal bağlantılar">
+      <a href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/nihatkutukoglu" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:kutukoglunihat1@gmail.com">Email</a>
+    </nav>
+    <p>© <span data-year>2026</span> Nihat Kütükoğlu</p>
+  </div>
+</footer>
+
+<dialog class="palette" id="palette" aria-label="Komut paleti">
+  <div class="palette__search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input type="text" id="paletteInput" placeholder="Sayfa, proje veya bağlantı ara..." autocomplete="off"
+           role="combobox" aria-expanded="true" aria-controls="paletteList" aria-autocomplete="list">
+    <kbd>Esc</kbd>
+  </div>
+  <div class="palette__list" id="paletteList" role="listbox" aria-label="Sonuçlar"></div>
+  <div class="palette__foot" aria-hidden="true"><span><kbd>↑</kbd> <kbd>↓</kbd> gezin</span><span><kbd>↵</kbd> aç</span></div>
+</dialog>
+<script src="/data/projects.js?v=5" defer></script>
+<script src="/data/site.js?v=5" defer></script>
+<script src="/js/main.js?v=5" defer></script>
+</body>
+</html>

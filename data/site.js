@@ -18,43 +18,28 @@
       { value: 116640, label: "analiz edilen göç akışı (TÜİK)" }
     ],
 
-    /* Henüz yayınlanmamış yazılar: kartlar "taslak" etiketiyle ilgili case study'ye bağlanır */
+    /* PDF dosyalarını assets/notes/ altına ekleyin.
+       Örnek: { title: "Not başlığı", tag: "Analiz", blurb: "Kısa açıklama",
+                file: "/assets/notes/not-basligi.pdf" } */
     notes: [
+      {"title": "Makine Öğrenimi: Kapsamlı Rehber", "tag": "Makine Öğrenimi", "blurb": "Makine öğrenimi kavramlarını uçtan uca ele alan geniş kapsamlı bir rehber.", "file": "/assets/notes/Makine_Ogrenimi_Kapsamli_Rehber.md", "slug": "makine-ogrenimi-kapsamli-rehber"},
+      {"title": "Ridge, Lasso, ElasticNet ve Çapraz Doğrulama", "tag": "Makine Öğrenimi", "blurb": "Düzenleme modelleri (Ridge, ElasticNet) ve Çapraz Doğrulama (Cross Validation) üzerine notlar.", "file": "/assets/notes/Ridge_ElasticNet_CrossValidation.md", "slug": "ridge-elasticnet-crossvalidation"},
+      {"title": "Lojistik Regresyon Ders Notları", "tag": "Makine Öğrenimi", "blurb": "Lojistik regresyon algoritmasının teorisi ve pratik uygulamaları.", "file": "/assets/notes/Lojistik_Regresyon_Ders_Notlari.md", "slug": "lojistik-regresyon-ders-notlari"},
+      {"title": "KNN Ders Notları", "tag": "Makine Öğrenimi", "blurb": "K-Nearest Neighbors (K-En Yakın Komşu) algoritması üzerine çalışma notları.", "file": "/assets/notes/KNN_Notlari.md", "slug": "knn-notlari"},
+      {"title": "Karar Ağaçları Ders Notları", "tag": "Makine Öğrenimi", "blurb": "Karar ağaçları (Decision Trees) algoritmasının yapısı ve kullanım alanları.", "file": "/assets/notes/Karar_Agaclari_Ders_Notlari.md", "slug": "karar-agaclari-ders-notlari"},
+      {"title": "Naive Bayes: Teori ve Uygulama", "tag": "Makine Öğrenimi", "blurb": "Olasılık tabanlı Naive Bayes algoritması ve sınıflandırma mantığı.", "file": "/assets/notes/NaiveBayes_Notlari.md", "slug": "naivebayes-notlari"},
+      {"title": "SVM Ders Notları", "tag": "Makine Öğrenimi", "blurb": "Destek Vektör Makineleri (Support Vector Machines) çalışma prensipleri.", "file": "/assets/notes/SVM_Ders_Notlari.md", "slug": "svm-ders-notlari"},
+      {"title": "Encoding Rehberi", "tag": "Makine Öğrenimi", "blurb": "Kategorik verilerin sayısal verilere dönüştürülmesine yönelik teknikler (One-Hot, Label vb).", "file": "/assets/notes/Encoding_Rehberi.md", "slug": "encoding-rehberi"},
+      {"title": "LazyPredict Ders Notları", "tag": "Makine Öğrenimi", "blurb": "Kısa sürede birçok modeli karşılaştırmaya yarayan LazyPredict kütüphanesi notları.", "file": "/assets/notes/lazypredict_ders_notlari.md", "slug": "lazypredict-ders-notlari"},
+      {"title": "Keşifçi Veri Analizi (EDA) Şablonu", "tag": "Makine Öğrenimi", "blurb": "Keşifçi Veri Analizi (EDA) sürecini basitleştirmek ve standartlaştırmak için genel bir şablon.", "file": "/assets/notes/eda_sablonu.md", "slug": "eda-sablonu"},
+      {"title": "Çoklu Doğrusallık ve VIF Notları", "tag": "Makine Öğrenimi", "blurb": "Çoklu doğrusallık problemi (Multicollinearity) ve VIF çözümleri üzerine teknik notlar.", "file": "/assets/notes/multicollinearity_notlari.md", "slug": "multicollinearity-notlari"},
+      {"title": "Map Encoding", "tag": "Makine Öğrenimi", "blurb": "Map fonksiyonu ile verilerin yeniden etiketlenmesi ve dönüştürülmesi.", "file": "/assets/notes/map_encoding.md", "slug": "map-encoding"},
+      {"title": "Ordinal ve Map Karşılaştırması", "tag": "Makine Öğrenimi", "blurb": "Sıralı veri türleri için Ordinal ve Map dönüşümleri arasındaki benzerlik/farklılıklar.", "file": "/assets/notes/ordinal_vs_map.md", "slug": "ordinal-vs-map"},
       {
-        title: "K-Means ne zaman kullanılmalı?",
-        tag: "Clustering",
-        blurb: "Göç profilleri ve bölgesel turizm segmentasyonunda K-Means'in işe yaradığı ve yetersiz kaldığı noktalar.",
-        project: "goc"
-      },
-      {
-        title: "HDBSCAN vs K-Means",
-        tag: "Clustering",
-        blurb: "Yoğunluk tabanlı ve merkez tabanlı kümelemeyi Silhouette, Davies–Bouldin ve Calinski–Harabasz ile karşılaştırmak.",
-        project: "goc"
-      },
-      {
-        title: "EDA Workflow",
-        tag: "Analysis",
-        blurb: "Kamu verisinde doğrulama, keşifçi analiz ve Pareto ile önceliklendirme için izlediğim adımlar.",
-        project: "gaziantep"
-      },
-      {
-        title: "Network Analysis",
-        tag: "Graphs",
-        blurb: "İller arası göç akışlarını NetworkX ile yönlü ağ olarak modellemek ve koridorları okumak.",
-        project: "goc"
-      },
-      {
-        title: "Model Evaluation",
-        tag: "ML",
-        blurb: "Bir modelin neden çalışmadığını raporlamak: SMOTE, model karşılaştırması ve açıkça yazılan sınırlılıklar.",
-        project: "gaziantep"
-      },
-      {
-        title: "Data Product Development",
-        tag: "Product",
-        blurb: "Analizden Streamlit ve Docker ile çalışan, health check'li bir karar destek ürününe geçiş.",
-        project: "agartha"
+        title: "Low-Code / No-Code Görsel Uygulama Notu",
+        tag: "Low-Code / No-Code",
+        blurb: "Low-Code / No-Code görsel uygulama notu · 2026.",
+        file: "/assets/notes/low-code-no-code-gorsel-uygulama-notu-2026.pdf"
       }
     ],
 

@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="tr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ridge, Lasso, ElasticNet ve Çapraz Doğrulama | Nihat Kütükoğlu</title>
+<meta name="description" content="Düzenleme modelleri (Ridge, ElasticNet) ve Çapraz Doğrulama (Cross Validation) üzerine notlar.">
+<link rel="canonical" href="https://www.nihatkutukoglu.com.tr/notes/ridge-elasticnet-crossvalidation">
+<meta property="og:title" content="Ridge, Lasso, ElasticNet ve Çapraz Doğrulama">
+<meta property="og:description" content="Düzenleme modelleri (Ridge, ElasticNet) ve Çapraz Doğrulama (Cross Validation) üzerine notlar.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.nihatkutukoglu.com.tr/notes/ridge-elasticnet-crossvalidation">
+<meta property="og:image" content="https://www.nihatkutukoglu.com.tr/assets/og/portfolio-cover.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css?v=5">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <nav class="nav" aria-label="Ana menü">
+      <a class="brand" href="/#hero" aria-label="Nihat Kütükoğlu — ana sayfa"><span class="brand__mark" aria-hidden="true">NK</span><span class="brand__name">Nihat Kütükoğlu</span></a>
+
+      <div class="nav__links">
+        <a href="/#hero" data-nav="home">Home</a>
+        <a href="/#projeler" data-nav="projects">Projects</a>
+        <a href="/#deneyim" data-nav="experience">Experience</a>
+        <a href="/#hakkimda" data-nav="about">About</a>
+        <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="kbd-btn nav__desktop" type="button" data-palette-open aria-label="Komut paletini aç (Ctrl+K)"><span>Ara</span><kbd>⌘K</kbd></button>
+        <a class="icon-btn nav__desktop" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener" aria-label="GitHub profili">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+        <a class="btn btn--primary btn--sm nav__desktop" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Temayı değiştir">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMobile" aria-label="Menüyü aç">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <div class="nav__mobile" id="navMobile" data-open="false">
+    <a href="/#hero" data-nav="home">Home</a>
+    <a href="/#projeler" data-nav="projects">Projects</a>
+    <a href="/#deneyim" data-nav="experience">Experience</a>
+    <a href="/#hakkimda" data-nav="about">About</a>
+    <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+    <a href="/#iletisim">Contact</a>
+    <div class="nav__mobile-cta">
+      <a class="btn btn--ghost" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn--primary" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+    </div>
+  </div>
+</header>
+<main id="main" class="section">
+  <div class="wrap note-reader">
+    <nav class="note__actions" aria-label="Not işlemleri">
+      <a class="btn btn--ghost btn--sm" href="/#notlar">← Tüm notlar</a>
+      <a class="btn btn--primary btn--sm" href="/assets/notes/Ridge_ElasticNet_CrossValidation.md" download>Notu indir (.md)</a>
+    </nav>
+    <article class="note-prose"><h1>🧮 REGÜLARİZASYON: RİDGE, LASSO, ELASTİCNET VE CROSS-VALİDATİON</h1>
+<blockquote>
+<p><strong>&quot;Bir model ne kadar karmaşıksa, o kadar çok kontrol edilmeli.&quot;</strong></p>
+</blockquote>
+<hr>
+<h2>🗺️ KONULARA GENEL BAKIŞ</h2>
+<h3>🏔️ Ridge Regression (L2 Regülarizasyon)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Problem</strong></td>
+<td>Model çok karmaşık → katsayılar devasa büyüyor → her gürültüyü ezberliyor</td>
+</tr>
+<tr>
+<td><strong>Çözüm</strong></td>
+<td>Katsayıların <strong>karesine</strong> ceza uygula → hepsini küçük tut</td>
+</tr>
+<tr>
+<td><strong>Sonuç</strong></td>
+<td>Katsayılar sıfıra <strong>yaklaşır</strong> ama <strong>hiçbiri tam 0 olmaz</strong></td>
+</tr>
+<tr>
+<td><strong>Ne zaman?</strong></td>
+<td>Tüm özellikler muhtemelen anlamlıdır, sadece overfitting&#39;i engellemek istiyorsun</td>
+</tr>
+<tr>
+<td><strong>Analoji</strong></td>
+<td>Şirket bütçesini kısıyorsun ama hiçbir departmanı tamamen kapatmıyorsun</td>
+</tr>
+<tr>
+<td><strong>sklearn</strong></td>
+<td><code>Ridge(alpha=1.0)</code> · <code>RidgeCV(cv=5)</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3>✂️ Lasso Regression (L1 Regülarizasyon)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Problem</strong></td>
+<td>50 özelliğin var ama sadece 10&#39;u gerçekten anlamlı — hangisi?</td>
+</tr>
+<tr>
+<td><strong>Çözüm</strong></td>
+<td>Katsayıların <strong>mutlak değerine</strong> ceza uygula → gereksizleri tam 0 yap</td>
+</tr>
+<tr>
+<td><strong>Sonuç</strong></td>
+<td>Bazı katsayılar <strong>kesinlikle 0.000</strong> olur → o özellik modelden çıkar</td>
+</tr>
+<tr>
+<td><strong>Ne zaman?</strong></td>
+<td>Özellik sayısı fazla, sadece en önemlileri bulmak istiyorsun</td>
+</tr>
+<tr>
+<td><strong>Analoji</strong></td>
+<td>Bazı departmanları <strong>tamamen kapatıyorsun</strong>, kalanlar çalışmaya devam ediyor</td>
+</tr>
+<tr>
+<td><strong>sklearn</strong></td>
+<td><code>Lasso(alpha=0.1)</code> · <code>LassoCV(cv=5)</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3>🔀 ElasticNet Regression (L1 + L2)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Problem</strong></td>
+<td>Lasso korele özellikleri görünce rastgele birini silip diğerini bırakır</td>
+</tr>
+<tr>
+<td><strong>Çözüm</strong></td>
+<td>Ridge + Lasso&#39;yu aynı anda uygula, <code>l1_ratio</code> ile dengeyi sen ayarla</td>
+</tr>
+<tr>
+<td><strong>Sonuç</strong></td>
+<td>Hem özellik siler hem de kalan katsayıları küçük tutar</td>
+</tr>
+<tr>
+<td><strong>Ne zaman?</strong></td>
+<td>Özellikler birbiriyle ilişkiliyse (korele) veya emin değilsen</td>
+</tr>
+<tr>
+<td><strong>Analoji</strong></td>
+<td>Bazı departmanları kapat <strong>(Lasso)</strong>, kalanların bütçesini de kıs <strong>(Ridge)</strong></td>
+</tr>
+<tr>
+<td><strong>sklearn</strong></td>
+<td><code>ElasticNet(alpha=0.1, l1_ratio=0.5)</code> · <code>ElasticNetCV(cv=5)</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3>🔄 Cross-Validation (Çapraz Doğrulama)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Problem</strong></td>
+<td>Tek bir train/test bölünmesi şansa bağlıdır — iyi bir test seti denk gelince model iyi görünür</td>
+</tr>
+<tr>
+<td><strong>Çözüm</strong></td>
+<td>Veriyi K parçaya böl, her seferinde farklı parçayı test et → K farklı skor al → ortala</td>
+</tr>
+<tr>
+<td><strong>Sonuç</strong></td>
+<td>Şansa bağlı olmayan, <strong>güvenilir</strong> bir model performans tahmini</td>
+</tr>
+<tr>
+<td><strong>Ne zaman?</strong></td>
+<td>Her zaman! Özellikle hangi modelin daha iyi olduğuna karar verirken</td>
+</tr>
+<tr>
+<td><strong>Analoji</strong></td>
+<td>Bir öğrenciyi tek sınavla değil, 5 farklı sınavla değerlendirmek</td>
+</tr>
+<tr>
+<td><strong>sklearn</strong></td>
+<td><code>cross_val_score(model, X, y, cv=5)</code> · <code>KFold</code> · <code>StratifiedKFold</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3>📐 Üç Formülün Karşılaştırması</h3>
+<pre><code>                  ┌──────────────────────────────────────────────────────────┐
+                  │              KAYIP FONKSİYONLARI                         │
+                  ├──────────────────────────────────────────────────────────┤
+Linear Regression │  Kayıp = Σ(gerçek - tahmin)²                            │
+                  │                                                          │
+Ridge   (L2)      │  Kayıp = Σ(hata²)  +  α · Σ(βᵢ²)                      │
+                  │                          ↑                               │
+                  │                   Kare → büyük katsayıları sert          │
+                  │                   cezalandırır, ama tam 0 yapamaz         │
+                  │                                                          │
+Lasso   (L1)      │  Kayıp = Σ(hata²)  +  α · Σ|βᵢ|                       │
+                  │                          ↑                               │
+                  │                   Mutlak değer → &quot;elmas köşesi&quot; sayesinde│
+                  │                   bazı katsayıları tam 0 yapabilir        │
+                  │                                                          │
+ElasticNet        │  Kayıp = Σ(hata²)  +  α·ρ·Σ|βᵢ|  +  α·(1-ρ)/2·Σβᵢ²  │
+                  │                          ↑ L1             ↑ L2          │
+                  │               ρ (l1_ratio): 0 = Ridge, 1 = Lasso        │
+                  └──────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>α (alpha) ne yapar?</strong></p>
+<ul>
+<li><code>α = 0</code> → Saf Linear Regression (ceza yok, overfitting riski)</li>
+<li><code>α küçük</code> → Hafif ceza; iyi bir başlangıç noktası</li>
+<li><code>α büyük</code> → Güçlü ceza; model aşırı basitleşir (underfitting riski)</li>
+<li>✅ <strong>En iyi α&#39;yı elle bulmak yerine <code>RidgeCV</code>, <code>LassoCV</code>, <code>ElasticNetCV</code> kullan!</strong></li>
+</ul>
+<hr>
+<h2>📌 PROBLEM: Linear Regression Bazen Çok Ezberler</h2>
+<pre><code class="language-python">from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+import pandas as pd
+import numpy as np
+
+# Veri
+df = pd.read_csv(&quot;verin.csv&quot;)
+X = df.drop(&quot;hedef&quot;, axis=1)
+y = df[&quot;hedef&quot;]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test  = scaler.transform(X_test)
+
+# Saf Linear Regression
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+print(f&quot;Train R2: {model.score(X_train, y_train):.3f}&quot;)  # Çok yüksek → ezberlemiş
+print(f&quot;Test  R2: {model.score(X_test, y_test):.3f}&quot;)    # Düşük → overfitting
+</code></pre>
+<blockquote>
+<p><strong>Sorun:</strong> Train&#39;de %99, Test&#39;te %60 çıkıyorsa model veriyi ezberlemiş.
+<strong>Çözüm:</strong> Regülarizasyon uygula → Ridge / Lasso / ElasticNet</p>
+</blockquote>
+<hr>
+<h2>🏔️ 1. RİDGE REGRESYON</h2>
+<p><strong>Ne yapar:</strong> Katsayıları küçültür ama <strong>hiçbirini sıfırlamaz</strong>.
+<strong>Ne zaman:</strong> Tüm özellikler muhtemelen anlamlı, sadece overfitting var.</p>
+<blockquote>
+<p><strong>Sezgi:</strong> Düşün ki bir öğrenci sınavda ezbere cevap yazıyor (overfitting).
+Ridge ona diyor ki: <em>&quot;Her şeyi hafifçe küçük yaz, ama sıfır yazma.&quot;</em>
+Lasso ise diyor ki: <em>&quot;Bilmiyorsan hiç yazma (sıfır koy), önemlilere odaklan.&quot;</em></p>
+</blockquote>
+<pre><code class="language-python">from sklearn.linear_model import Ridge
+
+# Kullanım — Kitaptaki gibi, sade
+ridge = Ridge(alpha=1.0)
+ridge.fit(X_train, y_train)
+
+y_pred = ridge.predict(X_test)
+
+print(f&quot;Train R2: {ridge.score(X_train, y_train):.3f}&quot;)
+print(f&quot;Test  R2: {ridge.score(X_test, y_test):.3f}&quot;)
+</code></pre>
+<h3>alpha ne demek?</h3>
+<ul>
+<li><code>alpha=0</code> → Saf Linear Regression (ceza yok)</li>
+<li><code>alpha=1</code> → Hafif ceza (iyi başlangıç)</li>
+<li><code>alpha=100</code> → Sert ceza (model çok basitleşir)</li>
+</ul>
+<h3>En iyi alpha&#39;yı otomatik bul (önerilen yol)</h3>
+<pre><code class="language-python">from sklearn.linear_model import RidgeCV
+import numpy as np
+
+ridge = RidgeCV(alphas=np.logspace(-3, 3, 50), cv=5)  # 50 farklı alpha dener
+ridge.fit(X_train, y_train)
+
+print(f&quot;En iyi alpha: {ridge.alpha_:.4f}&quot;)
+print(f&quot;Test R2: {ridge.score(X_test, y_test):.3f}&quot;)
+
+y_pred = ridge.predict(X_test)
+</code></pre>
+<hr>
+<h2>✂️ 2. LASSO REGRESYON</h2>
+<p><strong>Ne yapar:</strong> Gereksiz özelliklerin katsayısını <strong>tam 0 yapar</strong> → o özelliği modelden çıkarır.
+<strong>Ne zaman:</strong> Çok sayıda özellik var ve hangilerinin gereksiz olduğunu bilmiyorsun.</p>
+<blockquote>
+<p><strong>Neden tam 0 üretebiliyor, Ridge üretemiyor?</strong>
+L1 cezasının (mutlak değer) geometrik şekli bir <strong>elmastır</strong> — keskin köşeleri vardır.
+Optimizasyon bu köşelere çekilince katsayı tam eksen üzerine düşer = <strong>tam 0</strong>.
+Ridge&#39;in şekli ise bir <strong>daire</strong>dir — yumuşak yüzeylidir, köşe yoktur, eksenle kesişmesi gerekmez.</p>
+</blockquote>
+<pre><code class="language-python">from sklearn.linear_model import Lasso
+
+# Kullanım — sade
+lasso = Lasso(alpha=0.1)
+lasso.fit(X_train, y_train)
+
+y_pred = lasso.predict(X_test)
+
+print(f&quot;Train R2: {lasso.score(X_train, y_train):.3f}&quot;)
+print(f&quot;Test  R2: {lasso.score(X_test, y_test):.3f}&quot;)
+print(f&quot;Sıfırlanan özellik: {np.sum(lasso.coef_ == 0)} adet&quot;)
+print(f&quot;Kalan özellik:      {np.sum(lasso.coef_ != 0)} adet&quot;)
+</code></pre>
+<h3>En iyi alpha&#39;yı otomatik bul (önerilen yol)</h3>
+<pre><code class="language-python">from sklearn.linear_model import LassoCV
+
+lasso = LassoCV(cv=5, n_jobs=-1, max_iter=10000)
+lasso.fit(X_train, y_train)
+
+print(f&quot;En iyi alpha: {lasso.alpha_:.4f}&quot;)
+print(f&quot;Test R2: {lasso.score(X_test, y_test):.3f}&quot;)
+print(f&quot;Kalan özellik: {np.sum(np.abs(lasso.coef_) &gt; 1e-4)}&quot;)
+
+y_pred = lasso.predict(X_test)
+</code></pre>
+<h3>Lasso ile özellik seçimi → başka modele ver</h3>
+<pre><code class="language-python">from sklearn.linear_model import LassoCV
+from sklearn.ensemble import RandomForestRegressor
+
+# Adım 1: Hangi özellikler anlamlı?
+lasso = LassoCV(cv=5, n_jobs=-1, max_iter=10000)
+lasso.fit(X_train, y_train)
+
+# Adım 2: Sıfır olmayanları seç
+secili = np.abs(lasso.coef_) &gt; 1e-4
+X_train_sec = X_train[:, secili]
+X_test_sec  = X_test[:, secili]
+
+print(f&quot;Seçilen özellik: {secili.sum()} / {len(secili)}&quot;)
+
+# Adım 3: Seçilenlerle başka model eğit
+rf = RandomForestRegressor(n_estimators=100, random_state=42)
+rf.fit(X_train_sec, y_train)
+print(f&quot;RF Test R2: {rf.score(X_test_sec, y_test):.3f}&quot;)
+</code></pre>
+<hr>
+<h2>🔀 3. ELASTİCNET REGRESYON</h2>
+<p><strong>Ne yapar:</strong> Ridge + Lasso karışımı. Hem özellik siler hem de kalanları küçültür.
+<strong>Ne zaman:</strong> Özellikler birbiriyle ilişkiliyse (korele) ya da emin değilsen.</p>
+<blockquote>
+<p><strong>Korelasyon ne demek?</strong>
+Metrekare arttıkça oda sayısı da artıyorsa → bu iki özellik birbiriyle <strong>korele</strong>.
+<strong>Lasso bu durumda</strong> ikisinden rastgele birini seçip diğerini sıfırlar — bu tehlikelidir.
+<strong>ElasticNet</strong> ise her ikisini de modelde tutar ama küçültür, daha güvenlidir.</p>
+</blockquote>
+<blockquote>
+<p><strong>l1_ratio parametresi:</strong></p>
+<ul>
+<li><code>l1_ratio = 0.0</code> → Tamamen Ridge gibi davranır</li>
+<li><code>l1_ratio = 1.0</code> → Tamamen Lasso gibi davranır</li>
+<li><code>l1_ratio = 0.5</code> → %50 Ridge + %50 Lasso karışımı</li>
+</ul>
+</blockquote>
+<pre><code class="language-python">from sklearn.linear_model import ElasticNet
+
+# Kullanım — sade
+en = ElasticNet(alpha=0.1, l1_ratio=0.5)
+# l1_ratio=0 → tamamen Ridge gibi
+# l1_ratio=1 → tamamen Lasso gibi
+# l1_ratio=0.5 → %50 Ridge + %50 Lasso
+en.fit(X_train, y_train)
+
+y_pred = en.predict(X_test)
+
+print(f&quot;Train R2: {en.score(X_train, y_train):.3f}&quot;)
+print(f&quot;Test  R2: {en.score(X_test, y_test):.3f}&quot;)
+</code></pre>
+<h3>En iyi alpha + l1_ratio&#39;yu otomatik bul (önerilen yol)</h3>
+<pre><code class="language-python">from sklearn.linear_model import ElasticNetCV
+
+en = ElasticNetCV(
+    l1_ratio=[0.1, 0.3, 0.5, 0.7, 0.9, 1.0],  # Denenecek l1_ratio&#39;lar
+    cv=5,
+    n_jobs=-1,
+    max_iter=10000
+)
+en.fit(X_train, y_train)
+
+print(f&quot;En iyi alpha:    {en.alpha_:.4f}&quot;)
+print(f&quot;En iyi l1_ratio: {en.l1_ratio_:.2f}&quot;)
+print(f&quot;Test R2: {en.score(X_test, y_test):.3f}&quot;)
+
+y_pred = en.predict(X_test)
+</code></pre>
+<hr>
+<h2>🔄 4. CROSS-VALİDATİON (ÇAPRAZ DOĞRULAMA)</h2>
+<p><strong>Ne yapar:</strong> Modeli tek bir test setine değil, verinin 5 farklı bölümüne test eder.
+<strong>Ne zaman:</strong> Her zaman. Tek test seti şansa bağlıdır. CV güvenilir sonuç verir.</p>
+<blockquote>
+<p><strong>Neden tek test seti yetmez?</strong>
+Veriyi %80 train / %20 test diye ayırdığında, o %20&#39;nin hangi satırlardan oluştuğu tamamen şansa kalmış.
+Şanslı satırlar gelirse model iyi görünür, zor satırlar gelirse kötü görünür.
+CV ise veriyi 5 farklı biçimde train/test olarak böler ve 5 farklı skor alır.
+Bu 5 skorun ortalaması <strong>şansa bağlı değil</strong> — güvenilir bir ölçümdür.</p>
+</blockquote>
+<blockquote>
+<p><strong>std sapma ne anlatır?</strong>
+<code>CV R2: 0.85 ± 0.02</code> → Model her bölümde benzer davranıyor = <strong>tutarlı</strong> ✅
+<code>CV R2: 0.85 ± 0.18</code> → Model bazı bölümlerde çok iyi, bazılarında çok kötü = <strong>tutarsız</strong> ⚠️</p>
+</blockquote>
+<pre><code>Normal:  [────── Train ──────][─Test─]  → 1 tek skor → güvenilmez
+5-Fold:  [Test][──Train──────]          → Skor 1
+         [────][Test][───────]          → Skor 2
+         [────────][Test][───]          → Skor 3
+         [───────────][Test][]          → Skor 4
+         [────────────────][T]          → Skor 5
+                                → Ortalama → GÜVENİLİR!
+</code></pre>
+<pre><code class="language-python">from sklearn.model_selection import cross_val_score
+from sklearn.linear_model import Ridge
+
+ridge = Ridge(alpha=1.0)
+
+skorlar = cross_val_score(
+    ridge,
+    X_train,
+    y_train,
+    cv=5,          # 5 parçaya böl
+    scoring=&#39;r2&#39;
+)
+
+print(f&quot;Her fold&#39;un skoru: {skorlar.round(3)}&quot;)
+print(f&quot;Ortalama R2: {skorlar.mean():.3f}&quot;)
+print(f&quot;Std Sapma:   {skorlar.std():.3f}&quot;)
+# Std küçükse → model tutarlı, güvenilir
+# Std büyükse → model veriye göre çok değişiyor
+</code></pre>
+<h3>Birden fazla metrik almak</h3>
+<pre><code class="language-python">from sklearn.model_selection import cross_validate
+import numpy as np
+
+sonuclar = cross_validate(
+    Ridge(alpha=1.0),
+    X_train, y_train,
+    cv=5,
+    scoring=[&#39;r2&#39;, &#39;neg_mean_squared_error&#39;],
+    return_train_score=True
+)
+
+print(f&quot;Train R2: {sonuclar[&#39;train_r2&#39;].mean():.3f}&quot;)
+print(f&quot;Test  R2: {sonuclar[&#39;test_r2&#39;].mean():.3f}&quot;)
+rmse = np.sqrt(-sonuclar[&#39;test_neg_mean_squared_error&#39;])
+print(f&quot;Test RMSE: {rmse.mean():.3f}&quot;)
+</code></pre>
+<h3>GridSearchCV — En iyi parametreyi CV ile ara</h3>
+<pre><code class="language-python">from sklearn.model_selection import GridSearchCV
+from sklearn.linear_model import Ridge
+import numpy as np
+
+param_grid = {&#39;alpha&#39;: [0.01, 0.1, 1, 10, 100]}
+
+grid = GridSearchCV(
+    Ridge(),
+    param_grid,
+    cv=5,
+    scoring=&#39;r2&#39;
+)
+grid.fit(X_train, y_train)
+
+print(f&quot;En iyi alpha: {grid.best_params_[&#39;alpha&#39;]}&quot;)
+print(f&quot;CV R2:        {grid.best_score_:.3f}&quot;)
+print(f&quot;Test R2:      {grid.score(X_test, y_test):.3f}&quot;)
+
+y_pred = grid.predict(X_test)
+</code></pre>
+<hr>
+<h2>🧭 HANGİSİNİ NE ZAMAN KULLANIRIM?</h2>
+<h3>🌳 Karar Ağacı</h3>
+<pre><code>                         │
+                         ▼
+         ┌───────────────────────────────┐
+         │ Özellik (sütun) sayısı nedir? │
+         └───────────────────────────────┘
+                 │               │
+            Az (&lt; 20)        Çok (20+)
+                 │               │
+                 ▼               ▼
+     ┌───────────────────┐   ┌──────────────────────────────┐
+     │ Overfitting        │   │ Bu özellikler hepsi anlamlı  │
+     │ var mı?            │   │ mı, yoksa çoğu gereksiz mi?  │
+     └───────────────────┘   └──────────────────────────────┘
+        │           │               │               │
+       Evet        Hayır        Bilmiyorum        Hayır, çoğu
+        │           │           / Belki             gereksiz
+        ▼           ▼               │                │
+     Ridge       Linear             ▼                ▼
+              Regression        ElasticNet         Lasso
+</code></pre>
+<h3>3 Soru — 3 Cevap</h3>
+<p><strong>&quot;Fazla özelliğim var, hangisi gereksiz bilmiyorum?&quot;</strong>
+→ <strong>Lasso</strong> — Gereksizleri kendi siler.</p>
+<p><strong>&quot;Özelliklerim birbiriyle ilişkili mi?&quot; (boy-kilo, yaş-deneyim gibi)</strong>
+→ <strong>ElasticNet</strong> — Lasso rastgele biri silerdi, ElasticNet ikisini dengeli tutar.</p>
+<p><strong>&quot;Tüm özelliklerim anlamlı, sadece overfitting var?&quot;</strong>
+→ <strong>Ridge</strong> — Hiçbirini silmez, hepsin küçültür.</p>
+<h3>🔑 Karar Tablosu</h3>
+<table>
+<thead>
+<tr>
+<th>Durum</th>
+<th>Kullan</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Overfitting var, özellikler muhtemelen hepsi anlamlı</td>
+<td><strong>Ridge</strong></td>
+</tr>
+<tr>
+<td>20+ özellik, çoğu gereksiz olabilir</td>
+<td><strong>Lasso</strong></td>
+</tr>
+<tr>
+<td>Özellikler birbiriyle ilişkili</td>
+<td><strong>ElasticNet</strong></td>
+</tr>
+<tr>
+<td>Hiçbir fikrim yok</td>
+<td>Üçünü de dene, CV R2 en yükseği seç</td>
+</tr>
+<tr>
+<td>Hangi alpha doğru bilmiyorum</td>
+<td><code>RidgeCV</code> / <code>LassoCV</code> / <code>ElasticNetCV</code> kullan</td>
+</tr>
+<tr>
+<td>Random Forest / XGBoost kullanıyorum</td>
+<td>Hiçbirini kullanma, tree modeller gerektirmez</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>💡 <strong>Altın Kural:</strong> Şüpheledeysen önce <strong>Ridge</strong>. Çok özelliğin varsa <strong>LassoCV</strong>. Kararsızsan <strong>ElasticNetCV</strong>.</p>
+</blockquote>
+<hr>
+<h2>⚡ HIZLI ŞABLON — Her Projede Kullan</h2>
+<pre><code class="language-python">import numpy as np
+from sklearn.linear_model import RidgeCV, LassoCV, ElasticNetCV
+from sklearn.model_selection import cross_val_score, train_test_split
+from sklearn.preprocessing import StandardScaler
+
+# 1. Hazırlık
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test  = scaler.transform(X_test)
+
+# 2. Ridge
+ridge = RidgeCV(alphas=np.logspace(-3, 3, 50), cv=5)
+ridge.fit(X_train, y_train)
+print(f&quot;Ridge   → R2: {ridge.score(X_test, y_test):.3f} | α={ridge.alpha_:.3f}&quot;)
+
+# 3. Lasso
+lasso = LassoCV(cv=5, n_jobs=-1, max_iter=10000)
+lasso.fit(X_train, y_train)
+print(f&quot;Lasso   → R2: {lasso.score(X_test, y_test):.3f} | α={lasso.alpha_:.3f} | Kalan özellik: {(np.abs(lasso.coef_) &gt; 1e-4).sum()}&quot;)
+
+# 4. ElasticNet
+en = ElasticNetCV(l1_ratio=[0.1, 0.5, 0.9, 1.0], cv=5, n_jobs=-1)
+en.fit(X_train, y_train)
+print(f&quot;ElasticNet → R2: {en.score(X_test, y_test):.3f} | α={en.alpha_:.3f} | l1={en.l1_ratio_:.2f}&quot;)
+
+# 5. En yüksek R2&#39;li modeli seç ✅
+</code></pre>
+</article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__brand">
+      <span class="brand__mark" aria-hidden="true">NK</span>
+      <div><strong>Nihat Kütükoğlu</strong>Data Science · AI · Software</div>
+    </div>
+    <nav class="footer__links" aria-label="Sosyal bağlantılar">
+      <a href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/nihatkutukoglu" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:kutukoglunihat1@gmail.com">Email</a>
+    </nav>
+    <p>© <span data-year>2026</span> Nihat Kütükoğlu</p>
+  </div>
+</footer>
+
+<dialog class="palette" id="palette" aria-label="Komut paleti">
+  <div class="palette__search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input type="text" id="paletteInput" placeholder="Sayfa, proje veya bağlantı ara..." autocomplete="off"
+           role="combobox" aria-expanded="true" aria-controls="paletteList" aria-autocomplete="list">
+    <kbd>Esc</kbd>
+  </div>
+  <div class="palette__list" id="paletteList" role="listbox" aria-label="Sonuçlar"></div>
+  <div class="palette__foot" aria-hidden="true"><span><kbd>↑</kbd> <kbd>↓</kbd> gezin</span><span><kbd>↵</kbd> aç</span></div>
+</dialog>
+<script src="/data/projects.js?v=5" defer></script>
+<script src="/data/site.js?v=5" defer></script>
+<script src="/js/main.js?v=5" defer></script>
+</body>
+</html>

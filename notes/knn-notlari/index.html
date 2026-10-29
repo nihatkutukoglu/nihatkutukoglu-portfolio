@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="tr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KNN Ders Notları | Nihat Kütükoğlu</title>
+<meta name="description" content="K-Nearest Neighbors (K-En Yakın Komşu) algoritması üzerine çalışma notları.">
+<link rel="canonical" href="https://www.nihatkutukoglu.com.tr/notes/knn-notlari">
+<meta property="og:title" content="KNN Ders Notları">
+<meta property="og:description" content="K-Nearest Neighbors (K-En Yakın Komşu) algoritması üzerine çalışma notları.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.nihatkutukoglu.com.tr/notes/knn-notlari">
+<meta property="og:image" content="https://www.nihatkutukoglu.com.tr/assets/og/portfolio-cover.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css?v=5">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <nav class="nav" aria-label="Ana menü">
+      <a class="brand" href="/#hero" aria-label="Nihat Kütükoğlu — ana sayfa"><span class="brand__mark" aria-hidden="true">NK</span><span class="brand__name">Nihat Kütükoğlu</span></a>
+
+      <div class="nav__links">
+        <a href="/#hero" data-nav="home">Home</a>
+        <a href="/#projeler" data-nav="projects">Projects</a>
+        <a href="/#deneyim" data-nav="experience">Experience</a>
+        <a href="/#hakkimda" data-nav="about">About</a>
+        <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="kbd-btn nav__desktop" type="button" data-palette-open aria-label="Komut paletini aç (Ctrl+K)"><span>Ara</span><kbd>⌘K</kbd></button>
+        <a class="icon-btn nav__desktop" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener" aria-label="GitHub profili">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+        <a class="btn btn--primary btn--sm nav__desktop" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Temayı değiştir">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMobile" aria-label="Menüyü aç">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <div class="nav__mobile" id="navMobile" data-open="false">
+    <a href="/#hero" data-nav="home">Home</a>
+    <a href="/#projeler" data-nav="projects">Projects</a>
+    <a href="/#deneyim" data-nav="experience">Experience</a>
+    <a href="/#hakkimda" data-nav="about">About</a>
+    <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+    <a href="/#iletisim">Contact</a>
+    <div class="nav__mobile-cta">
+      <a class="btn btn--ghost" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn--primary" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+    </div>
+  </div>
+</header>
+<main id="main" class="section">
+  <div class="wrap note-reader">
+    <nav class="note__actions" aria-label="Not işlemleri">
+      <a class="btn btn--ghost btn--sm" href="/#notlar">← Tüm notlar</a>
+      <a class="btn btn--primary btn--sm" href="/assets/notes/KNN_Notlari.md" download>Notu indir (.md)</a>
+    </nav>
+    <article class="note-prose"><h1>K-Nearest Neighbors (KNN) Algoritması: Kapsamlı Ders Notları ve Projeler</h1>
+<p>Bu doküman, KNN algoritmasının teorisini, sınıflandırma ve regresyon arasındaki farklarını ve proje örneklerini (kodlarıyla birlikte) içeren kapsamlı bir rehberdir.</p>
+<hr>
+<h2>1. KNN Nedir ve Ne Zaman Kullanılır?</h2>
+<p><strong>K-Nearest Neighbors (K-En Yakın Komşu)</strong>, veri madenciliği ve makine öğrenmesinde kullanılan, &quot;Bana arkadaşını söyle, sana kim olduğunu söyleyeyim&quot; mantığıyla çalışan basit ama etkili bir algoritmadır.</p>
+<h3>Mantığı Nedir?</h3>
+<p>Yeni bir veri noktası geldiğinde, o noktaya <strong>en yakın olan &#39;K&#39; adet</strong> komşusuna bakılır.</p>
+<ul>
+<li><strong>Sınıflandırma</strong> yapıyorsak: Komşuların çoğunluğu hangi sınıftaysa, yeni veri o sınıfa atanır.</li>
+<li><strong>Regresyon</strong> yapıyorsak: Komşuların değerlerinin <strong>ortalaması</strong> alınır.</li>
+</ul>
+<h3>Ne Zaman Kullanılır?</h3>
+<ul>
+<li><strong>Veri Seti Küçük/Orta Boyuttaysa:</strong> Büyük verilerde her tahmin için mesafe hesaplamak çok yavaş olacağından KNN önerilmez.</li>
+<li><strong>Veri Gürültüsüzse:</strong> KNN gürültülü (hatalı) verilere karşı hassastır.</li>
+<li><strong>Karar Sınırları Düzensizse:</strong> Doğrusal (Linear) algoritmaların başarısız olduğu, karmaşık desenli verilerde iyi sonuç verir.</li>
+</ul>
+<hr>
+<h2>2. KNN Classifier vs. KNN Regressor Farkı</h2>
+<p>KNN hem sınıflandırma hem de regresyon için kullanılabilir. Temel fark <strong>karar verme</strong> aşamasındadır.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Özellik</th>
+<th align="left">KNN Sınıflandırma (Classifier)</th>
+<th align="left">KNN Regresyon (Regressor)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Amaç</strong></td>
+<td align="left">Bir sınıfı/etiketi tahmin etmek (Örn: Hasta/Sağlıklı).</td>
+<td align="left">Sayısal bir değeri tahmin etmek (Örn: Ev Fiyatı, Enerji Tüketimi).</td>
+</tr>
+<tr>
+<td align="left"><strong>Karar Mekanizması</strong></td>
+<td align="left"><strong>Oylama (Voting):</strong> En yakın K komşudan en çok hangisi varsa o seçilir.</td>
+<td align="left"><strong>Ortalama (Averaging):</strong> En yakın K komşunun değerlerinin ortalaması alınır.</td>
+</tr>
+<tr>
+<td align="left"><strong>Değerlendirme Metriği</strong></td>
+<td align="left">Accuracy (Doğruluk), Confusion Matrix, F1 Score.</td>
+<td align="left"><strong>R2 Score</strong>, MAE, MSE (<strong>Accuracy kullanılmaz!</strong>).</td>
+</tr>
+<tr>
+<td align="left"><strong>Formül</strong></td>
+<td align="left">$Mod(y_1, y_2, ..., y_k)$</td>
+<td align="left">$\frac{1}{k} \sum_{i=1}^{k} y_i$</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>3. Proje 1: Sağlık Riski Sınıflandırması (Classification)</h2>
+<p>Bu projede, hastaların vücut kitle indeksi, tansiyon ve aktivite seviyelerine bakarak <strong>Yüksek Riskli</strong> olup olmadıklarını tahmin ediyoruz.</p>
+<h3>Veri Seti Sütunları</h3>
+<ul>
+<li><code>bmi_score</code>: Vücut Kitle İndeksi skoru.</li>
+<li><code>blood_pressure_variation</code>: Tansiyon değişim oranı.</li>
+<li><code>activity_level_index</code>: Aktivite seviyesi.</li>
+<li><code>high_risk_flag</code> (<strong>HEDEF</strong>): 1 (Yüksek Riskli) veya 0 (Düşük Riskli).</li>
+</ul>
+<h3>Kritik Not: Data Leakage (Veri Sızıntısı)</h3>
+<p>Veriyi ölçeklendirirken (Scaling) yapılan en büyük hata, tüm veriyi aynı anda scale etmektir.</p>
+<ul>
+<li><strong>Yanlış:</strong> Tüm veriyi scale et -&gt; Train/Test diye ayır.</li>
+<li><strong>Doğru:</strong> Train/Test diye ayır -&gt; Scale işlemini Train&#39;e göre yap (fit), Test&#39;i buna göre dönüştür (transform).</li>
+</ul>
+<h3>Python Kodu (<code>saglikrisk.py</code>)</h3>
+<pre><code class="language-python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import os
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# Dosya yolunu dinamik olarak bul
+script_dir = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(script_dir, &quot;12-health_risk_classification (1).csv&quot;)
+
+df = pd.read_csv(file_path)
+
+# 1. Veri Hazırlığı
+X = df.drop(&quot;high_risk_flag&quot;, axis=1)
+y = df[&quot;high_risk_flag&quot;]
+
+# 2. Train-Test Split (ÖNCE AYIR)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 3. Scaling (SONRA ÖLÇEKLE)
+# Scaler sadece X_train üzerindeki istatistikleri (mean, std) öğrenmeli!
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# 4. Model Kurulumu (Classifier)
+k = 5
+# algorithm=&#39;auto&#39;: En iyi algoritmayı kendi seçsin
+# weights=&#39;uniform&#39;: Her komşunun oyu eşit olsun
+classifier = KNeighborsClassifier(n_neighbors=k, algorithm=&#39;auto&#39;, weights=&#39;uniform&#39;)
+classifier.fit(X_train_scaled, y_train)
+
+# 5. Tahmin
+y_pred = classifier.predict(X_test_scaled)
+
+# 6. Değerlendirme (Sınıflandırma Metrikleri)
+print(&quot;\n##################### KNN Algoritması Sonuçları #####################&quot;)
+print(f&quot;Doğruluk Oranı (Accuracy): {accuracy_score(y_test, y_pred):.2f}&quot;)
+print(&quot;\nSınıflandırma Raporu:&quot;)
+print(classification_report(y_test, y_pred))
+print(&quot;\nKarışıklık Matrisi:&quot;)
+print(confusion_matrix(y_test, y_pred))
+print(&quot;-----------------------------------------------------------\n&quot;)
+</code></pre>
+<hr>
+<h2>4. Proje 2: Ev Enerji Tüketimi Regresyonu (Regression)</h2>
+<p>Bu projede, dış ortam nemi ve iç ortam sıcaklık değişimine bakarak bir evin <strong>günlük ne kadar enerji (kWh)</strong> tüketeceğini tahmin ediyoruz.</p>
+<h3>Veri Seti Sütunları</h3>
+<ul>
+<li><code>avg_indoor_temp_change</code>: Ortalama iç mekan sıcaklık değişimi.</li>
+<li><code>outdoor_humidity_level</code>: Dış mekan nem seviyesi.</li>
+<li><code>daily_energy_consumption_kwh</code> (<strong>HEDEF</strong>): Günlük enerji tüketimi (Sayısal).</li>
+</ul>
+<h3>Kritik Not: Regresyonda Accuracy Yoktur!</h3>
+<p>Regresyon problemlerinde &quot;Doğruluk&quot; (Accuracy) diye bir kavram yoktur. Çünkü sayısal bir tahmin (örn: 45.2) tam olarak 45.2 çıkmayabilir. Bunun yerine <strong>Hata Payı</strong> (Error) veya <strong>R2 Score</strong> (Açıklanabilirlik) kullanılır.</p>
+<h3>Python Kodu (<code>ev-enerji-data.py</code>)</h3>
+<pre><code class="language-python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import os
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+# Veri Yükleme
+script_dir = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(script_dir, &quot;12-house_energy_regression.csv&quot;)
+df = pd.read_csv(file_path)
+
+# EDA (Kısaltılmış)
+# df.head(), df.info() vb. kodlarını burada çalıştırıp veriyi tanıyoruz.
+
+# 1. Veri Hazırlığı
+X = df.drop(&quot;daily_energy_consumption_kwh&quot;, axis=1)
+y = df[&quot;daily_energy_consumption_kwh&quot;]
+
+# 2. Train-Test Split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 3. Scaling
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# 4. Model Kurulumu (Regressor - Dikkat!)
+# Regresyon olduğu için KNeighborsRegressor kullanıyoruz.
+knn = KNeighborsRegressor(n_neighbors=5)
+knn.fit(X_train, y_train)
+
+# 5. Tahmin
+y_pred = knn.predict(X_test)
+
+# 6. Değerlendirme (Regresyon Metrikleri)
+print(&quot;\n##################### Model Performansı (Regresyon) #####################&quot;)
+print(&quot;Mean Absolute Error (MAE - Ort. Mutlak Hata):&quot;, mean_absolute_error(y_test, y_pred))
+# MSE büyük hataları cezalandırır
+print(&quot;Mean Squared Error (MSE - Ort. Kare Hata):&quot;, mean_squared_error(y_test, y_pred))
+# RMSE, hatayı orijinal birime (kWh) çevirir
+print(&quot;Root Mean Squared Error (RMSE):&quot;, np.sqrt(mean_squared_error(y_test, y_pred)))
+# R2 Score 1&#39;e ne kadar yakınsa o kadar iyidir
+print(&quot;R2 Score (Başarı Oranı):&quot;, r2_score(y_test, y_pred))
+print(&quot;-----------------------------------------------------------\n&quot;)
+</code></pre>
+<hr>
+<h2>5. KNN Uygulama Reçetesi (Adım Adım)</h2>
+<p>Herhangi bir KNN projesinde başarıya ulaşmak için bu reçeteyi uygulayın:</p>
+<h3>Adım 1: Veriyi Tanı (EDA)</h3>
+<ul>
+<li>Veri tiplerine bak (Sayısal mı, Kategorik mi?).</li>
+<li>Eksik veri var mı kontrol et (<code>df.isnull().sum()</code>).</li>
+<li>Hedef değişkenin ne olduğunu belirle (Sınıf mı, Sayı mı?).</li>
+</ul>
+<h3>Adım 2: Veriyi Hazırla (Preprocessing)</h3>
+<ul>
+<li><strong>Encoding:</strong> Yazısal verileri (Kadın/Erkek) sayısal hale getir (0/1). KNN sayılarla çalışır.</li>
+<li><strong>Outlier Temizliği:</strong> Çok uçuk verileri (Aykırı Değerleri) temizle, çünkü KNN mesafeye baktığı için bunlardan çok etkilenir.</li>
+</ul>
+<h3>Adım 3: Veriyi Böl (Split)</h3>
+<ul>
+<li>Veriyi <code>train_test_split</code> ile Eğitim ve Test olarak ayır.</li>
+</ul>
+<h3>Adım 4: Ölçekleme Yap (Scaling) [ÇOK ÖNEMLİ]</h3>
+<ul>
+<li>KNN için <strong>ZORUNLUDUR</strong>.</li>
+<li>Maaş (50.000) ve Yaş (30) gibi farklı ölçekteki sayıları aynı düzleme getirmelisiniz.</li>
+<li><code>StandardScaler</code> veya <code>MinMaxScaler</code> kullanın.</li>
+<li><strong>Kural:</strong> <code>scaler.fit</code> sadece <code>X_train</code> üzerinde yapılır!</li>
+</ul>
+<h3>Adım 5: Modeli Seç ve Eğit</h3>
+<ul>
+<li>Hedef Sınıfsa -&gt; <code>KNeighborsClassifier</code></li>
+<li>Hedef Sayıysa -&gt; <code>KNeighborsRegressor</code></li>
+<li>Uygun <code>k</code> değerini seç (Genelde 3, 5, 7 denenir).</li>
+</ul>
+<h3>Adım 6: Değerlendir</h3>
+<ul>
+<li><strong>Classifier için:</strong> <code>accuracy_score</code>, <code>confusion_matrix</code>.</li>
+<li><strong>Regressor için:</strong> <code>r2_score</code>, <code>mean_absolute_error</code>.</li>
+</ul>
+</article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__brand">
+      <span class="brand__mark" aria-hidden="true">NK</span>
+      <div><strong>Nihat Kütükoğlu</strong>Data Science · AI · Software</div>
+    </div>
+    <nav class="footer__links" aria-label="Sosyal bağlantılar">
+      <a href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/nihatkutukoglu" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:kutukoglunihat1@gmail.com">Email</a>
+    </nav>
+    <p>© <span data-year>2026</span> Nihat Kütükoğlu</p>
+  </div>
+</footer>
+
+<dialog class="palette" id="palette" aria-label="Komut paleti">
+  <div class="palette__search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input type="text" id="paletteInput" placeholder="Sayfa, proje veya bağlantı ara..." autocomplete="off"
+           role="combobox" aria-expanded="true" aria-controls="paletteList" aria-autocomplete="list">
+    <kbd>Esc</kbd>
+  </div>
+  <div class="palette__list" id="paletteList" role="listbox" aria-label="Sonuçlar"></div>
+  <div class="palette__foot" aria-hidden="true"><span><kbd>↑</kbd> <kbd>↓</kbd> gezin</span><span><kbd>↵</kbd> aç</span></div>
+</dialog>
+<script src="/data/projects.js?v=5" defer></script>
+<script src="/data/site.js?v=5" defer></script>
+<script src="/js/main.js?v=5" defer></script>
+</body>
+</html>

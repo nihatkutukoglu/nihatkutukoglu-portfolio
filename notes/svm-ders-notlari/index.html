@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="tr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SVM Ders Notları | Nihat Kütükoğlu</title>
+<meta name="description" content="Destek Vektör Makineleri (Support Vector Machines) çalışma prensipleri.">
+<link rel="canonical" href="https://www.nihatkutukoglu.com.tr/notes/svm-ders-notlari">
+<meta property="og:title" content="SVM Ders Notları">
+<meta property="og:description" content="Destek Vektör Makineleri (Support Vector Machines) çalışma prensipleri.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.nihatkutukoglu.com.tr/notes/svm-ders-notlari">
+<meta property="og:image" content="https://www.nihatkutukoglu.com.tr/assets/og/portfolio-cover.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css?v=5">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <nav class="nav" aria-label="Ana menü">
+      <a class="brand" href="/#hero" aria-label="Nihat Kütükoğlu — ana sayfa"><span class="brand__mark" aria-hidden="true">NK</span><span class="brand__name">Nihat Kütükoğlu</span></a>
+
+      <div class="nav__links">
+        <a href="/#hero" data-nav="home">Home</a>
+        <a href="/#projeler" data-nav="projects">Projects</a>
+        <a href="/#deneyim" data-nav="experience">Experience</a>
+        <a href="/#hakkimda" data-nav="about">About</a>
+        <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="kbd-btn nav__desktop" type="button" data-palette-open aria-label="Komut paletini aç (Ctrl+K)"><span>Ara</span><kbd>⌘K</kbd></button>
+        <a class="icon-btn nav__desktop" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener" aria-label="GitHub profili">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+        <a class="btn btn--primary btn--sm nav__desktop" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Temayı değiştir">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMobile" aria-label="Menüyü aç">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <div class="nav__mobile" id="navMobile" data-open="false">
+    <a href="/#hero" data-nav="home">Home</a>
+    <a href="/#projeler" data-nav="projects">Projects</a>
+    <a href="/#deneyim" data-nav="experience">Experience</a>
+    <a href="/#hakkimda" data-nav="about">About</a>
+    <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+    <a href="/#iletisim">Contact</a>
+    <div class="nav__mobile-cta">
+      <a class="btn btn--ghost" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn--primary" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+    </div>
+  </div>
+</header>
+<main id="main" class="section">
+  <div class="wrap note-reader">
+    <nav class="note__actions" aria-label="Not işlemleri">
+      <a class="btn btn--ghost btn--sm" href="/#notlar">← Tüm notlar</a>
+      <a class="btn btn--primary btn--sm" href="/assets/notes/SVM_Ders_Notlari.md" download>Notu indir (.md)</a>
+    </nav>
+    <article class="note-prose"><h1>🎓 Support Vector Machine (SVM): Sıfırdan Zirveye Uzmanlık Rehberi</h1>
+<p>Bu notlar, <code>diamond.py</code> (Regresyon) ve <code>svmClassifier.py</code> (Sınıflandırma) projelerimizden elde edilen deneyimlerle, konuyu hiç bilmeyen birine <strong>&quot;Neyi, Neden Yapıyoruz?&quot;</strong> mantığıyla anlatmak için hazırlanmıştır.</p>
+<hr>
+<h2>🚀 BÖLÜM 1: SVM Nedir? (Mantığı Anlamak)</h2>
+<p>Makine öğrenmesinde amacımız genelde verileri ikiye ayırmaktır.</p>
+<blockquote>
+<p><strong>Analoji: En Geniş Caddeyi Çizmek</strong>
+Bir kağıtta kırmızı ve mavi noktalar olduğunu hayal edin. Bunları ayırmak için araya bir çizgi çekeceğiz.</p>
+<ul>
+<li>Rastgele bir çizgi çekersek, çizgiye çok yakın noktalar &quot;riskli&quot; olur.</li>
+<li><strong>SVM&#39;in Farkı:</strong> Sadece ayırmakla kalmaz, iki gruba da <strong>EN UZAK</strong> olacak, ortadan geçen <strong>en geniş güvenlik şeridini (Margin)</strong> bulur.</li>
+<li>Bu şeridin sınırlarına değen o &quot;kritik&quot; noktalara <strong>Support Vectors (Destek Vektörleri)</strong> denir. Tüm sistem bu kritik noktaların omuzlarında durur.</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>SVC (Classification):</strong> Sınıf ayırır (Hasta/Sağlıklı, Spam/Normal).</li>
+<li><strong>SVR (Regression):</strong> Sayı tahmin eder (Elmas Fiyatı, Ev Kirası).</li>
+</ul>
+<hr>
+<h2>🛠️ BÖLÜM 2: Veri Ön İşleme (Data Preprocessing) - KRİTİK ADIMLAR</h2>
+<p>SVM, verinin kalitesine ve yapısına <strong>en duyarlı</strong> algoritmalardan biridir. Aşağıdaki adımları atlamak performansı yerle bir eder.</p>
+<h3>1. Encoding (Yazıyı Sayıya Çevirme Stratejileri)</h3>
+<p>Makine yazıları anlamaz (Kırmızı, İyi, Kötü). Bunları sayıya çevirmeliyiz ama <strong>NASIL?</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">Yöntem</th>
+<th align="left">Ne Yapar?</th>
+<th align="left">Ne Zaman Kullanılır?</th>
+<th align="left">Örnek</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Label Encoding</strong></td>
+<td align="left">Kelimelere rastgele sayı verir (0, 1, 2).</td>
+<td align="left">Sadece <strong>Hedef Değişken (y)</strong> için.</td>
+<td align="left">Kedi=0, Köpek=1</td>
+</tr>
+<tr>
+<td align="left"><strong>One-Hot Encoding</strong></td>
+<td align="left">Her kelimeye yeni sütun açar (1/0).</td>
+<td align="left">Sıralamanın önemsiz olduğu <strong>Nominal</strong> verilerde.</td>
+<td align="left">Renkler: Kırmızı, Mavi (Kırmızı &gt; Mavi diyemeyiz).</td>
+</tr>
+<tr>
+<td align="left"><strong>Manuel Mapping</strong></td>
+<td align="left">Bizim belirlediğimiz puanları verir.</td>
+<td align="left">Sıralamanın önemli olduğu <strong>Ordinal</strong> verilerde.</td>
+<td align="left">Kalite: Kötü=1, Orta=2, İyi=3.</td>
+</tr>
+</tbody></table>
+<p><strong>💻 Kod Örneği (<code>diamond.py</code> projemizden):</strong>
+Burada <code>OneHot</code> kullansaydık model &quot;Ideal&quot; elmasın &quot;Fair&quot; elmastan daha değerli olduğunu anlayamazdı. Bu yüzden elle puan verdik.</p>
+<pre><code class="language-python"># Kalite sıralaması var (Ordinal), bu yüzden MAP kullanıyoruz.
+cut_map = {&quot;Fair&quot;: 1, &quot;Good&quot;: 2, &quot;Very Good&quot;: 3, &quot;Premium&quot;: 4, &quot;Ideal&quot;: 5}
+df[&quot;cut_encoded&quot;] = df[&quot;cut&quot;].map(cut_map)
+
+# İşimiz bitince eski sözel sütunu siliyoruz
+df = df.drop([&quot;cut&quot;], axis=1)
+</code></pre>
+<h3>2. Aykırı Değer Temizliği (Outlier Removal)</h3>
+<p>Neden siliyoruz? Çünkü SVM &quot;sınırdaki&quot; noktalara göre çizgi çeker. Eğer sınırda alakasız, çok uçuk bir hata (outlier) varsa, tüm çizgi o hataya göre yamulur.</p>
+<p><strong>Nasıl Tespit Ettik?</strong>
+Scatterplot (Nokta Grafik) çizdik. Baktık ki <code>depth</code> (derinlik) genelde 55-70 arasında toplanmış ama tek tük 40&#39;ta veya 80&#39;de noktalar var. Bunları temizledik.</p>
+<pre><code class="language-python"># Grafiklere bakarak karar verdiğimiz sınırlar
+# Depth 45 ile 75 arasında olmayanları at!
+df = df[(df[&quot;depth&quot;] &lt; 75) &amp; (df[&quot;depth&quot;] &gt; 45)]
+
+# Table 40 ile 80 arasında olmayanları at!
+df = df[(df[&quot;table&quot;] &lt; 80) &amp; (df[&quot;table&quot;] &gt; 40)]
+</code></pre>
+<h3>3. Çoklu Bağlantı (Multicollinearity)</h3>
+<p>Isı haritasında (Heatmap) iki değişken birbirine <strong>%95&#39;ten fazla benziyorsa</strong>, ikisi de aynı şeyi söylüyordur. Modelin kafasını karıştırmamak için birini atarız.</p>
+<ul>
+<li><strong>Örnek:</strong> Elmasın ağırlığı (<code>carat</code>) arttıkça boyutları (<code>x, y, z</code>) de artar. Bunlar %99 aynı davranır.</li>
+<li><strong>Çözüm:</strong> <code>carat</code> kalsın, <code>x, y, z</code> gitsin.</li>
+</ul>
+<pre><code class="language-python"># Carat zaten boyut bilgisini taşıyor, x-y-z gereksiz kalabalık yapıyor.
+X = df.drop([&quot;price&quot;, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;], axis=1)
+</code></pre>
+<h3>4. Feature Scaling (Ölçeklendirme) - OLMAZSA OLMAZ!</h3>
+<p>⚠️ <strong>Unutursan Model Çöp Olur!</strong>
+SVM uzaklık ölçer.</p>
+<ul>
+<li>Maaş: 50.000 TL</li>
+<li>Yaş: 30
+Model burada &quot;Maaş&quot; farkını devasa, &quot;Yaş&quot; farkını önemsiz sanır.
+Hepsini <strong>StandartScaler</strong> ile aynı kaba (-1 ile +1 arasına) sıkıştırırız.</li>
+</ul>
+<p><strong>🚫 DİKKAT: Veri Sızıntısı (Data Leakage)</strong>
+Ölçeklendirmeyi <strong>SPLIT İŞLEMİNDEN SONRA</strong> yapmalısınız. Test verisinin ortalamasını modele göstermeyin!</p>
+<pre><code class="language-python">from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+# SADECE Train setine fit (öğrenme) yapıyoruz
+X_train = scaler.fit_transform(X_train)
+# Test setine sadece transform (uygulama) yapıyoruz
+X_test = scaler.transform(X_test)
+</code></pre>
+<hr>
+<h2>⚙️ BÖLÜM 3: Model ve Hiperparametreler (Ayarlar)</h2>
+<p>SVM&#39;in ayar düğmeleri çok hassastır.</p>
+<h3>Kernel (Çekirdek)</h3>
+<p>Veriyi nasıl böleceğimize karar verir.</p>
+<ul>
+<li><strong><code>linear</code>:</strong> Veriyi düz çizgiyle (veya düzlemle) ayırır. (Basit işler için).</li>
+<li><strong><code>rbf</code> (Radial Basis Function):</strong> Varsayılan ve en güçlüsü. Veriyi eğip büker, yuvarlak sınırlar çizer. (Elmas fiyatları gibi karmaşık işler için).</li>
+<li><strong><code>poly</code>:</strong> Polinom (eğri) çizer.</li>
+</ul>
+<h3>C (Ceza Parametresi)</h3>
+<p>Modelin hatalara ne kadar kızacağını belirler.</p>
+<ul>
+<li><strong>Büyük C (Örn: 100):</strong> &quot;Asla hata yapma!&quot; der. Model veriyi ezberlemeye çalışır (Overfit riski), sınırları çok dar çizer.</li>
+<li><strong>Küçük C (Örn: 0.1):</strong> &quot;Biraz hata yapabilirsin, sorun yok&quot; der. Sınırları daha geniş ve yumuşak çizer.</li>
+</ul>
+<h3>Gamma</h3>
+<p>Bir noktanın etkisinin ne kadar uzağa gideceği.</p>
+<ul>
+<li><strong>Büyük Gamma:</strong> Sadece çok yakındaki noktaları dikkate alır (Girintili çıkıntılı sınır).</li>
+<li><strong>Küçük Gamma:</strong> Uzaktaki noktalar bile hesaba katılır (Daha pürüzsüz sınır).</li>
+</ul>
+<p><strong>En İyisini Nasıl Bulduk? (GridSearch)</strong>
+Bilgisayara &quot;Sen hepsini dene, bana en iyisini söyle&quot; dedik.</p>
+<pre><code class="language-python">param_grid = {&#39;C&#39;: [0.1, 10, 100], &#39;gamma&#39;: [&#39;scale&#39;, &#39;auto&#39;], &#39;kernel&#39;: [&#39;rbf&#39;]}
+grid = GridSearchCV(SVR(), param_grid, refit=True)
+# Sonuç: C=100, kernel=&#39;rbf&#39; (Elmas projemizde skoru 0.86&#39;dan 0.96&#39;ya çıkardı!)
+</code></pre>
+<hr>
+<h2>📊 BÖLÜM 4: Değerlendirme (Model Ne Kadar Başarılı?)</h2>
+<h3>1. Confusion Matrix (Hata Matrisi) - Sınıflandırma İçin</h3>
+<p>Modelin nerede yanıldığını gösteren tablodur.</p>
+<pre><code class="language-text">                 TAHMİN
+               0 (Negatif)      1 (Pozitif)
+GERÇEK  0 (N)  [TN - Doğru Neg]  [FP - Yanlış Alarm]
+        1 (P)  [FN - Gözden Kaçan] [TP - Doğru Poz]
+</code></pre>
+<ul>
+<li><strong>Accuracy:</strong> Toplam doğru sayısı / Her şey. (Dengesiz veride yanıltır!)</li>
+<li><strong>Precision (Kesinlik):</strong> &quot;Hasta&quot; dediklerimin yüzde kaçı gerçekten hasta? (Yanlış alarmdan kaçınmak için).</li>
+<li><strong>Recall (Duyarlılık):</strong> Gerçek hastaların yüzde kaçını yakaladım? (Gözden kaçırmamak için - Kanser testinde bu önemli!).</li>
+<li><strong>F1 Score:</strong> Precision ve Recall&#39;un ortalaması. En dengeli metriktir.</li>
+</ul>
+<h3>2. Regresyon Metrikleri (<code>diamond.py</code>)</h3>
+<ul>
+<li><strong>RMSE (Kök Ortalama Kare Hata):</strong> Tahminlerimiz gerçek fiyattan ortalama kaç dolar şaşıyor? (Düşük olması iyi).</li>
+<li><strong>R2 Score:</strong> Model veriyi ne kadar iyi açıklıyor? (1&#39;e ne kadar yakınsa o kadar iyi. Biz %96 bulduk!).</li>
+</ul>
+<hr>
+<h2>📝 EK: SVM Uygulama Reçetesi (Adım Adım)</h2>
+<p>Projenizi yaparken bu listeyi yanınıza alın ve tik atarak ilerleyin.</p>
+<h3>1. Hazırlık ve Temizlik</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Veriyi Yükle (<code>pd.read_csv</code>).</li>
+<li><input disabled="" type="checkbox"> <code>df.info()</code> ve <code>df.describe()</code> ile genel duruma bak.</li>
+<li><input disabled="" type="checkbox"> <strong>Eksik Veri Var mı?</strong> (<code>isnull().sum()</code>). Varsa doldur veya sil.</li>
+<li><input disabled="" type="checkbox"> <strong>Aykırı Değer Var mı?</strong> (<code>scatterplot</code> veya <code>boxplot</code>). Göze batan uçuk noktaları filtrele.</li>
+</ul>
+<h3>2. Encoding (Dönüştürme)</h3>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Sıralı Veri (Ordinal):</strong> <code>map</code> ile elle puanla (Kötü=1, İyi=2).</li>
+<li><input disabled="" type="checkbox"> <strong>Sırasız Veri (Nominal):</strong> <code>pd.get_dummies</code> veya <code>OneHotEncoder</code>.</li>
+<li><input disabled="" type="checkbox"> <strong>Hedef (Target):</strong> <code>LabelEncoder</code> (Sadece sınıflandırmada y için).</li>
+</ul>
+<h3>3. İlişki Kontrolü</h3>
+<ul>
+<li><input disabled="" type="checkbox"> <code>sns.heatmap</code> ile korelasyona bak.</li>
+<li><input disabled="" type="checkbox"> Birbiriyle %95+ aynı olan sütunlardan (Multicollinearity) birini sil (Örn: <code>x,y,z</code> at, <code>carat</code> kalsın).</li>
+</ul>
+<h3>4. Bölme ve Ölçeklendirme (ÇOK ÖNEMLİ SIRALAMA)</h3>
+<ul>
+<li><input disabled="" type="checkbox"> ÖNCE <code>train_test_split</code> yap (X_train, X_test).</li>
+<li><input disabled="" type="checkbox"> SONRA <code>StandardScaler</code> kullan.<ul>
+<li><code>scaler.fit_transform(X_train)</code></li>
+<li><code>scaler.transform(X_test)</code></li>
+</ul>
+</li>
+</ul>
+<h3>5. Modelleme ve Tuning</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Temel model kur: <code>model = SVC()</code> veya <code>SVR()</code>.</li>
+<li><input disabled="" type="checkbox"> <code>GridSearchCV</code> ile en iyi <code>C</code>, <code>gamma</code> ve <code>kernel</code> ayarlarını bul.</li>
+<li><input disabled="" type="checkbox"> En iyi parametrelerle final modelini eğit.</li>
+</ul>
+<h3>6. Final Testi</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Sınıflandırma ise: <code>confusion_matrix</code> ve <code>classification_report</code> çıkar.</li>
+<li><input disabled="" type="checkbox"> Regresyon ise: <code>RMSE</code> ve <code>R2 Score</code> hesapla.</li>
+<li><input disabled="" type="checkbox"> Sonuçları yorumla (&quot;Model %96 başarıyla elmas fiyatı tahmin ediyor&quot;).</li>
+</ul>
+<hr>
+<p><em>Başarılar! Bu notlarla SVM&#39;in efendisi olacaksınız.</em> 🚀</p>
+</article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__brand">
+      <span class="brand__mark" aria-hidden="true">NK</span>
+      <div><strong>Nihat Kütükoğlu</strong>Data Science · AI · Software</div>
+    </div>
+    <nav class="footer__links" aria-label="Sosyal bağlantılar">
+      <a href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/nihatkutukoglu" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:kutukoglunihat1@gmail.com">Email</a>
+    </nav>
+    <p>© <span data-year>2026</span> Nihat Kütükoğlu</p>
+  </div>
+</footer>
+
+<dialog class="palette" id="palette" aria-label="Komut paleti">
+  <div class="palette__search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input type="text" id="paletteInput" placeholder="Sayfa, proje veya bağlantı ara..." autocomplete="off"
+           role="combobox" aria-expanded="true" aria-controls="paletteList" aria-autocomplete="list">
+    <kbd>Esc</kbd>
+  </div>
+  <div class="palette__list" id="paletteList" role="listbox" aria-label="Sonuçlar"></div>
+  <div class="palette__foot" aria-hidden="true"><span><kbd>↑</kbd> <kbd>↓</kbd> gezin</span><span><kbd>↵</kbd> aç</span></div>
+</dialog>
+<script src="/data/projects.js?v=5" defer></script>
+<script src="/data/site.js?v=5" defer></script>
+<script src="/js/main.js?v=5" defer></script>
+</body>
+</html>

@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="/assets/images/profile.webp" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css?v=3">
+<link rel="stylesheet" href="/css/styles.css?v=5">
 
 <script type="application/ld+json">
 {
@@ -411,9 +411,15 @@
     <div class="section__head" data-reveal>
       <span class="eyebrow" lang="en">Notes</span>
       <h2>Teknik notlar</h2>
-      <p>Projelerden çıkan konular üzerine hazırladığım yazılar. Henüz yayınlanmadılar; o zamana kadar her not, konunun uygulandığı case study'ye bağlanıyor.</p>
+      <p>Araştırma ve çalışma notlarım burada. Tarayıcıda açabilir, bağlantısını paylaşabilir veya cihazına indirebilirsin.</p>
     </div>
     <div class="notes" id="notesList"></div>
+    <p id="notesStatus" role="status" aria-live="polite"></p>
+    <div id="noteShareFallback" hidden>
+      <label for="noteShareUrl">Paylaşmak için bağlantıyı kopyala</label>
+      <input id="noteShareUrl" type="url" readonly>
+    </div>
+    <noscript>Not listesini görmek için JavaScript’i etkinleştir.</noscript>
   </div>
 </section>
 
@@ -469,8 +475,8 @@
 </dialog>
 <!-- /@footer -->
 
-<script src="/data/projects.js?v=3" defer></script>
-<script src="/data/site.js?v=3" defer></script>
-<script src="/js/main.js?v=3" defer></script>
+<script src="/data/projects.js?v=5" defer></script>
+<script src="/data/site.js?v=5" defer></script>
+<script src="/js/main.js?v=5" defer></script>
 </body>
 </html>

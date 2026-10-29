@@ -2,6 +2,7 @@
 // Kullanım: repo kökünde `node scripts/build.mjs`. Çıktılar repoya commit edilir; hosting'de build gerekmez.
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from "node:fs";
 import vm from "node:vm";
+import { marked } from "marked";
 
 const SITE_URL = "https://www.nihatkutukoglu.com.tr";
 const OG_IMAGE = `${SITE_URL}/assets/og/portfolio-cover.jpg`;
@@ -9,6 +10,8 @@ const OG_IMAGE = `${SITE_URL}/assets/og/portfolio-cover.jpg`;
 const ctx = { window: {} };
 vm.createContext(ctx);
 vm.runInContext(readFileSync("data/projects.js", "utf8"), ctx);
+vm.runInContext(readFileSync("data/site.js", "utf8"), ctx);
+const notes = ctx.window.SITE.notes.filter((n) => n.slug);
 const projects = ctx.window.PROJECTS.filter((p) => p.slug && p.study);
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -111,7 +114,7 @@ const page = (p, i) => {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css?v=3">
+<link rel="stylesheet" href="/css/styles.css?v=5">
 <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
 </head>
 <body>
@@ -169,9 +172,9 @@ ${header}
 
 ${footer}
 
-<script src="/data/projects.js?v=3" defer></script>
-<script src="/data/site.js?v=3" defer></script>
-<script src="/js/main.js?v=3" defer></script>
+<script src="/data/projects.js?v=5" defer></script>
+<script src="/data/site.js?v=5" defer></script>
+<script src="/js/main.js?v=5" defer></script>
 </body>
 </html>
 `;
@@ -183,10 +186,55 @@ projects.forEach((p, i) => {
   writeFileSync(`projects/${p.slug}/index.html`, page(p, i));
 });
 
+// Markdown yalnızca build sırasında HTML'e çevrilir; okuma sayfaları statiktir.
+const noteHeader = block("header").replaceAll('data-nav="notes"', 'data-nav="notes" aria-current="true"');
+const renderer = new marked.Renderer();
+renderer.html = ({ text }) => esc(text);
+for (const note of notes) {
+  if (!/^[a-z0-9-]+$/.test(note.slug)) throw new Error(`Geçersiz not adresi: ${note.slug}`);
+  const body = marked.parse(readFileSync(`.${note.file}`, "utf8"), { renderer });
+  mkdirSync(`notes/${note.slug}`, { recursive: true });
+  writeFileSync(`notes/${note.slug}/index.html`, `<!doctype html>
+<html lang="tr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(note.title)} | Nihat Kütükoğlu</title>
+<meta name="description" content="${esc(note.blurb)}">
+<link rel="canonical" href="${SITE_URL}/notes/${note.slug}">
+<meta property="og:title" content="${esc(note.title)}">
+<meta property="og:description" content="${esc(note.blurb)}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="${SITE_URL}/notes/${note.slug}">
+<meta property="og:image" content="${OG_IMAGE}">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css?v=5">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){}</script>
+</head>
+<body>
+${noteHeader}
+<main id="main" class="section">
+  <div class="wrap note-reader">
+    <nav class="note__actions" aria-label="Not işlemleri">
+      <a class="btn btn--ghost btn--sm" href="/#notlar">← Tüm notlar</a>
+      <a class="btn btn--primary btn--sm" href="${esc(note.file)}" download>Notu indir (.md)</a>
+    </nav>
+    <article class="note-prose">${body}</article>
+  </div>
+</main>
+${footer}
+<script src="/data/projects.js?v=5" defer></script>
+<script src="/data/site.js?v=5" defer></script>
+<script src="/js/main.js?v=5" defer></script>
+</body>
+</html>`);
+}
+
 const today = new Date().toLocaleDateString("sv"); // yerel tarih, YYYY-MM-DD
 const urls = [
   { loc: `${SITE_URL}/`, priority: "1.0" },
-  ...projects.map((p) => ({ loc: `${SITE_URL}/projects/${p.slug}`, priority: "0.8" }))
+  ...projects.map((p) => ({ loc: `${SITE_URL}/projects/${p.slug}`, priority: "0.8" })),
+  ...notes.map((n) => ({ loc: `${SITE_URL}/notes/${n.slug}`, priority: "0.6" }))
 ];
 writeFileSync(
   "sitemap.xml",
@@ -206,4 +254,4 @@ ${urls
 `
 );
 
-console.log(`${projects.length} case study sayfası ve sitemap.xml üretildi.`);
+console.log(`${projects.length} case study, ${notes.length} not sayfası ve sitemap.xml üretildi.`);

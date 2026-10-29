@@ -1,6 +1,6 @@
 # Nihat Kütükoğlu — Portfolio V2
 
-Kişisel portföy sitesi. Vanilla HTML/CSS/JS; framework ve runtime bağımlılığı yok.
+Kişisel portföy sitesi. Vanilla HTML/CSS/JS; framework ve tarayıcı runtime bağımlılığı yok. Markdown sayfaları build sırasında `marked` ile üretilir.
 
 **Live:** https://www.nihatkutukoglu.com.tr
 
@@ -26,6 +26,7 @@ Tüm proje içerikleri `data/projects.js` içinde; metrikler, notlar ve komut pa
 Proje ekledikten veya case study içeriğini değiştirdikten sonra sayfaları yeniden üretin:
 
 ```bash
+npm ci
 node scripts/build.mjs
 ```
 
@@ -54,3 +55,32 @@ favicon.svg · robots.txt · sitemap.xml · vercel.json
 ## Deployment
 
 Statik hosting (Vercel); repo kökü doğrudan yayınlanır. `vercel.json` URL'leri sondaki `/` olmadan sunar.
+
+## PDF notları ekleme
+
+PDF dosyasını `assets/notes/` klasörüne koyun (ör. `veri-analizi.pdf`).
+`data/site.js` içindeki `notes` dizisine bir kayıt ekleyin:
+
+```js
+{
+  title: "Veri analizi notları",
+  tag: "Analiz",
+  blurb: "Keşifçi veri analizine dair çalışma notları.",
+  file: "/assets/notes/veri-analizi.pdf"
+}
+```
+
+PDF’yi aç yeni sekmede tarayıcının PDF görüntüleyicisini kullanır; tarayıcı
+ayarlarına göre dosya indirilebilir. İndir düğmesi dosyayı cihaza kaydeder.
+Paylaş, desteklenen cihazlarda paylaşım menüsünü açar; diğerlerinde doğrudan
+PDF bağlantısını kopyalar. Pano erişimi yoksa seçilebilir bağlantı gösterilir.
+PDF ve veri değişiklikleri birlikte yayınlanmalıdır. Liste boşken yakında mesajı görünür.
+
+## Eski siteden aktarılan notlar
+
+Eski portföyün `#documents` bölümündeki 13 Markdown dosyası `assets/notes/`
+altında özgün içerikleriyle saklanır. `data/site.js` kayıtlarında `slug` bulunan
+notlar için build, `notes/<slug>/index.html` okuma sayfalarını ve sitemap kayıtlarını
+üretir. Notu oku ve Paylaş bu sayfalara, İndir özgün `.md` dosyasına bağlanır.
+Markdown değişikliklerinden sonra `node scripts/build.mjs` çalıştırın.
+Kaynak: https://nihat-cv-site.vercel.app/#documents

@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="tr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lojistik Regresyon Ders Notları | Nihat Kütükoğlu</title>
+<meta name="description" content="Lojistik regresyon algoritmasının teorisi ve pratik uygulamaları.">
+<link rel="canonical" href="https://www.nihatkutukoglu.com.tr/notes/lojistik-regresyon-ders-notlari">
+<meta property="og:title" content="Lojistik Regresyon Ders Notları">
+<meta property="og:description" content="Lojistik regresyon algoritmasının teorisi ve pratik uygulamaları.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.nihatkutukoglu.com.tr/notes/lojistik-regresyon-ders-notlari">
+<meta property="og:image" content="https://www.nihatkutukoglu.com.tr/assets/og/portfolio-cover.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css?v=5">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <nav class="nav" aria-label="Ana menü">
+      <a class="brand" href="/#hero" aria-label="Nihat Kütükoğlu — ana sayfa"><span class="brand__mark" aria-hidden="true">NK</span><span class="brand__name">Nihat Kütükoğlu</span></a>
+
+      <div class="nav__links">
+        <a href="/#hero" data-nav="home">Home</a>
+        <a href="/#projeler" data-nav="projects">Projects</a>
+        <a href="/#deneyim" data-nav="experience">Experience</a>
+        <a href="/#hakkimda" data-nav="about">About</a>
+        <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="kbd-btn nav__desktop" type="button" data-palette-open aria-label="Komut paletini aç (Ctrl+K)"><span>Ara</span><kbd>⌘K</kbd></button>
+        <a class="icon-btn nav__desktop" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener" aria-label="GitHub profili">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+        <a class="btn btn--primary btn--sm nav__desktop" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Temayı değiştir">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMobile" aria-label="Menüyü aç">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <div class="nav__mobile" id="navMobile" data-open="false">
+    <a href="/#hero" data-nav="home">Home</a>
+    <a href="/#projeler" data-nav="projects">Projects</a>
+    <a href="/#deneyim" data-nav="experience">Experience</a>
+    <a href="/#hakkimda" data-nav="about">About</a>
+    <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+    <a href="/#iletisim">Contact</a>
+    <div class="nav__mobile-cta">
+      <a class="btn btn--ghost" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn--primary" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+    </div>
+  </div>
+</header>
+<main id="main" class="section">
+  <div class="wrap note-reader">
+    <nav class="note__actions" aria-label="Not işlemleri">
+      <a class="btn btn--ghost btn--sm" href="/#notlar">← Tüm notlar</a>
+      <a class="btn btn--primary btn--sm" href="/assets/notes/Lojistik_Regresyon_Ders_Notlari.md" download>Notu indir (.md)</a>
+    </nav>
+    <article class="note-prose"><h1>🎓 Lojistik Regresyon ve Sınıflandırma: Sıfırdan Zirveye Ders Notları</h1>
+<p>Merhaba! Bu rehber, klasöründeki kodları analiz ederek oluşturulmuş, seni sınıflandırma problemlerinde başlangıç seviyesinden alıp ileri seviye tekniklere taşıyacak kapsamlı bir yol haritasıdır.</p>
+<h2>📚 İçindekiler</h2>
+<ol>
+<li><a href="#1-giri%C5%9F-s%C4%B1n%C4%B1fland%C4%B1rma-nedir">Giriş: Sınıflandırma Nedir?</a></li>
+<li><a href="#b%C3%B6l%C3%BCm-1-veri-y%C3%BCkleme-ve-ke%C5%9Fif-eda">Bölüm 1: Veri Yükleme ve Keşif (EDA)</a></li>
+<li><a href="#b%C3%B6l%C3%BCm-2-kritik-%C3%B6n-i%C5%9Fleme-ad%C4%B1mlar%C4%B1">Bölüm 2: Kritik Ön İşleme Adımları (Scaling &amp; Split)</a></li>
+<li><a href="#b%C3%B6l%C3%BCm-3-temel-model-e%C4%9Fitimi-ve-yorumlama">Bölüm 3: Temel Model Eğitimi ve Yorumlama</a></li>
+<li><a href="#b%C3%B6l%C3%BCm-4-model-iyile%C5%9Ftirme-grid-search--tuning">Bölüm 4: Model İyileştirme (Grid Search &amp; Tuning)</a></li>
+<li><a href="#b%C3%B6l%C3%BCm-5-dengesiz-veriler-ve-ileri-metrikler">Bölüm 5: Dengesiz Veriler ve İleri Metrikler (ROC/AUC)</a></li>
+<li><a href="#b%C3%B6l%C3%BCm-6-%C3%A7oklu-s%C4%B1n%C4%B1fland%C4%B1rma-multi-class">Bölüm 6: Çoklu Sınıflandırma (Multi-Class)</a></li>
+</ol>
+<hr>
+<h2>1. Giriş: Sınıflandırma Nedir?</h2>
+<p>Makine öğrenmesinde sınıflandırma, bir verinin hangi kategoriye (sınıfa) ait olduğunu tahmin etme işidir.</p>
+<ul>
+<li><strong>İkili Sınıflandırma (Binary):</strong> Sadece iki seçenek vardır. (Evet/Hayır, Hasta/Sağlıklı, Fraud/Normal).</li>
+<li><strong>Çoklu Sınıflandırma (Multi-class):</strong> İkiden fazla seçenek vardır. (Kedi/Köpek/Kuş, Saldırı Tipi A/B/C).</li>
+</ul>
+<p>Bu rehberde <strong>Lojistik Regresyon</strong> algoritmasını kullanacağız. Adı &quot;Regresyon&quot; olsa da, aslında matematiksel bir S harfi (Sigmoid fonksiyonu) çizerek olasılık hesabı yapan bir <strong>Sınıflandırma</strong> algoritmasıdır.</p>
+<hr>
+<h2>Bölüm 1: Veri Yükleme ve Keşif (EDA)</h2>
+<p>Örnek Veri Seti: <code>6-bank_customers.csv</code> (Müşteri banka kampanyasına katılacak mı?)</p>
+<h3>👨‍🏫 Eğitmen Notu:</h3>
+<blockquote>
+<p>&quot;Veriyi görmeden modele sokmak, gözleri kapalı araba kullanmaya benzer. Önce veriyi tanıyalım!&quot;</p>
+</blockquote>
+<h3>💻 Uygulama Adımları:</h3>
+<pre><code class="language-python">import pandas as pd
+import os
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# 1. Veriyi Yükleme (Dinamik Dosya Yolu ile)
+current_dir = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(current_dir, &quot;6-bank_customers.csv&quot;)
+df = pd.read_csv(file_path)
+
+# 2. Veriye İlk Bakış
+print(&quot;Veri Seti Boyutu:&quot;, df.shape)
+print(&quot;\n--- İlk 5 Satır ---&quot;)
+print(df.head())
+
+# 3. Hedef Değişken Analizi (Çok Önemli!)
+# Kaç kişi kabul etmiş (1), kaçı etmemiş (0)?
+print(&quot;\n--- Hedef Değişken Dağılımı ---&quot;)
+print(df[&quot;subscribed&quot;].value_counts())
+</code></pre>
+<p><strong>Neden Bakıyoruz?</strong></p>
+<ul>
+<li><code>df.info()</code>: Boş veri var mı? (Varsa doldurmalıyız).</li>
+<li><code>value_counts()</code>: Sınıflar dengeli mi? (Dengesizse özel teknikler gerekir, Bölüm 5&#39;te göreceğiz).</li>
+</ul>
+<hr>
+<h2>Bölüm 2: Kritik Ön İşleme Adımları</h2>
+<p>Makine öğrenmesinde başarının %80&#39;i model değil, <strong>Ön İşleme (Preprocessing)</strong> kısmıdır.</p>
+<h3>2.1. Train - Test Split (Eğitim ve Test Ayrımı)</h3>
+<p>Modelin ezberlememesi (overfitting) için veriyi ikiye böleriz:</p>
+<ol>
+<li><strong>Train (%70-80):</strong> Ders çalışma materyali.</li>
+<li><strong>Test (%20-30):</strong> Sınav soruları (Modelin hiç görmediği veri).</li>
+</ol>
+<h3>2.2. Scaling (Ölçeklendirme) - Standard Scaler</h3>
+<h3>👨‍🏫 Eğitmen Notu:</h3>
+<blockquote>
+<p>&quot;Bu adımı atlamak, Lojistik Regresyon, SVM ve KNN gibi modellerde <strong>MODERN BİR İNTİHARDIR!</strong> Neden mi?&quot;</p>
+</blockquote>
+<p><strong>Senaryo:</strong></p>
+<ul>
+<li><strong>Yaş:</strong> 18 ile 90 arasında.</li>
+<li><strong>Bakiye:</strong> 0 ile 100.000 Euro arasında.</li>
+</ul>
+<p>Matematiksel olarak 100.000 sayısı 90&#39;dan çok büyüktür. Model, &quot;Parası çok olanın etkisi yaştan 1000 kat fazladır&quot; diye yanlış bir çıkarım yapar.
+<strong>Çözüm:</strong> <code>StandardScaler</code> ile tüm sütunları &quot;Ortalaması 0, Standart Sapması 1&quot; olacak şekilde dönüştürürüz. Herkes eşit şartlarda yarışır!</p>
+<h3>⚠️ KRİTİK UYARI: VERİ SIZINTISI (DATA LEAKAGE)</h3>
+<p>Asla tüm veriye aynı anda Scaling yapma!</p>
+<ul>
+<li><code>fit_transform</code> -&gt; <strong>TRAIN</strong> setine yapılır. (Ortalamayı buradan öğren).</li>
+<li><code>transform</code> -&gt; <strong>TEST</strong> setine yapılır. (Test setinin ortalamasını hesaplama! Train&#39;den öğrendiğini kullan).</li>
+</ul>
+<h3>💻 Kod Bloğu:</h3>
+<pre><code class="language-python">from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+# X (Özellikler) ve y (Hedef) ayrımı
+X = df.drop(&quot;subscribed&quot;, axis=1)
+y = df[&quot;subscribed&quot;]
+
+# 1. Veriyi Bölme (Stratify=y, orantıyı korumak için önemlidir)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=15, stratify=y)
+
+# 2. Scaling (Ölçeklendirme)
+scaler = StandardScaler()
+
+# DİKKAT: Train&#39;e fit+transform, Test&#39;e sadece transform!
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+print(&quot;Eğitim seti başarıyla ölçeklendi!&quot;)
+</code></pre>
+<hr>
+<h2>Bölüm 3: Temel Model Eğitimi ve Yorumlama</h2>
+<h3>💻 Model Kurulumu:</h3>
+<pre><code class="language-python">from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
+# Modeli Başlat ve Eğit
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Tahmin Yap
+y_pred = model.predict(X_test)
+</code></pre>
+<h3>📊 Sonuçları Değerlendirme (Evaluation)</h3>
+<p>Sadece &quot;Accuracy&quot; (Doğruluk) yetmez! İşte karnemiz:</p>
+<ol>
+<li><p><strong>Confusion Matrix (Karmaşıklık Matrisi):</strong></p>
+<ul>
+<li><strong>TP (True Positive):</strong> Zili çaldı, kapıyı açtık. (Doğru bildik).</li>
+<li><strong>TN (True Negative):</strong> Zil çalmadı, açmadık. (Doğru bildik).</li>
+<li><strong>FP (False Positive - Tip 1 Hata):</strong> Zil çalmadı ama biz &quot;çaldı&quot; sanıp açtık. (Yanlış Alarm).</li>
+<li><strong>FN (False Negative - Tip 2 Hata):</strong> Zil çaldı ama duymadık. (Kaçırılan Fırsat).</li>
+</ul>
+</li>
+<li><p><strong>Rapor:</strong></p>
+<ul>
+<li><strong>Precision (Kesinlik):</strong> &quot;Evet&quot; dediklerimin yüzde kaçı gerçekten evet?</li>
+<li><strong>Recall (Duyarlılık):</strong> Gerçekteki &quot;Evet&quot;lerin yüzde kaçını yakalayabildim? (Hayati konularda -kanser teşhisi, hırsızlık- bu daha önemlidir!)</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-python">print(&quot;Accuracy:&quot;, accuracy_score(y_test, y_pred))
+print(&quot;\nConfusion Matrix:\n&quot;, confusion_matrix(y_test, y_pred))
+print(&quot;\nClassification Report:\n&quot;, classification_report(y_test, y_pred))
+</code></pre>
+<hr>
+<h2>Bölüm 4: Model İyileştirme (Grid Search &amp; Tuning)</h2>
+<p>İlk kurduğumuz model &quot;fabrika ayarlarıyla&quot; çalıştı. Ama her veri seti farklıdır.
+Bize en uygun ayarları (Hiperparametreleri) bulmak için <strong>GridSearchCV</strong> kullanırız.</p>
+<h3>Nedir Bu Parametreler?</h3>
+<ol>
+<li><strong>C (Ceza Şiddeti):</strong><ul>
+<li>Küçük C (Örn: 0.01) -&gt; Çok disiplinli, genelleme yapmaya çalışır. (Underfitting riski).</li>
+<li>Büyük C (Örn: 100) -&gt; Çok esnek, veriyi ezberlemeye çalışır. (Overfitting riski).</li>
+</ul>
+</li>
+<li><strong>Penalty:</strong> Hata yapan katsayıları nasıl cezalandıralım? (L1, L2).</li>
+</ol>
+<h3>💻 Otomatik Arama Kodu:</h3>
+<pre><code class="language-python">from sklearn.model_selection import GridSearchCV
+
+# 1. Denenecek Ayarlar Menüsü
+params = {
+    &quot;C&quot;: [0.01, 1, 10, 100],
+    &quot;penalty&quot;: [&quot;l1&quot;, &quot;l2&quot;],
+    &quot;solver&quot;: [&quot;liblinear&quot;] # Küçük veri setleri için hızlıdır
+}
+
+# 2. Grid Search Robotunu Kur
+# cv=5: Veriyi 5 parçaya bölüp sağlamasını yapar (Cross Validation).
+grid = GridSearchCV(estimator=model, param_grid=params, cv=5, scoring=&quot;accuracy&quot;, n_jobs=-1)
+
+# 3. Robotu Çalıştır
+grid.fit(X_train, y_train)
+
+print(&quot;En İyi Ayarlar:&quot;, grid.best_params_)
+print(&quot;En İyi Skor:&quot;, grid.best_score_)
+
+# 4. En İyi Modelle Tahmin Yap
+y_final = grid.predict(X_test)
+</code></pre>
+<hr>
+<h2>Bölüm 5: Dengesiz Veriler ve İleri Metrikler (ROC/AUC)</h2>
+<p>Örnek Veri Seti: <code>8-fraud_detection.csv</code> (Kredi Kartı Dolandırıcılığı)</p>
+<h3>⚠️ Sorun: Dengesiz Veri (Imbalanced Data)</h3>
+<p>Veri setinde 1000 işlem var. Sadece 10 tanesi dolandırıcılık (Fraud=1), 990 tanesi normal (0).
+Model hepsine &quot;Normal&quot; derse %99 başarı (Accuracy) alır! Ama <strong>hiçbir dolandırıcıyı yakalayamaz.</strong>
+Bu yüzden Accuracy metriği burada <strong>YALANDIR.</strong></p>
+<h3>✅ Çözüm 1: Class Weight</h3>
+<p>Modele şunu deriz: &quot;Azınlık sınıfında (1) yapacağın hatayı 10 kat daha ağır cezalandır!&quot;</p>
+<pre><code class="language-python"># class_weight=&#39;balanced&#39; ibaresi dengeleri otomatik kurar.
+model = LogisticRegression(class_weight=&#39;balanced&#39;)
+</code></pre>
+<h3>✅ Çözüm 2: ROC Curve ve AUC Skoru</h3>
+<p>Modelin tahmin yeteneğini tek bir sayıyla özetler (0.5 = Yazı Tura, 1.0 = Mükemmel).
+Eğer AUC &gt; 0.80 ise modeliniz harika ayrıştırıyor demektir.</p>
+<h3>✅ Çözüm 3: Eşik Değeri (Threshold) Ayarlama</h3>
+<p>Standart olarak model %50 (0.5) ihtimalin üzerine &quot;Evet&quot; der.
+Ama banka, &quot;Benim için güvenlik çok önemli, %30 şüphe bile olsa alarm ver&quot; diyebilir.</p>
+<pre><code class="language-python"># Olasılıkları al (Her satır için [0 olma ihtimali, 1 olma ihtimali])
+y_probs = model.predict_proba(X_test)[:, 1]
+
+# Normalde eşik 0.5&#39;tir. Biz 0.3 yapalım:
+new_threshold = 0.3
+y_pred_new = (y_probs &gt;= new_threshold).astype(int)
+
+# Sonuç: Recall (Yakalama) artar, ama Precision (Yanlış Alarm) da artabilir. Bu bir ticari karardır!
+</code></pre>
+<hr>
+<h2>Bölüm 6: Çoklu Sınıflandırma (Multi-Class)</h2>
+<p>Örnek Veri Seti: <code>7-cyber_attack_data.csv</code> (Saldırı Türü: 0, 1 veya 2)</p>
+<p>Lojistik Regresyon özünde &quot;İkili&quot; (Evet/Hayır) çalışır. Peki 3 sınıf varsa ne olacak?
+İki strateji vardır:</p>
+<ol>
+<li><strong>OvR (One vs Rest):</strong> &quot;Ben tek, siz hepiniz.&quot; (Sınıf 0 vs Diğerleri, Sınıf 1 vs Diğerleri...). En yaygın ve hızlı yöntemdir.</li>
+<li><strong>OvO (One vs One):</strong> &quot;Lig Usulü.&quot; (Sınıf 0 ile 1 maçı, Sınıf 0 ile 2 maçı...). Daha yavaştır.</li>
+</ol>
+<h3>💻 Kod Bloğu:</h3>
+<pre><code class="language-python">from sklearn.multiclass import OneVsRestClassifier
+
+# Çoklu sınıflandırma için kapsayıcı
+model_multi = OneVsRestClassifier(LogisticRegression())
+model_multi.fit(X_train, y_train)
+
+y_pred_multi = model_multi.predict(X_test)
+print(&quot;Çoklu Sınıf Başarısı:&quot;, accuracy_score(y_test, y_pred_multi))
+</code></pre>
+<hr>
+<h2>🏁 Sonuç ve Ödev</h2>
+<p>Tebrikler! 🎉 Artık veriyi yükleyip, temizleyip, modelleyip, ince ayarını (tuning) yapabilen ve zorlu durumlarla (dengesiz veri) başa çıkabilen bir Veri Bilimci adayı oldunuz.</p>
+<h3>📝 Pekiştirme Ödevi:</h3>
+<p>Klasördeki <code>pokemon.csv</code> dosyasını <code>pokemonsiniflandırma.py</code> dosyasından inceleyerek:</p>
+<ul>
+<li>StandardScaler kullanarak,</li>
+<li>Bir Pokemon&#39;un &quot;Efsanevi&quot; (Legendary) olup olmadığını tahmin eden bir model kurun.</li>
+<li>En az %90 accuracy almaya çalışın!</li>
+</ul>
+<hr>
+<h2>8. 🚑 ADIM ADIM LOJİSTİK REGRESYON UYGULAMA REÇETESİ (Hangi Durumda Ne Yapmalı?)</h2>
+<p>Bir sınıflandırma projesi geldiğinde bu sırayı takip et:</p>
+<h3>🏁 ADIM 1: Veri Kontrolü ve Scaling (ZORUNLU)</h3>
+<p>Sınıflandırma yapıyorsun diye matematikten kaçamazsın.</p>
+<ul>
+<li>✅ <strong>Kural:</strong> <code>StandardScaler</code> kullanmak ZORUNDASIN.</li>
+<li>❌ <strong>Neden:</strong> Yoksa yaşı 50 olan müşteriyle, maaşı 50.000 olan müşteri arasında 1000 kat önem farkı var sanılır.</li>
+</ul>
+<h3>⚖️ ADIM 2: Dengesizlik Kontrolü (Terazi Bozuk Mu?)</h3>
+<p><code>df[&#39;Hedef&#39;].value_counts()</code> çalıştır.</p>
+<ul>
+<li>📊 <strong>Durum A (Dengeli):</strong> (50 Evet / 50 Hayır) -&gt; <code>Accuracy</code> kullanabilirsin.</li>
+<li>📉 <strong>Durum B (Dengesiz):</strong> (95 Normal / 5 Dolandırıcı)<ul>
+<li>👉 <strong>Müdahale:</strong> <code>class_weight=&#39;balanced&#39;</code> kullan.</li>
+<li>👉 <strong>Metrik:</strong> <code>Accuracy</code> çöpe at, <code>F1-Score</code> veya <code>Recall</code> kullan.</li>
+</ul>
+</li>
+</ul>
+<h3>🧪 ADIM 3: Model İyileştirme (Grid Search Reçetesi)</h3>
+<p>Modeli kurdun ama sonuçlar seni tatmin etmedi mi?</p>
+<p><strong>SENARYO A: Model çok basit kaldı (Underfitting)</strong></p>
+<ul>
+<li><em>Anlamı:</em> Model olayları çok genel alıyor, detayları kaçırıyor.</li>
+<li>👉 <strong>Çözüm:</strong> <code>C</code> değerini ARTIR (C=10, C=100).<ul>
+<li><em>Etkisi:</em> Modeli &quot;Daha dikkatli ol, hata yapma&quot; diye sıkıştırırsın.</li>
+</ul>
+</li>
+</ul>
+<p><strong>SENARYO B: Model ezberledi (Overfitting)</strong></p>
+<ul>
+<li><em>Anlamı:</em> Eğitim setinde %100 yapıyor ama test setinde çuvallıyor.</li>
+<li>👉 <strong>Çözüm:</strong> <code>C</code> değerini AZALT (C=0.1, C=0.01).<ul>
+<li><em>Etkisi:</em> Modeli &quot;Rahat ol, genelleme yap&quot; diye gevşetirsin.</li>
+</ul>
+</li>
+</ul>
+<h3>🚀 ÖZET TABLO (Kopyala Yapıştır)</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Durum</th>
+<th align="left">İlk Denenecek Ayar</th>
+<th align="left">İkinci Denenecek Ayar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Standart Veri</strong></td>
+<td align="left">LogisticRegression()</td>
+<td align="left">C=1.0</td>
+</tr>
+<tr>
+<td align="left"><strong>Dengesiz Veri (Fraud)</strong></td>
+<td align="left">class_weight=&#39;balanced&#39;</td>
+<td align="left">C=10, Solver=&#39;liblinear&#39;</td>
+</tr>
+<tr>
+<td align="left"><strong>Çok Değişken Var</strong></td>
+<td align="left">Penalty=&#39;l1&#39; (Gereksizi siler)</td>
+<td align="left">C=0.1 (Sadeleştirir)</td>
+</tr>
+<tr>
+<td align="left"><strong>Ezberledi (Overfit)</strong></td>
+<td align="left">Penalty=&#39;l2&#39; (Baskılar)</td>
+<td align="left">C=0.01 (Çok gevşetir)</td>
+</tr>
+</tbody></table>
+</article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__brand">
+      <span class="brand__mark" aria-hidden="true">NK</span>
+      <div><strong>Nihat Kütükoğlu</strong>Data Science · AI · Software</div>
+    </div>
+    <nav class="footer__links" aria-label="Sosyal bağlantılar">
+      <a href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/nihatkutukoglu" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:kutukoglunihat1@gmail.com">Email</a>
+    </nav>
+    <p>© <span data-year>2026</span> Nihat Kütükoğlu</p>
+  </div>
+</footer>
+
+<dialog class="palette" id="palette" aria-label="Komut paleti">
+  <div class="palette__search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input type="text" id="paletteInput" placeholder="Sayfa, proje veya bağlantı ara..." autocomplete="off"
+           role="combobox" aria-expanded="true" aria-controls="paletteList" aria-autocomplete="list">
+    <kbd>Esc</kbd>
+  </div>
+  <div class="palette__list" id="paletteList" role="listbox" aria-label="Sonuçlar"></div>
+  <div class="palette__foot" aria-hidden="true"><span><kbd>↑</kbd> <kbd>↓</kbd> gezin</span><span><kbd>↵</kbd> aç</span></div>
+</dialog>
+<script src="/data/projects.js?v=5" defer></script>
+<script src="/data/site.js?v=5" defer></script>
+<script src="/js/main.js?v=5" defer></script>
+</body>
+</html>

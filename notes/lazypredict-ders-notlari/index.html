@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="tr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LazyPredict Ders Notları | Nihat Kütükoğlu</title>
+<meta name="description" content="Kısa sürede birçok modeli karşılaştırmaya yarayan LazyPredict kütüphanesi notları.">
+<link rel="canonical" href="https://www.nihatkutukoglu.com.tr/notes/lazypredict-ders-notlari">
+<meta property="og:title" content="LazyPredict Ders Notları">
+<meta property="og:description" content="Kısa sürede birçok modeli karşılaştırmaya yarayan LazyPredict kütüphanesi notları.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.nihatkutukoglu.com.tr/notes/lazypredict-ders-notlari">
+<meta property="og:image" content="https://www.nihatkutukoglu.com.tr/assets/og/portfolio-cover.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css?v=5">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <nav class="nav" aria-label="Ana menü">
+      <a class="brand" href="/#hero" aria-label="Nihat Kütükoğlu — ana sayfa"><span class="brand__mark" aria-hidden="true">NK</span><span class="brand__name">Nihat Kütükoğlu</span></a>
+
+      <div class="nav__links">
+        <a href="/#hero" data-nav="home">Home</a>
+        <a href="/#projeler" data-nav="projects">Projects</a>
+        <a href="/#deneyim" data-nav="experience">Experience</a>
+        <a href="/#hakkimda" data-nav="about">About</a>
+        <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="kbd-btn nav__desktop" type="button" data-palette-open aria-label="Komut paletini aç (Ctrl+K)"><span>Ara</span><kbd>⌘K</kbd></button>
+        <a class="icon-btn nav__desktop" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener" aria-label="GitHub profili">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+        <a class="btn btn--primary btn--sm nav__desktop" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Temayı değiştir">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMobile" aria-label="Menüyü aç">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <div class="nav__mobile" id="navMobile" data-open="false">
+    <a href="/#hero" data-nav="home">Home</a>
+    <a href="/#projeler" data-nav="projects">Projects</a>
+    <a href="/#deneyim" data-nav="experience">Experience</a>
+    <a href="/#hakkimda" data-nav="about">About</a>
+    <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+    <a href="/#iletisim">Contact</a>
+    <div class="nav__mobile-cta">
+      <a class="btn btn--ghost" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn--primary" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+    </div>
+  </div>
+</header>
+<main id="main" class="section">
+  <div class="wrap note-reader">
+    <nav class="note__actions" aria-label="Not işlemleri">
+      <a class="btn btn--ghost btn--sm" href="/#notlar">← Tüm notlar</a>
+      <a class="btn btn--primary btn--sm" href="/assets/notes/lazypredict_ders_notlari.md" download>Notu indir (.md)</a>
+    </nav>
+    <article class="note-prose"><h1>Lazy Predict: Kapsamlı Rehber ve Ders Notları</h1>
+<p>Bu döküman, <strong>Lazy Predict</strong> kütüphanesinin ne olduğu, nasıl çalıştığı, hangi durumlarda kullanılması gerektiği ve avantaj/dezavantajlarını detaylı bir şekilde ele almaktadır. Ayrıca pratik kod örnekleri ile kullanımı pekiştirilmiştir.</p>
+<hr>
+<h2>1. Lazy Predict Nedir?</h2>
+<p><strong>Lazy Predict</strong>, makine öğrenmesi projelerinde modelleme sürecini hızlandırmak için geliştirilmiş, düşük kodlu (low-code) bir Python kütüphanesidir. Scikit-learn kütüphanesi üzerine inşa edilmiştir ve tek bir komutla onlarca farklı makine öğrenmesi algoritmasını eğitip, performanslarını karşılaştırmanıza olanak tanır.</p>
+<p>Temel amacı, veri bilimcinin veya geliştiricinin &quot;Hangi model bu veri seti için daha iyi çalışır?&quot; sorusuna hızlı bir cevap bulmasını sağlamaktır.</p>
+<h3>Temel Özellikleri:</h3>
+<ul>
+<li><strong>Otomatik Model Eğitimi:</strong> Sınıflandırma ve Regresyon için 30&#39;dan fazla algoritmayı otomatik çalıştırır.</li>
+<li><strong>Performans Raporlama:</strong> Accuracy, RMSE, R2, F1-Score gibi metrikleri ve eğitim sürelerini (Time Taken) tablo halinde sunar.</li>
+<li><strong>Kolay Entegrasyon:</strong> Pandas DataFrame ve Numpy array yapıları ile doğrudan çalışır.</li>
+</ul>
+<hr>
+<h2>2. Kurulum</h2>
+<p>Lazy Predict&#39;i kullanmaya başlamadan önce Python ortamınıza yüklemeniz gerekir:</p>
+<pre><code class="language-bash">pip install lazypredict
+</code></pre>
+<p><em>Not: Bazı durumlarda <code>scikit-learn</code> ve <code>pandas</code> bağımlılıklarının güncel olması önerilir.</em></p>
+<hr>
+<h2>3. Ne Zaman Kullanılmalı?</h2>
+<p>Lazy Predict her senaryo için uygun değildir, ancak aşağıdaki durumlarda hayat kurtarıcıdır:</p>
+<ol>
+<li><strong>Prototipleme Aşaması (Prototyping):</strong><ul>
+<li>Projenin başında, veri setinizin makine öğrenmesine ne kadar uygun olduğunu hızlıca görmek istediğinizde.</li>
+</ul>
+</li>
+<li><strong>Temel Başarım (Baseline) Belirleme:</strong><ul>
+<li>Karmaşık modellere (Deep Learning vs.) geçmeden önce, basit makine öğrenmesi modellerinin ne kadar başarım gösterdiğini (benchmark) ölçmek için.</li>
+</ul>
+</li>
+<li><strong>Model Seçimi:</strong><ul>
+<li>Hangi algoritma ailesinin (Ağaç tabanlılar mı, Lineer modeller mi, Destek Vektör Makineleri mi?) verinizle daha iyi uyum sağladığını anlamak için.</li>
+</ul>
+</li>
+<li><strong>Hackathon ve Yarışmalar:</strong><ul>
+<li>Zamanın kısıtlı olduğu durumlarda hızlıca fikir sahibi olmak ve yol haritası çizmek için.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>4. Avantajlar ve Dezavantajlar</h2>
+<h3>Avantajları (+)</h3>
+<ul>
+<li><strong>Hız:</strong> Dakikalar içinde onlarca modeli deneyebilirsiniz.</li>
+<li><strong>Kapsam:</strong> Çok nadir kullanılan veya aklınıza gelmeyebilecek algoritmaları bile test eder.</li>
+<li><strong>Kullanım Kolaylığı:</strong> Sadece birkaç satır kod ile çalışır. Karmaşık parametre ayarlarına gerek duymaz.</li>
+<li><strong>Karşılaştırılabilirlik:</strong> Tüm sonuçları tek bir tablo üzerinde sıralı olarak sunar.</li>
+</ul>
+<h3>Dezavantajları (-)</h3>
+<ul>
+<li><strong>Üretim (Production) İçin Uygun Değil:</strong> Lazy Predict modelleri genellikle varsayılan hiperparametrelerle eğitilir. Üretim ortamında optimize edilmiş (fine-tuned) modellere ihtiyaç vardır.</li>
+<li><strong>Esneklik Eksikliği:</strong> Model parametrelerine müdahale etmek zordur.</li>
+<li><strong>Veri Ön İşleme:</strong> Lazy Predict bazı temel ön işlemeleri (eksik veri doldurma, kategorik dönüşüm) otomatik yapmaya çalışsa da, karmaşık verilerde manuel ön işleme (preprocessing) şarttır.</li>
+<li><strong>Kaynak Tüketimi:</strong> Büyük veri setlerinde tüm modelleri aynı anda eğitmek yüksek RAM ve işlemci gücü gerektirebilir.</li>
+</ul>
+<hr>
+<h2>5. Uygulama ve Kod Örnekleri</h2>
+<p>Lazy Predict <code>LazyClassifier</code> ve <code>LazyRegressor</code> olmak üzere iki ana modüle sahiptir.</p>
+<h3>5.1. Sınıflandırma (Classification) Örneği</h3>
+<p>Meme kanseri veri seti üzerinde sınıflandırma modellerini karşılaştıralım.</p>
+<pre><code class="language-python">import pandas as pd
+from lazypredict.Supervised import LazyClassifier
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+
+# 1. Veri Setini Yükle
+data = load_breast_cancer()
+X = data.data
+y = data.target
+
+# 2. Eğitim ve Test Olarak Ayır
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 3. LazyClassifier Oluştur
+# verbose=0: Çıktı kalabalığını önler
+# ignore_warnings=True: Uyarıları gizler
+# custom_metric: İsterseniz özel bir metrik fonksiyonu verebilirsiniz
+clf = LazyClassifier(verbose=0, ignore_warnings=True, custom_metric=None)
+
+# 4. Modelleri Eğit ve Karşılaştır
+models, predictions = clf.fit(X_train, X_test, y_train, y_test)
+
+# 5. Sonuçları Yazdır
+print(models)
+</code></pre>
+<p><strong>Çıktı Örneği (Tablo):</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">Model</th>
+<th align="left">Accuracy</th>
+<th align="left">Balanced Accuracy</th>
+<th align="left">ROC AUC</th>
+<th align="left">F1 Score</th>
+<th align="left">Time Taken</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">LogisticRegression</td>
+<td align="left">0.98</td>
+<td align="left">0.97</td>
+<td align="left">0.97</td>
+<td align="left">0.98</td>
+<td align="left">0.02</td>
+</tr>
+<tr>
+<td align="left">XGBClassifier</td>
+<td align="left">0.97</td>
+<td align="left">0.96</td>
+<td align="left">0.96</td>
+<td align="left">0.97</td>
+<td align="left">0.15</td>
+</tr>
+<tr>
+<td align="left">...</td>
+<td align="left">...</td>
+<td align="left">...</td>
+<td align="left">...</td>
+<td align="left">...</td>
+<td align="left">...</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>5.2. Regresyon (Regression) Örneği</h3>
+<p>Boston konut fiyatları (veya benzeri bir veri seti) üzerinde tahmin modellerini karşılaştıralım.</p>
+<pre><code class="language-python">import pandas as pd
+from lazypredict.Supervised import LazyRegressor
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+
+# 1. Veri Setini Yükle (Örnek: Kalifornia Konut Verisi)
+data = datasets.fetch_california_housing()
+X = pd.DataFrame(data.data, columns=data.feature_names)
+y = data.target
+
+# Daha hızlı sonuç görmek için veri setini küçültelim (Opsiyonel)
+X = X.iloc[:1000]
+y = y[:1000]
+
+# 2. Eğitim ve Test Olarak Ayır
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 3. LazyRegressor Oluştur
+reg = LazyRegressor(verbose=0, ignore_warnings=False, custom_metric=None)
+
+# 4. Modelleri Eğit
+models, predictions = reg.fit(X_train, X_test, y_train, y_test)
+
+# 5. Sonuçları Görüntüle
+print(models)
+</code></pre>
+<p><strong>Çıktı Örneği (Tablo):</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">Model</th>
+<th align="left">Adjusted R-Squared</th>
+<th align="left">R-Squared</th>
+<th align="left">RMSE</th>
+<th align="left">Time Taken</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ExtraTreesRegressor</td>
+<td align="left">0.82</td>
+<td align="left">0.84</td>
+<td align="left">0.45</td>
+<td align="left">0.12</td>
+</tr>
+<tr>
+<td align="left">RandomForestRegressor</td>
+<td align="left">0.81</td>
+<td align="left">0.83</td>
+<td align="left">0.48</td>
+<td align="left">0.35</td>
+</tr>
+<tr>
+<td align="left">LinearRegression</td>
+<td align="left">0.60</td>
+<td align="left">0.62</td>
+<td align="left">0.75</td>
+<td align="left">0.01</td>
+</tr>
+<tr>
+<td align="left">...</td>
+<td align="left">...</td>
+<td align="left">...</td>
+<td align="left">...</td>
+<td align="left">...</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>6. Önemli İpuçları</h2>
+<ul>
+<li><strong>Veri Sızıntısı (Data Leakage):</strong> Lazy Predict kullanırken <code>train_test_split</code> işlemini mutlaka Lazy Predict&#39;ten <strong>önce</strong> yapın. Scaler gibi işlemleri Lazy Predict bazen kendi içinde halledebilir ancak veri setini ayırmak sizin sorumluluğunuzdadır.</li>
+<li><strong>Kategorik Veriler:</strong> Veriniz string (metin) formatında kategorik değişkenler içeriyorsa, Lazy Predict genellikle bunları işlemeye çalışır ancak en sağlıklısı <code>Encoding</code> işlemlerini (One-Hot, Label Encoding) önceden yapıp sayısal hale getirmektir.</li>
+<li><strong>Büyük Veri:</strong> Eğer veri setiniz çok büyükse (örneğin 100.000+ satır), Lazy Predict tüm modelleri eğitirken çok yavaşlayabilir. Bu durumda verinin mantıklı bir alt kümesiyle (sample) çalışmak iyi bir stratejidir.</li>
+</ul>
+<h2>7. Sonuç</h2>
+<p>Lazy Predict, veri bilimi iş akışında <strong>&quot;Keşif&quot;</strong> aşaması için mükemmel bir araçtır. Nihai modelinizi belirlemez, ancak size doğru yönü gösteren bir pusula görevi görür. Hızlı analizler ve fikir edinmek için çantanızda bulunması gereken güçlü bir kütüphanedir.</p>
+<hr>
+<h2>8. Lazy Predict Uygulama Reçetesi (Adım Adım)</h2>
+<p>Projenize Lazy Predict&#39;i dahil etmek için aşağıdaki reçeteyi adım adım uygulayabilirsiniz:</p>
+<h3>Adım 1: Veri Hazırlığı ve Bağlamın Anlaşılması</h3>
+<ul>
+<li>Veri setini yükle (<code>pd.read_csv</code>, <code>pd.read_excel</code> vb.).</li>
+<li>Problemin türünü belirle: <strong>Sınıflandırma</strong> mı, <strong>Regresyon</strong> mu?</li>
+<li>Hedef bağımlı değişkeni (<code>y</code>) ve bağımsız değişkenleri (<code>X</code>) ayır.</li>
+</ul>
+<h3>Adım 2: Temel Veri Temizliği (ÖNEMLİ!)</h3>
+<p>Lazy Predict &quot;lazy&quot; (tembel) olsa da, veriyi tamamen ham haliyle vermek hata almanıza neden olabilir.</p>
+<ul>
+<li><strong>Eksik Veriler:</strong> <code>NaN</code> veya boş değerleri doldurun (imputation) veya satırları silin.</li>
+<li><strong>Tip Dönüşümü:</strong> Sayısal olması gereken sütunların (örn. fiyat, yaş) &quot;object&quot; veya &quot;string&quot; türünde olmadığından emin olun.</li>
+</ul>
+<h3>Adım 3: Eğitim ve Test Ayrımı</h3>
+<p>Veri sızıntısını önlemek için en kritik adımdır. Lazy Predict&#39;i tüm veriye değil, sadece eğitim verisine uygulamayın; ayrımı önceden yapın.</p>
+<pre><code class="language-python">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+</code></pre>
+<h3>Adım 4: Lazy Predict Nesnesini Başlatma</h3>
+<p>Problem türüne uygun sınıfı çağırın. Performansı düşüren gereksiz uyarıları kapatmak için <code>ignore_warnings=True</code> kullanın.</p>
+<pre><code class="language-python"># Sınıflandırma için
+clf = LazyClassifier(verbose=0, ignore_warnings=True, custom_metric=None)
+
+# Regresyon için
+reg = LazyRegressor(verbose=0, ignore_warnings=True, custom_metric=None)
+</code></pre>
+<h3>Adım 5: Modelleri Koşturma ve Sıralama</h3>
+<p>Eğitim sürecini başlatın. Bu adım veri boyutuna göre birkaç saniye ile birkaç dakika sürebilir.</p>
+<pre><code class="language-python">models, predictions = clf.fit(X_train, X_test, y_train, y_test)
+print(models)
+</code></pre>
+<h3>Adım 6: Şampiyonları Belirleme ve Odaklanma</h3>
+<p>Çıkan tabloya bakarak ilk 3-5 modeli seçin.</p>
+<ul>
+<li><strong>Sınıflandırma için:</strong> Accuracy, F1-Score ve ROC-AUC değerlerine bakın.</li>
+<li><strong>Regresyon için:</strong> R-Squared (R2) ve RMSE değerlerine bakın (R2 1&#39;e yakın, RMSE 0&#39;a yakın olmalı).</li>
+</ul>
+<h3>Adım 7: Derinlemesine Analiz (Fine-Tuning)</h3>
+<p>Lazy Predict&#39;in işi burada biter. Seçtiğiniz en iyi algoritmaları (örneğin XGBoost veya Random Forest çıktıysa) artık Scikit-Learn veya kendi kütüphaneleriyle manuel olarak kurup, hiperparametre optimizasyonu (GridSearchCV, RandomizedSearchCV) yapmalısınız.</p>
+<hr>
+<h2>9. Kritik Tavsiyeler ve Best Practices</h2>
+<ol>
+<li><p><strong>Hata Aldığınızda Pes Etmeyin:</strong></p>
+<ul>
+<li>Lazy Predict bazen belirli algoritmalarda (örn. StackedGeneralization) hata verebilir. Bu tüm sürecin durması anlamına gelmez, o modeli atlayıp diğerlerine devam eder veya hata verse bile sonuç tablosunu basabilir.</li>
+</ul>
+</li>
+<li><p><strong>Veriyi Çok Küçültmeyin (Underfitting Riski):</strong></p>
+<ul>
+<li>Hız kazanmak için veriyi çok kırparsanız (çok az satır), modellerin hiçbiri öğrenemez. En azından istatistiksel olarak anlamlı bir veri boyutu (örn. sınıf başına 50-100 örnek) bırakın.</li>
+</ul>
+</li>
+<li><p><strong>Kategorik Değişken Tuzağı:</strong></p>
+<ul>
+<li>Lazy Predict bazen çok fazla kategorisi olan (kardinalitesi yüksek) sütunlarda takılabilir veya RAM şişirebilir. Şehir, İsim, ID gibi sütunları eğitimden önce düşürmeyi unutmayın.</li>
+</ul>
+</li>
+<li><p><strong>Zaman Kısıtı Varsa:</strong></p>
+<ul>
+<li>Eğer veri setiniz devasa ise ve sonuçları hemen görmek istiyorsanız, veri setinin %10&#39;luk rastgele bir örneklemi (<code>df.sample(frac=0.1)</code>) ile Lazy Predict çalıştırarak genel eğilimi görebilirsiniz.</li>
+</ul>
+</li>
+<li><p><strong>Sonuçlar Kesin Değildir:</strong></p>
+<ul>
+<li>Lazy Predict&#39;te <code>Random Forest</code> en iyi çıktı diye, optimize edilmiş bir <code>SVM</code>&#39;in onu geçemeyeceği anlamına gelmez. Bu sadece varsayılan ayarlardaki bir başlangıç sıralamasıdır.</li>
+</ul>
+</li>
+<li><p><strong>Custom Metric (Özel Metrik) Kullanımı:</strong></p>
+<ul>
+<li>İş probleminiz &quot;Accuracy&quot; değil de &quot;Log Loss&quot; veya &quot;Recall&quot; optimize etmeyi gerektiriyorsa, <code>custom_metric</code> parametresine kendi fonksiyonunuzu tanımlayarak modelleri buna göre sıralatabilirsiniz.</li>
+</ul>
+</li>
+</ol>
+</article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__brand">
+      <span class="brand__mark" aria-hidden="true">NK</span>
+      <div><strong>Nihat Kütükoğlu</strong>Data Science · AI · Software</div>
+    </div>
+    <nav class="footer__links" aria-label="Sosyal bağlantılar">
+      <a href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/nihatkutukoglu" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:kutukoglunihat1@gmail.com">Email</a>
+    </nav>
+    <p>© <span data-year>2026</span> Nihat Kütükoğlu</p>
+  </div>
+</footer>
+
+<dialog class="palette" id="palette" aria-label="Komut paleti">
+  <div class="palette__search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input type="text" id="paletteInput" placeholder="Sayfa, proje veya bağlantı ara..." autocomplete="off"
+           role="combobox" aria-expanded="true" aria-controls="paletteList" aria-autocomplete="list">
+    <kbd>Esc</kbd>
+  </div>
+  <div class="palette__list" id="paletteList" role="listbox" aria-label="Sonuçlar"></div>
+  <div class="palette__foot" aria-hidden="true"><span><kbd>↑</kbd> <kbd>↓</kbd> gezin</span><span><kbd>↵</kbd> aç</span></div>
+</dialog>
+<script src="/data/projects.js?v=5" defer></script>
+<script src="/data/site.js?v=5" defer></script>
+<script src="/js/main.js?v=5" defer></script>
+</body>
+</html>

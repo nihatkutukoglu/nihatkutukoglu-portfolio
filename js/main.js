@@ -303,22 +303,65 @@
     apply();
   }
 
-  /* ---------- Notes ---------- */
+  /* ---------- PDF ve Markdown notları ---------- */
   const notesEl = $("#notesList");
-  if (notesEl && SITE.notes) {
-    notesEl.innerHTML = SITE.notes
-      .map((n) => {
-        const p = PROJECTS.find((x) => x.id === n.project);
-        const url = p && caseUrl(p);
-        return `
-        <article class="note panel panel--hover" data-reveal>
-          <div class="note__meta"><span class="badge" lang="en">${esc(n.tag)}</span><span class="badge">Taslak · yakında</span></div>
-          <h3>${esc(n.title)}</h3>
-          <p>${esc(n.blurb)}</p>
-          ${url ? `<a href="${url}">İlgili case study: ${esc(p.title)} →</a>` : ""}
-        </article>`;
-      })
-      .join("");
+  if (notesEl) {
+    // Aynı sitedeki PDF'ler doğrudan açılabilir ve download ile indirilebilir.
+    const notes = (SITE.notes || []).filter((n) =>
+      typeof n.file === "string" && /^\/assets\/notes\/[^?#]+\.(pdf|md)$/i.test(n.file)
+    );
+    notesEl.innerHTML = notes.length ? notes.map((n, i) => `
+      <article class="note panel panel--hover" data-reveal>
+        <div class="note__meta"><span class="badge">${esc(n.tag || "Not")}</span><span class="badge">${n.slug ? "Not" : "PDF"}</span></div>
+        <h3>${esc(n.title)}</h3>
+        <p>${esc(n.blurb || "")}</p>
+        <div class="note__actions">
+          <a class="btn btn--primary btn--sm" href="${esc(n.slug ? `/notes/${n.slug}/` : n.file)}" target="_blank" rel="noopener" aria-label="${esc(n.title)} — aç (yeni sekme)">${n.slug ? "Notu oku" : "PDF’yi aç"} ${ICON.out}</a>
+          <a class="btn btn--ghost btn--sm" href="${esc(n.file)}" download aria-label="${esc(n.title)} — indir">İndir</a>
+          <button class="btn btn--ghost btn--sm" type="button" data-share-note="${i}" aria-label="${esc(n.title)} — paylaş">Paylaş</button>
+        </div>
+      </article>`).join("") : `
+      <div class="notes__empty panel">
+        <span class="badge">PDF arşivi</span>
+        <h3>Notlar yakında burada</h3>
+        <p>PDF notları eklendiğinde buradan açabilir, paylaşabilir ve indirebilirsin.</p>
+      </div>`;
+
+    notesEl.addEventListener("click", async (e) => {
+      const button = e.target.closest("[data-share-note]");
+      if (!button) return;
+      const note = notes[Number(button.dataset.shareNote)];
+      const url = new URL(note.slug ? `/notes/${note.slug}/` : note.file, location.origin).href;
+      const status = $("#notesStatus");
+      const fallback = $("#noteShareFallback");
+      status.textContent = "";
+      fallback.hidden = true;
+      button.disabled = true;
+      try {
+        if (navigator.share) {
+          try {
+            await navigator.share({ title: note.title, url });
+            status.textContent = "Paylaşım tamamlandı.";
+            return;
+          } catch (error) {
+            if (error.name === "AbortError") return;
+          }
+        }
+        try {
+          await navigator.clipboard.writeText(url);
+          status.textContent = "Not bağlantısı kopyalandı.";
+        } catch {
+          fallback.hidden = false;
+          const input = $("#noteShareUrl");
+          input.value = url;
+          input.focus();
+          input.select();
+          status.textContent = "Not bağlantısını aşağıdaki alandan kopyalayabilirsin.";
+        }
+      } finally {
+        button.disabled = false;
+      }
+    });
   }
 
   /* ---------- Komut paleti ---------- */

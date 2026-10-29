@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="tr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Naive Bayes: Teori ve Uygulama | Nihat Kütükoğlu</title>
+<meta name="description" content="Olasılık tabanlı Naive Bayes algoritması ve sınıflandırma mantığı.">
+<link rel="canonical" href="https://www.nihatkutukoglu.com.tr/notes/naivebayes-notlari">
+<meta property="og:title" content="Naive Bayes: Teori ve Uygulama">
+<meta property="og:description" content="Olasılık tabanlı Naive Bayes algoritması ve sınıflandırma mantığı.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.nihatkutukoglu.com.tr/notes/naivebayes-notlari">
+<meta property="og:image" content="https://www.nihatkutukoglu.com.tr/assets/og/portfolio-cover.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css?v=5">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <nav class="nav" aria-label="Ana menü">
+      <a class="brand" href="/#hero" aria-label="Nihat Kütükoğlu — ana sayfa"><span class="brand__mark" aria-hidden="true">NK</span><span class="brand__name">Nihat Kütükoğlu</span></a>
+
+      <div class="nav__links">
+        <a href="/#hero" data-nav="home">Home</a>
+        <a href="/#projeler" data-nav="projects">Projects</a>
+        <a href="/#deneyim" data-nav="experience">Experience</a>
+        <a href="/#hakkimda" data-nav="about">About</a>
+        <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="kbd-btn nav__desktop" type="button" data-palette-open aria-label="Komut paletini aç (Ctrl+K)"><span>Ara</span><kbd>⌘K</kbd></button>
+        <a class="icon-btn nav__desktop" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener" aria-label="GitHub profili">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+        <a class="btn btn--primary btn--sm nav__desktop" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Temayı değiştir">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMobile" aria-label="Menüyü aç">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <div class="nav__mobile" id="navMobile" data-open="false">
+    <a href="/#hero" data-nav="home">Home</a>
+    <a href="/#projeler" data-nav="projects">Projects</a>
+    <a href="/#deneyim" data-nav="experience">Experience</a>
+    <a href="/#hakkimda" data-nav="about">About</a>
+    <a href="/#notlar" data-nav="notes" aria-current="true">Notes</a>
+    <a href="/#iletisim">Contact</a>
+    <div class="nav__mobile-cta">
+      <a class="btn btn--ghost" href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn--primary" href="/nihat-kutukoglu-cv.pdf" target="_blank" rel="noopener">CV / Resume</a>
+    </div>
+  </div>
+</header>
+<main id="main" class="section">
+  <div class="wrap note-reader">
+    <nav class="note__actions" aria-label="Not işlemleri">
+      <a class="btn btn--ghost btn--sm" href="/#notlar">← Tüm notlar</a>
+      <a class="btn btn--primary btn--sm" href="/assets/notes/NaiveBayes_Notlari.md" download>Notu indir (.md)</a>
+    </nav>
+    <article class="note-prose"><h1>Naive Bayes Sınıflandırıcısı: Teori ve Uygulama</h1>
+<h2>1. Naive Bayes Nedir?</h2>
+<p>Naive Bayes, <strong>Bayes Teoremi</strong>&#39;ne dayanan, olasılık temelli ve makine öğrenmesinde yaygın olarak kullanılan bir sınıflandırma algoritmasıdır. &quot;Naive&quot; (Saf/Basit) olarak adlandırılmasının nedeni, algoritmanın <strong>tüm özelliklerin (feature) birbirinden bağımsız olduğunu</strong> varsaymasıdır. Gerçek hayatta bu her zaman doğru olmasa da, algoritma şaşırtıcı derecede iyi sonuçlar verir ve hesaplama açısından oldukça hızlıdır.</p>
+<h3>Bayes Teoremi</h3>
+<p>Matematiksel temeli şu formüle dayanır:</p>
+<p>$$
+P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}
+$$</p>
+<p>Burada:</p>
+<ul>
+<li><strong>$P(A|B)$ (Posterior Probability)</strong>: B olayı gerçekleştiğinde A olayının olma olasılığı (Hesaplamak istediğimiz değer).</li>
+<li><strong>$P(B|A)$ (Likelihood)</strong>: A sınıfı verildiğinde B özelliğinin görülme olasılığı.</li>
+<li><strong>$P(A)$ (Prior Probability)</strong>: A sınıfının genel görülme olasılığı.</li>
+<li><strong>$P(B)$ (Evidence)</strong>: B özelliğinin genel görülme olasılığı.</li>
+</ul>
+<hr>
+<h2>2. Naive Bayes Çeşitleri</h2>
+<p>Veri setinizin yapısına göre kullanılan 3 temel Naive Bayes varyasyonu vardır:</p>
+<h3>A. Gaussian Naive Bayes : Maaş veya yaş verileri</h3>
+<ul>
+<li><strong>Kullanım Alanı:</strong> Özellikler sürekli değerler (continuous values) alıyorsa kullanılır.</li>
+<li><strong>Varsayım:</strong> Özelliklerin normal (Gaussian) dağılıma sahip olduğu varsayılır.</li>
+<li><strong>Örnek:</strong> <strong>İris çiçeği sınıflandırma (çanak yaprağı uzunluğu, genişliği gibi ondalıklı sayılar), maaş veya yaş verileri.</strong></li>
+</ul>
+<h3>B. Multinomial Naive Bayes : Kesikli veri ve metin madenciliği</h3>
+<ul>
+<li><strong>Kullanım Alanı:</strong> Kesikli veriler ve özellikle <strong>metin madenciliği</strong> (NLP) için uygundur.</li>
+<li><strong>Varsayım:</strong> Özellikler belirli olayların oluşum sayılarını temsil eder (frekans tabanlı).</li>
+<li><strong>Örnek:</strong> Spam filtresi (bir kelimenin e-postada kaç kez geçtiği), haber sınıflandırma.</li>
+</ul>
+<h3>C. Bernoulli Naive Bayes : boolean değerler evt hyr var yok</h3>
+<ul>
+<li><strong>Kullanım Alanı:</strong> Özellikler ikili (binary - 0 veya 1) değerler alıyorsa kullanılır.</li>
+<li><strong>Varsayım:</strong> Özellik var mı yok mu? (Boolean özellikler).</li>
+<li><strong>Örnek:</strong> Bir kelimenin metinde geçip geçmediğine göre sınıflandırma (frekans değil, varlık/yokluk).</li>
+</ul>
+<hr>
+<h2>3. Ne Zaman ve Nerede Kullanılır?</h2>
+<h3>Avantajları</h3>
+<ol>
+<li><strong>Hız:</strong> Eğitim ve tahmin süresi <strong>çok hızlıdır</strong>. Gerçek zamanlı uygulamalar için idealdir.</li>
+<li><strong>Az Veri:</strong> Başarılı bir genelleme için çok büyük veri setlerine ihtiyaç duymayabilir (özellikle diğer karmaşık modellere kıyasla).</li>
+<li><strong>Yüksek Boyut:</strong> Metin verileri gibi binlerce özelliğin olduğu durumlarda (High Dimensionality) çok iyi çalışır.</li>
+</ol>
+<h3>Dezavantajları</h3>
+<ol>
+<li><strong>Bağımsızlık Varsayımı:</strong> Gerçek hayatta özellikler genellikle birbirilye ilişkilidir (örneğin &quot;yapay&quot; kelimesi sıklıkla &quot;zeka&quot; kelimesiyle beraber geçer). Naive Bayes bu ilişkiyi göz ardı eder. Buna rağmen pratikte performansı yüksektir.</li>
+</ol>
+<h3>Yaygın Kullanım Senaryoları : semptomlar , spam filtreleme , döküman sınıflandırma</h3>
+<ul>
+<li><strong>Spam Filtreleme:</strong> E-postaların &quot;Spam&quot; veya &quot;Normal&quot; olarak ayrılması.</li>
+<li><strong>Duygu Analizi (Sentiment Analysis):</strong> Sosyal medya yorumlarının &quot;Olumlu&quot;, &quot;Olumsuz&quot; veya &quot;Nötr&quot; olarak etiketlenmesi.</li>
+<li><strong>Doküman Sınıflandırma:</strong> Haber metinlerinin &quot;Spor&quot;, &quot;Siyaset&quot;, &quot;Teknoloji&quot; olarak kategorize edilmesi.</li>
+<li><strong>Tıbbi Tanı:</strong> Semptomlara dayalı hastalık tahmini (olasılık değerleri verdiği için tercih edilir).</li>
+</ul>
+<hr>
+<h2>4. Python ile Uygulama Örnekleri</h2>
+<p>Aşağıda hem <strong>GaussianNB</strong> (sürekli veriler için) hem de <strong>MultinomialNB</strong> (metin verileri için) kullanım örnekleri verilmiştir.</p>
+<h3>Örnek 1: Gaussian Naive Bayes (İris Veri Seti ile)</h3>
+<p>Sürekli sayısal veriler içeren klasik iris veri seti üzerinde sınıflandırma yapalım.</p>
+<pre><code class="language-python">import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.datasets import load_iris
+
+# 1. Veri Setini Yükle
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Veriyi DataFrame&#39;e çevirip görelim (Opsiyonel)
+df = pd.DataFrame(X, columns=iris.feature_names)
+df[&#39;target&#39;] = y
+print(&quot;Veri Setinden İlk 5 Satır:&quot;)
+print(df.head())
+
+# 2. Eğitim ve Test Olarak Bölme
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 3. Model Kurulumu ve Eğitimi (Gaussian Naive Bayes)
+# Veriler sürekli ve normal dağılıma yakın olduğu için GaussianNB tercih edilir.
+model = GaussianNB()
+model.fit(X_train, y_train)
+
+# 4. Tahmin Yapma
+y_pred = model.predict(X_test)
+
+# 5. Model Değerlendirme
+print(&quot;\n--- Model Performansı ---&quot;)
+print(f&quot;Doğruluk (Accuracy) Skoru: {accuracy_score(y_test, y_pred):.2f}&quot;)
+
+print(&quot;\nKarmaşıklık Matrisi (Confusion Matrix):&quot;)
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+
+print(&quot;\nSınıflandırma Raporu:&quot;)
+print(classification_report(y_test, y_pred, target_names=iris.target_names))
+
+# Görselleştirme (Opsiyonel - Isı Haritası)
+plt.figure(figsize=(6, 4))
+sns.heatmap(cm, annot=True, fmt=&#39;d&#39;, cmap=&#39;Blues&#39;, xticklabels=iris.target_names, yticklabels=iris.target_names)
+plt.title(&#39;GaussianNB Confusion Matrix&#39;)
+plt.ylabel(&#39;Gerçek Değerler&#39;)
+plt.xlabel(&#39;Tahmin Edilen Değerler&#39;)
+plt.show()
+</code></pre>
+<h3>Örnek 2: Multinomial Naive Bayes (Metin Sınıflandırma / Spam Tespiti)</h3>
+<p>Metin verilerini vektörlere dönüştürüp sınıflandırma örneği.</p>
+<pre><code class="language-python">from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# 1. Örnek Veri Seti (E-postalar)
+# Gerçek hayatta bu veriler bir CSV dosyasından okunur.
+sentences = [
+    &quot;Tebrikler, iphone kazandınız hemen tıklayın&quot;,  # Spam
+    &quot;Yarın toplantı saat 10&#39;da yapılacak mı?&quot;,      # Normal
+    &quot;Bedava tatil fırsatı için arayın&quot;,             # Spam
+    &quot;Proje dosyalarını gönderdim, kontrol eder misin?&quot;, # Normal
+    &quot;Banka hesabınız bloke oldu, hemen giriş yapın&quot;, # Spam
+    &quot;Akşam yemeğe çıkıyor muyuz?&quot;,                  # Normal
+]
+labels = [1, 0, 1, 0, 1, 0] # 1: Spam, 0: Normal
+
+# 2. Metni Sayısal Vektörlere Dönüştürme (Bag of Words)
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(sentences) # Kelime frekans matrisi oluşturur
+
+# 3. Eğitim ve Test Bölmesi
+X_train, X_test, y_train, y_test = train_test_split(X, labels, test_size=0.25, random_state=42)
+
+# 4. Model Kurulumu (Multinomial Naive Bayes)
+# Kelime sayımları (frekansları) ile çalıştığımız için MultinomialNB idealdir.
+mnb_model = MultinomialNB()
+mnb_model.fit(X_train, y_train)
+
+# 5. Tahmin
+y_pred = mnb_model.predict(X_test)
+print(f&quot;Test Doğruluğu: {accuracy_score(y_test, y_pred)}&quot;)
+
+# Yeni bir cümle ile test edelim
+yeni_mesaj = [&quot;Bedava kontör kazanmak için tıklayın&quot;]
+yeni_vektor = vectorizer.transform(yeni_mesaj)
+tahmin = mnb_model.predict(yeni_vektor)
+
+sonuc = &quot;Spam&quot; if tahmin[0] == 1 else &quot;Normal&quot;
+print(f&quot;Mesaj: &#39;{yeni_mesaj[0]}&#39; -&gt; Tahmin: {sonuc}&quot;)
+</code></pre>
+<h2>Özet: Hangi Modeli Seçmeliyim?</h2>
+<table>
+<thead>
+<tr>
+<th align="left">Model</th>
+<th align="left">Veri Tipi</th>
+<th align="left">Örnek Durum</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>GaussianNB</strong></td>
+<td align="left">Sürekli (Continuous) Veriler</td>
+<td align="left">İris çiçeği ölçümleri, yaş, boy, kilo verileri.</td>
+</tr>
+<tr>
+<td align="left"><strong>MultinomialNB</strong></td>
+<td align="left">Kesikli Sayım (Count) Verileri</td>
+<td align="left">Metin sınıflandırma, kelime frekansları (Spam tespiti).</td>
+</tr>
+<tr>
+<td align="left"><strong>BernoulliNB</strong></td>
+<td align="left">İkili (Binary) Veriler</td>
+<td align="left">Sadece kelime var mı yok mu? (True/False özellikler).</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>5. Adım Adım Uygulama Reçetesi: Hangi Durumda Ne Yapmalı?</h2>
+<p>Bu bölüm, yeni bir proje ile karşılaştığınızda Naive Bayes&#39;i nasıl uygulayacağınıza dair pratik bir rehberdir.</p>
+<h3>Adım 1: Veri Tipini Analiz Et</h3>
+<p>Verinize bakın. Sütunlarınız (Features) en çok neye benziyor?</p>
+<ul>
+<li><p><strong>Senaryo A: Ondalıklı/Sürekli Sayılar</strong> (Örn: Boy, Kilo, Sıcaklık, Sensör verisi)</p>
+<ul>
+<li><strong>Karar:</strong> <code>GaussianNB</code> kullan.</li>
+<li><strong>Ön İşleme:</strong><ul>
+<li>Verilerin dağılımına bak (<code>sns.histplot</code>).</li>
+<li>Naive Bayes normal dağılım (çan eğrisi) varsayar. Eğer veri çok çarpıksa, <code>Log Transformation</code> veya sklearn&#39;deki <code>PowerTransformer</code> ile veriyi biraz &quot;normale&quot; benzetmek başarıyı artırabilir.</li>
+<li><em>Not:</em> Scaling (StandardScaler) Naive Bayes için zorunlu değildir ama diğer algoritmalarla kıyaslayacaksanız yapmanızda sakınca yoktur.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Senaryo B: Kelime Sayıları / Metin</strong> (Örn: E-postalar, Tweetler, Yorumlar)</p>
+<ul>
+<li><strong>Karar:</strong> <code>MultinomialNB</code> kullan.</li>
+<li><strong>Ön İşleme:</strong><ul>
+<li>Metni temizle (noktalama işaretlerini sil, küçük harfe çevir).</li>
+<li><code>CountVectorizer</code> veya <code>TfidfVectorizer</code> kullanarak metni sayısal matrise çevir.</li>
+<li>Stop words&#39;leri (ve, veya, bir, ile vb.) temizle.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Senaryo C: Var/Yok (0/1) Verileri</strong> (Örn: &quot;Kelime geçiyor mu?&quot;, &quot;Kullanıcı giriş yaptı mı?&quot;)</p>
+<ul>
+<li><strong>Karar:</strong> <code>BernoulliNB</code> kullan.</li>
+<li><strong>Ön İşleme:</strong><ul>
+<li>Veriniz kategorik ise (örn: Renk=Kırmızı) <code>One-Hot Encoding</code> yaparak binary hale getirin.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Adım 2: Veriyi Bölme (Splitting)</h3>
+<p>Veriyi her zaman Eğitim ve Test olarak ayırın.</p>
+<ul>
+<li>Bölme işlemi: <code>train_test_split(X, y, test_size=0.2, stratify=y)</code></li>
+<li><strong>Kritik İpucu:</strong> <code>stratify=y</code> parametresini mutlaka kullanın!<ul>
+<li>Eğer verinizde 100 tane &quot;Normal&quot;, 10 tane &quot;Kanser&quot; varsa; rastgele böldüğünüzde test setine hiç kanser verisi düşmeyebilir. <code>stratify=y</code> her iki sınıftan da orantılı şekilde test setine koyar.</li>
+</ul>
+</li>
+</ul>
+<h3>Adım 3: Model Kurma ve Tuning (İnce Ayar)</h3>
+<p>Naive Bayes&#39;te ayarlanacak parametre çok azdır, bu yüzden hızlıdır.</p>
+<ul>
+<li><strong>alpha (Laplace Smoothing):</strong><ul>
+<li>Sadece <code>MultinomialNB</code> ve <code>BernoulliNB</code> için önemlidir.</li>
+<li><strong>Ne yapar?</strong> Eğitim setinde hiç görülmemiş bir kelime test setinde çıkarsa (örn: &quot;covid&quot;), olasılık formülünde &quot;0&quot; çarpanı gelir ve tüm olasılığı sıfırlar. Alpha değeri buna küçük bir sayı ekleyerek sistemin çökmesini engeller.</li>
+<li>Varsayılan <code>alpha=1.0</code> iyidir.</li>
+<li>Model &quot;Overfitting&quot; (aşırı öğrenme) yapıyorsa alpha değerini artırın (2.0, 3.0...).</li>
+<li>Model &quot;Underfitting&quot; (yetersiz öğrenme) yapıyorsa alpha değerini azaltın (0.1, 0.01...).</li>
+</ul>
+</li>
+</ul>
+<h3>Adım 4: Sonuç, Değerlendirme</h3>
+<p>Başarıyı nasıl ölçmelisiniz?</p>
+<ol>
+<li><strong>Sınıf Dağılımına Bakın:</strong> Eğer verinizin %99&#39;u &quot;Sağlam&quot;, %1&#39;i &quot;Bozuk&quot; ise Accuracy (Doğruluk) yanıltıcıdır. Her şeye &quot;Sağlam&quot; diyen model %99 doğru çıkar ama işe yaramazdır.<ul>
+<li>Bu durumda <strong>F1-Score</strong>, <strong>Precision</strong> ve <strong>Recall</strong> değerlerine bakın (<code>classification_report</code> bunu verir).</li>
+</ul>
+</li>
+</ol>
+<h3>Özet Kontrol Listesi</h3>
+<ol>
+<li><input disabled="" type="checkbox"> Veri tipim ne? (Sayısal -&gt; Gaussian, Metin -&gt; Multinomial).</li>
+<li><input disabled="" type="checkbox"> Verim dengeli mi? <code>stratify</code> kullandım mı?</li>
+<li><input disabled="" type="checkbox"> Metin verisi ise Vektörleştirme (CountVector) yaptım mı?</li>
+<li><input disabled="" type="checkbox"> <code>alpha</code> parametresini değiştirmeme gerek var mı? (Genelde varsayılan yeterlidir).</li>
+</ol>
+<hr>
+<h2>6. Pratikten Notlar ve İleri Seviye İpuçları (Live Session Learnings)</h2>
+<p>Bu bölüm, <strong>İris Veri Seti</strong> üzerinde yapılan canlı kodlama seansından elde edilen kritik deneyimler ve kod parçacıklarıdır.</p>
+<h3>A. Çoklu Bağlantı (Multicollinearity) Sorunu ve Çözümü</h3>
+<p>Naive Bayes algoritması özelliklerin <strong>bağımsız</strong> olduğunu varsayar. Eğer iki özellik (örn. <code>petal width</code> ve <code>petal length</code>) birbirbiriyle aşırı korelasyonluysa (%90+), model aynı bilgiyi iki kere öğrenir ve olasılıkları yanlış hesaplayabilir.</p>
+<p><strong>Çözüm:</strong> Yüksek korelasyonlu sütunlardan birini tespit edip silmek.</p>
+<pre><code class="language-python"># Korelasyon Matrisini Çizdirme
+plt.figure(figsize=(10, 8))
+sns.heatmap(df.corr(), annot=True, cmap=&#39;coolwarm&#39;, fmt=&quot;.2f&quot;)
+plt.tight_layout() # Etiketlerin kesilmesini önler
+plt.show()
+
+# Pratik Fonksiyon: 0.90 üzeri korelasyonu olan sütunları otomatik sil
+def remove_highly_correlated_features(df, threshold=0.90):
+    corr_matrix = df.corr().abs()
+    upper = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))
+    to_drop = [column for column in upper.columns if any(upper[column] &gt; threshold) and column != &#39;target&#39;]
+
+    if to_drop:
+        print(f&quot;Silinen Yüksek Korelasyonlu Sütunlar: {to_drop}&quot;)
+        return df.drop(columns=to_drop)
+    return df
+</code></pre>
+<h3>B. Confusion Matrix&#39;i Profesyonelce Görselleştirme</h3>
+<p>Sonuçları sadece sayı olarak görmek yerine, hataları bir bakışta anlamak için bu bloğu kullanın.</p>
+<pre><code class="language-python">from sklearn.metrics import confusion_matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Tahminleri al
+cm = confusion_matrix(y_test, y_pred)
+
+# Görselleştir
+plt.figure(figsize=(8, 6))
+# xticklabels ve yticklabels ile 0,1,2 yerine çiçek isimlerini yazdırıyoruz
+sns.heatmap(cm, annot=True, fmt=&quot;d&quot;, cmap=&quot;Blues&quot;,
+            xticklabels=iris.target_names,
+            yticklabels=iris.target_names)
+
+plt.xlabel(&#39;Tahmin Edilen (Predicted)&#39;)
+plt.ylabel(&#39;Gerçek Değer (Actual)&#39;)
+plt.title(&#39;Confusion Matrix (Hata Matrisi)&#39;)
+plt.tight_layout()
+plt.show()
+</code></pre>
+<h3>C. Modelin Sağlamasını Yapma (Cross Validation)</h3>
+<p>Modelin başarısı &quot;şans eseri&quot; mi yoksa gerçekten iyi mi? Bunu anlamak için veriyi 5 farklı parçaya bölüp 5 kere test eden yöntem: <strong>K-Fold Cross Validation</strong>.</p>
+<pre><code class="language-python">from sklearn.model_selection import cross_val_score
+
+# cv=5 : Veriyi 5&#39;e böl, 5 kere test et
+scores = cross_val_score(model, X_train, y_train, cv=5)
+
+print(f&quot;5 Katlı Skorlar: {scores}&quot;)
+print(f&quot;Ortalama Başarı: {scores.mean():.4f}&quot;) # %90 gibi istikrarlı bir sonuç görmelisiniz
+print(f&quot;Standart Sapma: {scores.std():.4f}&quot;)   # Bu sayı ne kadar küçükse model o kadar güvenilirdir
+</code></pre>
+</article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__brand">
+      <span class="brand__mark" aria-hidden="true">NK</span>
+      <div><strong>Nihat Kütükoğlu</strong>Data Science · AI · Software</div>
+    </div>
+    <nav class="footer__links" aria-label="Sosyal bağlantılar">
+      <a href="https://github.com/nihatkutukoglu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/nihatkutukoglu" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:kutukoglunihat1@gmail.com">Email</a>
+    </nav>
+    <p>© <span data-year>2026</span> Nihat Kütükoğlu</p>
+  </div>
+</footer>
+
+<dialog class="palette" id="palette" aria-label="Komut paleti">
+  <div class="palette__search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input type="text" id="paletteInput" placeholder="Sayfa, proje veya bağlantı ara..." autocomplete="off"
+           role="combobox" aria-expanded="true" aria-controls="paletteList" aria-autocomplete="list">
+    <kbd>Esc</kbd>
+  </div>
+  <div class="palette__list" id="paletteList" role="listbox" aria-label="Sonuçlar"></div>
+  <div class="palette__foot" aria-hidden="true"><span><kbd>↑</kbd> <kbd>↓</kbd> gezin</span><span><kbd>↵</kbd> aç</span></div>
+</dialog>
+<script src="/data/projects.js?v=5" defer></script>
+<script src="/data/site.js?v=5" defer></script>
+<script src="/js/main.js?v=5" defer></script>
+</body>
+</html>
