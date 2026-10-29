@@ -114,7 +114,7 @@ const page = (p, i) => {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css?v=5">
+<link rel="stylesheet" href="/css/styles.css?v=6">
 <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
 </head>
 <body>
@@ -172,9 +172,9 @@ ${header}
 
 ${footer}
 
-<script src="/data/projects.js?v=5" defer></script>
-<script src="/data/site.js?v=5" defer></script>
-<script src="/js/main.js?v=5" defer></script>
+<script src="/data/projects.js?v=6" defer></script>
+<script src="/data/site.js?v=6" defer></script>
+<script src="/js/main.js?v=6" defer></script>
 </body>
 </html>
 `;
@@ -208,7 +208,7 @@ for (const note of notes) {
 <meta property="og:url" content="${SITE_URL}/notes/${note.slug}">
 <meta property="og:image" content="${OG_IMAGE}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/css/styles.css?v=5">
+<link rel="stylesheet" href="/css/styles.css?v=6">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){}</script>
 </head>
 <body>
@@ -223,9 +223,9 @@ ${noteHeader}
   </div>
 </main>
 ${footer}
-<script src="/data/projects.js?v=5" defer></script>
-<script src="/data/site.js?v=5" defer></script>
-<script src="/js/main.js?v=5" defer></script>
+<script src="/data/projects.js?v=6" defer></script>
+<script src="/data/site.js?v=6" defer></script>
+<script src="/js/main.js?v=6" defer></script>
 </body>
 </html>`);
 }

@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="/assets/images/profile.webp" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css?v=5">
+<link rel="stylesheet" href="/css/styles.css?v=6">
 
 <script type="application/ld+json">
 {
@@ -413,7 +413,14 @@
       <h2>Teknik notlar</h2>
       <p>Araştırma ve çalışma notlarım burada. Tarayıcıda açabilir, bağlantısını paylaşabilir veya cihazına indirebilirsin.</p>
     </div>
-    <div class="notes" id="notesList"></div>
+    <p class="notes-library__total" id="notesTotal"></p>
+    <div class="note-categories" id="noteCategories" role="group" aria-label="Not konuları"></div>
+    <div class="notes-library__toolbar">
+      <h3 id="notesHeading">Tüm notlar</h3>
+      <button class="btn btn--ghost btn--sm" id="allNotes" type="button" aria-pressed="true" aria-controls="notesList">Tümünü göster</button>
+    </div>
+    <p class="notes-library__selection" id="notesSelection" role="status" aria-live="polite"></p>
+    <div class="notes" id="notesList" aria-labelledby="notesHeading"></div>
     <p id="notesStatus" role="status" aria-live="polite"></p>
     <div id="noteShareFallback" hidden>
       <label for="noteShareUrl">Paylaşmak için bağlantıyı kopyala</label>
@@ -475,8 +482,8 @@
 </dialog>
 <!-- /@footer -->
 
-<script src="/data/projects.js?v=5" defer></script>
-<script src="/data/site.js?v=5" defer></script>
-<script src="/js/main.js?v=5" defer></script>
+<script src="/data/projects.js?v=6" defer></script>
+<script src="/data/site.js?v=6" defer></script>
+<script src="/js/main.js?v=6" defer></script>
 </body>
 </html>

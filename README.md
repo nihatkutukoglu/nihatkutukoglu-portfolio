@@ -84,3 +84,10 @@ notlar için build, `notes/<slug>/index.html` okuma sayfalarını ve sitemap kay
 üretir. Notu oku ve Paylaş bu sayfalara, İndir özgün `.md` dosyasına bağlanır.
 Markdown değişikliklerinden sonra `node scripts/build.mjs` çalıştırın.
 Kaynak: https://nihat-cv-site.vercel.app/#documents
+
+## Not kategorileri ve kapakları
+
+Konu kartları `data/site.js` içindeki `noteCategories` üzerinden yönetilir.
+Her notun `category` alanı ilgili kartın `id` değeriyle eşleşmelidir.
+Kapaklar `assets/notes/covers/` altında yerel SVG görselleridir.
+İçerik, PDF ve yazılı not sayıları dosya listesinden otomatik hesaplanır.

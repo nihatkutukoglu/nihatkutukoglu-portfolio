@@ -310,15 +310,41 @@
     const notes = (SITE.notes || []).filter((n) =>
       typeof n.file === "string" && /^\/assets\/notes\/[^?#]+\.(pdf|md)$/i.test(n.file)
     );
-    notesEl.innerHTML = notes.length ? notes.map((n, i) => `
-      <article class="note panel panel--hover" data-reveal>
+    const categories = SITE.noteCategories || [];
+    const countLabel = (items) => {
+      const pdfs = items.filter((n) => /\.pdf$/i.test(n.file)).length;
+      return `${items.length} içerik · ${pdfs} PDF · ${items.length - pdfs} yazılı not`;
+    };
+    $("#notesTotal").textContent = `${categories.length} konu · ${countLabel(notes)}`;
+    $("#noteCategories").innerHTML = categories.map((category) => {
+      const items = notes.filter((n) => n.category === category.id);
+      return `<button type="button" class="note-category panel" data-note-category="${esc(category.id)}" aria-pressed="false" aria-controls="notesList">
+        <img src="${esc(category.cover)}" alt="" width="640" height="360" loading="lazy">
+        <span class="note-category__body">
+          <span class="note-category__title">${esc(category.title)}</span>
+          <span class="note-category__description">${esc(category.description)}</span>
+          <span class="note-category__count">${countLabel(items)}</span>
+          <span class="note-category__cta">Notları keşfet ↗</span>
+        </span>
+      </button>`;
+    }).join("");
+    const renderNotes = (categoryId = null) => {
+      const filtered = notes.filter((n) => !categoryId || n.category === categoryId);
+      $("#notesHeading").textContent = categories.find((c) => c.id === categoryId)?.title || "Tüm notlar";
+      $("#notesSelection").textContent = countLabel(filtered);
+      $("#allNotes").setAttribute("aria-pressed", String(!categoryId));
+      $$("[data-note-category]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.noteCategory === categoryId)));
+      $("#noteShareFallback").hidden = true;
+      $("#notesStatus").textContent = "";
+      notesEl.innerHTML = filtered.length ? filtered.map((n) => `
+      <article class="note panel panel--hover">
         <div class="note__meta"><span class="badge">${esc(n.tag || "Not")}</span><span class="badge">${n.slug ? "Not" : "PDF"}</span></div>
         <h3>${esc(n.title)}</h3>
         <p>${esc(n.blurb || "")}</p>
         <div class="note__actions">
           <a class="btn btn--primary btn--sm" href="${esc(n.slug ? `/notes/${n.slug}/` : n.file)}" target="_blank" rel="noopener" aria-label="${esc(n.title)} — aç (yeni sekme)">${n.slug ? "Notu oku" : "PDF’yi aç"} ${ICON.out}</a>
           <a class="btn btn--ghost btn--sm" href="${esc(n.file)}" download aria-label="${esc(n.title)} — indir">İndir</a>
-          <button class="btn btn--ghost btn--sm" type="button" data-share-note="${i}" aria-label="${esc(n.title)} — paylaş">Paylaş</button>
+          <button class="btn btn--ghost btn--sm" type="button" data-share-note="${notes.indexOf(n)}" aria-label="${esc(n.title)} — paylaş">Paylaş</button>
         </div>
       </article>`).join("") : `
       <div class="notes__empty panel">
@@ -326,6 +352,14 @@
         <h3>Notlar yakında burada</h3>
         <p>PDF notları eklendiğinde buradan açabilir, paylaşabilir ve indirebilirsin.</p>
       </div>`;
+
+    };
+    $("#noteCategories").addEventListener("click", (e) => {
+      const button = e.target.closest("[data-note-category]");
+      if (button) renderNotes(button.dataset.noteCategory);
+    });
+    $("#allNotes").addEventListener("click", () => renderNotes());
+    renderNotes();
 
     notesEl.addEventListener("click", async (e) => {
       const button = e.target.closest("[data-share-note]");
